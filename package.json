@@ -1,0 +1,60 @@
+{
+  "name": "beer-compass",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline-first PWA zur Visualisierung von Standortdaten (Beer Compass)",
+  "engines": {
+    "node": ">=20.19.0"
+  },
+  "scripts": {
+    "build": "npm run typecheck && vite build",
+    "build:only": "vite build",
+    "data:generate": "node scripts/generate-sample-data.mjs",
+    "data:validate": "node scripts/validate-data.mjs",
+    "dev": "node scripts/dev.mjs",
+    "dev:api": "node server/index.mjs",
+    "dev:app": "vite",
+    "format": "prettier --write \"**/*.{ts,vue,js,mjs,json,css,md,html}\"",
+    "format:check": "prettier --check \"**/*.{ts,vue,js,mjs,json,css,md,html}\"",
+    "icons": "node scripts/generate-icons.mjs",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "preview": "node server/index.mjs --serve-dist",
+    "test": "npm run lint && npm run typecheck && npm run data:validate",
+    "test:e2e": "node scripts/e2e-check.mjs",
+    "test:ui": "node scripts/ui-check.mjs",
+    "typecheck": "vue-tsc --build --force"
+  },
+  "dependencies": {
+    "idb": "^8.0.3",
+    "vue": "^3.5.43",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "eslint": "^9.39.5",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-vue": "^10.11.1",
+    "globals": "^17.13.0",
+    "playwright": "^1.63.0",
+    "prettier": "^3.9.9",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.71.1",
+    "vite": "^7.3.6",
+    "vite-plugin-pwa": "^2.0.0",
+    "vue-tsc": "^3.3.12",
+    "workbox-build": "^7.4.1",
+    "workbox-cacheable-response": "^7.4.1",
+    "workbox-core": "^7.4.1",
+    "workbox-expiration": "^7.4.1",
+    "workbox-precaching": "^7.4.1",
+    "workbox-routing": "^7.4.1",
+    "workbox-strategies": "^7.4.1"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

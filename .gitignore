@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dev-dist/
+.DS_Store
+*.log
+
+# Local configuration: only the .env.example template is versioned.
+.env
+.env.local
+.env.*.local
+.vscode/*
+!.vscode/extensions.json
+.idea/
