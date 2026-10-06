@@ -32,7 +32,6 @@ export const de = {
     title: 'Auswahl',
     details: 'Details',
     clear: 'Auswahl aufheben',
-    hint: 'Gewählter Eintrag',
   },
 
   status: {

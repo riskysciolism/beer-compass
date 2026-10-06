@@ -151,22 +151,22 @@ check(
 
 /* ================================================================ 2. List === */
 
-process.stdout.write('\n2) Liste, virtualisierte Zeilen, Auswahlleiste, Detail-Sheet\n')
+process.stdout.write('\n2) Liste, virtualisierte Zeilen, Badge, Detail-Sheet\n')
 await page.waitForSelector('.entry', { timeout: 10000 })
 const rendered = await page.locator('.entry').count()
 check('Einträge werden angezeigt', rendered > 0, `${rendered} gerendert`)
 check('Virtualisierung', rendered < dbState.items, `${rendered} von ${dbState.items} im DOM`)
 check('Zähler zeigt Gesamtzahl', /\d+/.test((await page.textContent('.list__count')) ?? ''))
 
-// A tap only selects, the details come via the fixed bar below.
+// A tap only selects, the details come via the badge below the compass.
 await page.locator('.entry').first().click()
-await page.waitForSelector('.selection-bar', { timeout: 5000 })
-check('Auswahlleiste erscheint', (await page.locator('.selection-bar').count()) === 1)
+await page.waitForSelector('.compass-panel__banner', { timeout: 5000 })
+check('Badge erscheint', (await page.locator('.compass-panel__banner').count()) === 1)
 check(
-  'Auswahlleiste nennt den Eintrag',
-  ((await page.textContent('.selection-bar')) ?? '').trim().length > 0,
+  'Badge nennt den Eintrag',
+  ((await page.textContent('.compass-panel__banner-name')) ?? '').trim().length > 0,
 )
-await page.click('.selection-bar .button')
+await page.click('.compass-panel__banner-details')
 await page.waitForSelector('.sheet__name', { timeout: 5000 })
 check('Detail-Sheet öffnet', Boolean(await page.textContent('.sheet__name')))
 const mapHref = await page.getAttribute('.sheet__actions a', 'href')
@@ -224,7 +224,7 @@ await page2.click('.sheet__close')
 
 // Name, distance and bearing now live in the compass line.
 await page2.locator('.entry').first().click()
-await page2.waitForSelector('.selection-bar', { timeout: 5000 })
+await page2.waitForSelector('.compass-panel__banner', { timeout: 5000 })
 await page2.waitForTimeout(400)
 const targetBanner = ((await page2.textContent('.compass-panel__banner')) ?? '')
   .replace(/\s+/g, ' ')

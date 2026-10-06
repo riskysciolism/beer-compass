@@ -154,7 +154,7 @@ const label = computed(() =>
 /*
  * The scaling to 50% uses `width`, not `transform`:
  * only then does the space in the layout shrink too and the list below gets
- * wirklich mehr Raum.
+ * really more room.
  */
 .compass {
   display: flex;

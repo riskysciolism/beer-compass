@@ -4,8 +4,8 @@
  *
  * Structure of the main screen (no tabs):
  * Header (title + settings button) -> notices -> compass -> list
- * Plus a fixed panel at the bottom for the selected entry, whose
- * selection steers the compass needle.
+ * The selection is shown as a badge directly below the compass, which steers
+ * the compass needle.
  */
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
@@ -15,7 +15,6 @@ import InstallBanner from '@/components/InstallBanner.vue'
 import ItemDetailSheet from '@/components/ItemDetailSheet.vue'
 import ItemList from '@/components/ItemList.vue'
 import NoticeBanner from '@/components/NoticeBanner.vue'
-import SelectedBar from '@/components/SelectedBar.vue'
 import SettingsSheet from '@/components/SettingsSheet.vue'
 import { translate } from '@/i18n'
 import { reportSync } from '@/services/echo'
@@ -329,7 +328,7 @@ watch(
 <template>
   <AppHeader @open-settings="settingsOpen = true" />
 
-  <main class="layout" :class="{ 'layout--with-selection': selected }">
+  <main class="layout">
     <div class="layout__notices">
       <NoticeBanner
         v-if="swNotice"
@@ -394,6 +393,8 @@ watch(
       :has-fix="geo.fix.value !== null"
       :compact="compassCompact"
       @open-settings="settingsOpen = true"
+      @open-details="detailItem = selected!"
+      @clear-selection="clearSelection"
     />
 
     <ItemList
@@ -407,14 +408,6 @@ watch(
       @sort-change="onSortChange"
     />
   </main>
-
-  <SelectedBar
-    v-if="selected"
-    :item="selected"
-    :meters="target?.meters ?? null"
-    @details="detailItem = selected!"
-    @clear="clearSelection"
-  />
 
   <ItemDetailSheet
     v-if="detailItem"
@@ -450,11 +443,6 @@ watch(
   gap: var(--space-3);
   min-height: 0;
   padding: var(--space-4) var(--space-4) var(--space-5);
-}
-
-/* Space for the fixed selection bar at the bottom. */
-.layout--with-selection {
-  padding-bottom: calc(var(--safe-bottom) + 86px);
 }
 
 .layout__notices {

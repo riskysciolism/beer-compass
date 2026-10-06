@@ -82,11 +82,8 @@ check(
 // Selection via the list
 const firstName = await pageA.locator('.entry__name').first().textContent()
 await pageA.locator('.entry').first().click()
-await pageA.waitForSelector('.selection-bar', { timeout: 5000 })
-check(
-  'Auswahlleiste erscheint',
-  (await pageA.textContent('.selection-bar__text strong')) === firstName,
-)
+await pageA.waitForSelector('.compass-panel__banner', { timeout: 5000 })
+check('Badge erscheint', (await pageA.textContent('.compass-panel__banner-name')) === firstName)
 check('Flaschennadel erscheint', (await pageA.locator('.compass__bottle').count()) === 1)
 
 // Banner: large name + distance, no direction.
@@ -111,13 +108,66 @@ const bannerFont = await pageA.evaluate(() =>
   parseFloat(getComputedStyle(document.querySelector('.compass-panel__banner-name')).fontSize),
 )
 check('Name im Banner ist vergrößert', bannerFont >= 16, `${bannerFont}px`)
-// The banner floats: it overlaps the lower edge of the dial.
-const overlap = await pageA.evaluate(() => {
+
+// The badge sits directly below the compass and must not cover the dial.
+const badgePlacement = await pageA.evaluate(() => {
   const dial = document.querySelector('.compass__svg').getBoundingClientRect()
-  const banner = document.querySelector('.compass-panel__banner').getBoundingClientRect()
-  return Math.round(dial.bottom - banner.top)
+  const badge = document.querySelector('.compass-panel__banner').getBoundingClientRect()
+  return {
+    gap: Math.round(badge.top - dial.bottom),
+    width: Math.round(badge.width),
+    dialWidth: Math.round(dial.width),
+  }
 })
-check('Banner schwebt unter dem Kompass', overlap > 0 && overlap < 24, `${overlap}px Überlappung`)
+check(
+  'Badge sitzt direkt unter dem Kompass',
+  badgePlacement.gap >= 0 && badgePlacement.gap < 32,
+  `${badgePlacement.gap}px Abstand zum Zifferblatt`,
+)
+
+// Details and clear button live inside the badge.
+const badgeActions = await pageA.evaluate(() => {
+  const badge = document.querySelector('.compass-panel__banner').getBoundingClientRect()
+  const inside = (selector) => {
+    const box = document.querySelector(selector)?.getBoundingClientRect()
+    if (!box) return false
+    return (
+      box.left >= badge.left - 1 &&
+      box.right <= badge.right + 1 &&
+      box.top >= badge.top - 1 &&
+      box.bottom <= badge.bottom + 1
+    )
+  }
+  return {
+    details: document.querySelectorAll('.compass-panel__banner-details').length,
+    detailsInside: inside('.compass-panel__banner-details'),
+    clear: document.querySelectorAll('.compass-panel__banner-clear').length,
+    clearInside: inside('.compass-panel__banner-clear'),
+    detailsLabel:
+      document.querySelector('.compass-panel__banner-details')?.textContent?.trim() ?? '',
+  }
+})
+check(
+  'Details-Knopf im Badge',
+  badgeActions.details === 1 &&
+    badgeActions.detailsInside &&
+    badgeActions.detailsLabel === 'Details',
+  `${badgeActions.details} Knopf, Text "${badgeActions.detailsLabel}"`,
+)
+check(
+  'Auswahl-Knopf (✕) im Badge',
+  badgeActions.clear === 1 && badgeActions.clearInside,
+  `${badgeActions.clear} Knopf`,
+)
+check(
+  'Kein Footer mehr am unteren Rand',
+  (await pageA.locator('.selection-bar').count()) === 0 &&
+    !(await pageA.evaluate(() => {
+      const badge = document.querySelector('.compass-panel__banner').getBoundingClientRect()
+      return badge.bottom > window.innerHeight - 8
+    })),
+  `Badge unten bei ${badgePlacement.gap >= 0 ? 'oberhalb' : 'überlappend'}`,
+)
 
 // Accuracy small at the top right next to the compass.
 const accuracyBox = await pageA.evaluate(() => {
@@ -156,11 +206,11 @@ check(
   `${needleAngle.toFixed(1)}°`,
 )
 
-// List details via the bar
+// List details via the badge below the compass
 await pageA.waitForTimeout(300)
-await pageA.click('.selection-bar .button')
+await pageA.click('.compass-panel__banner-details')
 await pageA.waitForSelector('.sheet__name', { timeout: 5000 })
-check('Details über die Auswahlleiste', (await pageA.textContent('.sheet__name')) === firstName)
+check('Details über den Badge-Knopf', (await pageA.textContent('.sheet__name')) === firstName)
 await pageA.click('.sheet__close')
 
 /* -------------------------------------------- B: shrink on list scrolling -- */
@@ -244,14 +294,14 @@ await pageA.evaluate(() => {
 await pageA.waitForTimeout(500)
 check(
   'Auswahl ist jetzt der dritte Eintrag',
-  (await pageA.textContent('.selection-bar__text strong')) ===
+  (await pageA.textContent('.compass-panel__banner-name')) ===
     (await pageA.locator('.entry__name').nth(2).textContent()),
 )
 
 // Clear the selection
-await pageA.click('.selection-bar__clear')
+await pageA.click('.compass-panel__banner-clear')
 await pageA.waitForTimeout(300)
-check('Auswahl aufhebbar', (await pageA.locator('.selection-bar').count()) === 0)
+check('Auswahl aufhebbar', (await pageA.locator('.compass-panel__banner').count()) === 0)
 check('Nadel wieder weg', (await pageA.locator('.compass__bottle').count()) === 0)
 
 /* ---------------------------------------------------- C: GPS in settings --- */
@@ -377,10 +427,10 @@ check(
   (await pageD.textContent('.compass-panel__caption'))?.includes('freigegeben'),
 )
 await pageD.locator('.entry').first().click()
-await pageD.waitForSelector('.selection-bar', { timeout: 5000 })
+await pageD.waitForSelector('.compass-panel__banner', { timeout: 5000 })
 check(
   'Auswahl funktioniert auch ohne Position',
-  (await pageD.locator('.selection-bar').count()) === 1,
+  (await pageD.locator('.compass-panel__banner').count()) === 1,
 )
 check(
   'Keine Distanz ohne Position',
@@ -403,8 +453,8 @@ await pageA.evaluate(() => {
 })
 await pageA.waitForTimeout(400)
 // The selection from section 2 was already cleared there.
-if ((await pageA.locator('.selection-bar').count()) > 0) {
-  await pageA.click('.selection-bar__clear')
+if ((await pageA.locator('.compass-panel__banner').count()) > 0) {
+  await pageA.click('.compass-panel__banner-clear')
   await pageA.waitForTimeout(300)
 }
 

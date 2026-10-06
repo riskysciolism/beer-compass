@@ -32,7 +32,7 @@ const props = defineProps<{
   compact: boolean
 }>()
 
-const emit = defineEmits<{ openSettings: [] }>()
+const emit = defineEmits<{ openSettings: []; openDetails: []; clearSelection: [] }>()
 
 const distanceLabel = computed(() => (props.meters === null ? null : formatDistance(props.meters)))
 
@@ -97,15 +97,34 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
       />
     </div>
 
-    <!-- Floating banner with the selected entry. -->
+    <!-- Badge of the selected entry, directly below the compass. -->
     <div v-if="target" class="compass-panel__banner">
-      <span class="compass-panel__banner-label">{{ translate('compass.selectedLabel') }}</span>
+      <div class="compass-panel__banner-head">
+        <span class="compass-panel__banner-label">{{ translate('compass.selectedLabel') }}</span>
+        <button
+          class="compass-panel__banner-clear"
+          type="button"
+          :aria-label="translate('selection.clear')"
+          @click="emit('clearSelection')"
+        >
+          ✕
+        </button>
+      </div>
+
       <span class="compass-panel__banner-value">
         <strong class="compass-panel__banner-name">{{ target.name }}</strong>
         <span v-if="distanceLabel" class="compass-panel__banner-distance mono">
           {{ distanceLabel }}
         </span>
       </span>
+
+      <button
+        class="button button--small compass-panel__banner-details"
+        type="button"
+        @click="emit('openDetails')"
+      >
+        {{ translate('selection.details') }}
+      </button>
     </div>
 
     <p v-else class="compass-panel__caption">{{ caption }}</p>
@@ -127,7 +146,7 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
   flex-direction: column;
   align-items: center;
   /* Do not shrink: under space pressure the space comes from the list, not from
-     dem Kompass – sonst wird das Zifferblatt gestaucht. */
+     the compass - otherwise the dial gets squashed. */
   flex-shrink: 0;
   gap: var(--space-2);
   padding: var(--space-3) var(--space-3) var(--space-4);
@@ -176,25 +195,52 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
 }
 
 /*
- * Banner of the selected entry: overlaps the lower compass edge so that the
- * compass keeps as much space as possible at 100% and the banner looks "floating".
+ * Badge of the selected entry: sits directly below the compass and holds name,
+ * distance, the details button and the clear button.
  */
 .compass-panel__banner {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  width: min(100%, 30ch);
-  /* Negative spacing against the flex gap: the banner overlaps the lower
-     Kompassrand um 8 px und wirkt dadurch schwebend. Mehr Überlappung würde bei
-     südlicher Peilung den Flaschenfuß abschneiden. */
-  margin-top: calc(-1 * var(--space-4));
+  gap: var(--space-1);
+  width: min(100%, 34ch);
   padding: var(--space-2) var(--space-3);
   border: 1px solid var(--accent);
   border-radius: var(--radius-md);
   background: var(--bg-elevated);
   box-shadow: var(--shadow-md);
   text-align: center;
+}
+
+.compass-panel__banner-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-right: 26px;
+}
+
+.compass-panel__banner-clear {
+  position: absolute;
+  top: var(--space-1);
+  right: var(--space-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border: 1px solid var(--surface-border);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  line-height: 1;
+}
+
+.compass-panel__banner-details {
+  width: 100%;
+  margin-top: var(--space-1);
 }
 
 .compass-panel__banner-label {
@@ -231,7 +277,6 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
 }
 
 .compass-panel--compact .compass-panel__banner {
-  margin-top: calc(-1 * var(--space-3));
   padding: var(--space-1) var(--space-2);
 }
 
@@ -241,6 +286,12 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
 
 .compass-panel--compact .compass-panel__banner-distance {
   font-size: 0.84rem;
+}
+
+.compass-panel--compact .compass-panel__banner-details {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  font-size: 0.78rem;
 }
 
 .compass-panel--compact .compass-panel__accuracy {

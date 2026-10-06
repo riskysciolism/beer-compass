@@ -72,7 +72,7 @@ npm run preview            # liefert dist/ + API auf http://localhost:8787 aus
 | `npm run data:validate` | prüft `public/data/*.json` gegen das App-Schema              |
 | `npm test`            | Lint + Typecheck + Datenvalidierung                             |
 | `npm run test:e2e`    | Browsertest (Headless Chromium) gegen `npm run preview`         |
-| `npm run test:ui`     | prüft Kompass, Auswahlleiste und Einstellungen im Browser          |
+| `npm run test:ui`     | prüft Kompass, Auswahl-Badge und Einstellungen im Browser         |
 
 Zusätzliche Flags für das Backend:
 
@@ -104,9 +104,9 @@ was die App tatsächlich abfragt).
 - **Quelle der Wahrheit ist IndexedDB**, nicht der Cache und nicht `localStorage`.
 - **Große JSON-Dateien** werden in einem Web Worker geparst und mit zod geprüft –
   das Haupt-Bundle bleibt dadurch frei von zod (~44 kB gzip).
-- **Kein Vue-Router und keine Reiter**: eine Seite mit Kompass, Liste, fester
-  Auswahlleiste und zwei Sheets (Details, Einstellungen). Das hält das Bundle klein
-  und reicht für eine PWA völlig.
+- **Kein Vue-Router und keine Reiter**: eine Seite mit Kompass, Liste, Auswahl-Badge
+  direkt unter dem Kompass und zwei Sheets (Details, Einstellungen). Das hält das
+  Bundle klein und reicht für eine PWA völlig.
 - **Kompass** (`BeerCompass.vue`): reine SVG-Grafik ohne Bibliothek. Die Nadel
   zeigt auf die berechnete Peilung (`atan2(Δlon, Δlat)`), die N/O/S/W-Rose wird um
   das negative Geräte-Heading gedreht, damit Norden oben bleibt. Ohne
@@ -115,8 +115,9 @@ was die App tatsächlich abfragt).
   Fehlerunterscheidung (verweigert / nicht verfügbar / Timeout) und optionaler
   High-Accuracy. Das Tracking pausiert, wenn die App in den Hintergrund geht, und
   läuft offline weiter.
-- **Auswahl-Banner**: Unter dem Kompass schwebt ein Banner mit dem gewählten
-  Eintrag – großer Name plus Entfernung. Die Richtungsangabe steht bewusst nicht
+- **Auswahl-Badge**: Direkt unter dem Kompass erscheint ein Badge mit dem gewählten
+  Eintrag – großer Name, Entfernung, „Details"-Knopf zum Öffnen des Detail-Sheets
+  und ein „✕" zum Aufheben der Auswahl. Die Richtungsangabe steht bewusst nicht
   dort, sie steckt in der Nadel. Oben rechts am Kompass zeigt eine kleine
   Genauigkeitsplakette die aktuelle GPS-Genauigkeit (z. B. „± 9 m").
 - **Sortierung** direkt in der Liste: ein Knopf öffnet ein Dropdown mit
@@ -287,7 +288,7 @@ npx playwright install chromium     # einmalig
 npm run build:only
 npm run preview &                   # oder: node server/index.mjs --serve-dist --log
 npm run test:e2e                    # Daten, Updates, Offline, PWA
-npm run test:ui                     # Kompass, Liste, Auswahlleiste
+npm run test:ui                     # Kompass, Liste, Auswahl-Badge
 ```
 
 `npm run test:ui` ersetzt die Geolocation deterministisch (feste Position,
@@ -295,7 +296,7 @@ fester Lagesensor, verweigerte Berechtigung) – dadurch sind die Aussagen über
 Nadelwinkel und Rosen-Rotation reproduzierbar.
 
 Geprüft werden unter anderem: Erststart ohne Rückfrage, IndexedDB als Quelle der
-Wahrheit, `localStorage` bleibt leer, virtualisierte Liste, Auswahlleiste,
+Wahrheit, `localStorage` bleibt leer, virtualisierte Liste, Auswahl-Badge,
 `geo:`-Intent, verweigerte Berechtigung, GPS-Position in den Einstellungen,
 Offline-Neustart inkl. GPS, kein Download im Flugmodus, Update-Ankündigung mit
 Bestätigung, atomarer Austausch, Datenverlustschutz bei kaputtem JSON und bei
@@ -304,8 +305,9 @@ Precache, Service-Worker-Scope) sowie eine fehlerfreie Browser-Konsole.
 
 Der UI-Test prüft das neue Layout: kein Reiter mehr, Nadel auf dem Zielwinkel,
 Rosendrehung gegen die Geräteausrichtung, Ausblenden der Rose ohne Lagesensor,
-Auswahl-Banner (großer Name, Entfernung, ohne Richtungsangabe), schwebende
-Genauigkeitsplakette, Shrink auf 50 % beim Scrollen – zurück auf 100 % oben bzw.
+Auswahl-Badge direkt unter dem Kompass (großer Name, Entfernung, ohne
+Richtungsangabe, Details- und Aufheben-Knopf), Genauigkeitsplakette, Shrink auf
+50 % beim Scrollen – zurück auf 100 % oben bzw.
 bei Auswahl und wieder klein beim weitergescrollten –, das Sortier-Dropdown sowie
 GPS-Angaben ausschließlich in den Einstellungen und der Zustand ohne Position.
 
@@ -334,8 +336,7 @@ danach wieder her (auch bei Abbruch).
     ├── sw.ts                   Service Worker (Precache, Offline-Fallback)
     ├── components/
     │   ├── BeerCompass.vue     Kompassrose + Bierflaschennadel (SVG)
-    │   ├── CompassPanel.vue    Kompass, Auswahl-Banner, Genauigkeit, Start-Hinweis
-    │   ├── SelectedBar.vue     feste Leiste mit der aktuellen Auswahl
+    │   ├── CompassPanel.vue    Kompass, Auswahl-Badge (Name, Distanz, Details), Genauigkeit
     │   ├── GeoStatusPanel.vue  GPS-Status, Koordinaten, Genauigkeit
     │   └── …                   Header, ItemList, Detail-/Settings-Sheet …
     ├── services/               data-store, update-service, geo-service, sw-registration …
