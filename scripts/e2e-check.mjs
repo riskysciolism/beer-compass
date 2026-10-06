@@ -446,9 +446,52 @@ check(
   `${afterSchema} Einträge`,
 )
 
+/* ============================================ 10. Automatic update notice */
+
+process.stdout.write('\n10) Update-Hinweis erscheint beim Start von selbst\n')
+
+// Regression test: if the automatic check were off, an app with an older
+// dataset in IndexedDB would never learn about a new release - the old data
+// (without features, for example) would stay forever.
+const nextRelease = JSON.parse(originalData)
+nextRelease[0].name = 'Automatisch erkannte Brauerei GmbH'
+writeData(JSON.stringify(nextRelease, null, 2), 5)
+
+const page3 = await context2.newPage()
+await page3.goto(BASE, { waitUntil: 'domcontentloaded' })
+await page3.waitForSelector('.entry', { timeout: 20000 })
+const autoNotice = await page3
+  .waitForSelector('.banner:has-text("Neue Daten verfügbar")', { timeout: 20000 })
+  .then(
+    () => true,
+    () => false,
+  )
+check(
+  'Neue Daten werden beim Start angekündigt',
+  autoNotice,
+  autoNotice ? '' : 'kein Hinweis ohne Klick',
+)
+let autoVersion = null
+if (autoNotice) {
+  await page3.click('.banner button:has-text("Übernehmen")')
+  await page3.waitForTimeout(3000)
+  autoVersion = await page3.evaluate(async () => {
+    const db = await new Promise((r) => {
+      const request = indexedDB.open('beer-compass')
+      request.onsuccess = () => r(request.result)
+    })
+    return new Promise((r) => {
+      const tx = db.transaction('meta').objectStore('meta').getAll()
+      tx.onsuccess = () => r(tx.result[0]?.version ?? null)
+    })
+  })
+}
+check('Start-Update lässt sich übernehmen', autoVersion === 5, `version=${autoVersion}`)
+await page3.close()
+
 /* ===================================================== 9b. Settings-Persistenz */
 
-process.stdout.write('\n10) Einstellungen werden in IndexedDB gespeichert\n')
+process.stdout.write('\n11) Einstellungen werden in IndexedDB gespeichert\n')
 await page2.evaluate(() => {
   document.querySelector('.topbar__settings')?.click()
 })
@@ -485,9 +528,9 @@ check(
   (await page2.evaluate(() => document.documentElement.dataset.theme)) === 'dark',
   `data-theme=${await page2.evaluate(() => document.documentElement.dataset.theme)}`,
 )
-/* ================================================================ 10. PWA == */
+/* ==================================================== 12. PWA ==== */
 
-process.stdout.write('\n11) PWA-Kriterien\n')
+process.stdout.write('\n12) PWA-Kriterien\n')
 const manifest = await page2.evaluate(async () => {
   const link = document.querySelector('link[rel="manifest"]')
   return link ? await (await fetch(link.getAttribute('href') ?? '')).json() : null
@@ -524,9 +567,9 @@ check(
   `${swInfo.cached} Einträge (${swInfo.names.join(', ')})`,
 )
 
-/* ============================================================= 11. Konsole == */
+/* ================================================ 13. Konsole ==== */
 
-process.stdout.write('\n12) Konsole\n')
+process.stdout.write('\n13) Konsole\n')
 const unexpected = consoleErrors.filter(
   (entry) =>
     !entry.includes('ERR_INTERNET_DISCONNECTED') &&

@@ -30,7 +30,13 @@ export interface Settings {
 }
 
 export const DEFAULT_SETTINGS: Settings = {
-  autoCheckUpdates: false,
+  /**
+   * On by default: the data is part of the app, and a cached dataset from an
+   * older release would otherwise never be replaced (no features, no entries).
+   * The check is cheap (`HEAD` plus the small `version.json`); applying the
+   * update still asks.
+   */
+  autoCheckUpdates: true,
   autoApplyUpdates: false,
   highAccuracy: false,
   autoStartTracking: true,

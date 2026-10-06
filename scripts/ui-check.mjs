@@ -648,6 +648,130 @@ check('Die Liste behält ihre Höhe', afterScroll.height >= 100, `${afterScroll.
 await pageE.close()
 await ctxE.close()
 
+/* ------------------------------------------- H: loading indicator (bottle) -- */
+
+process.stdout.write('\n8) Ladeanzeige: die Flasche pendelt, bis die Position da ist\n')
+
+// The position only arrives after a delay: tracking runs (`requesting`), so the
+// bottle has to be visible and swinging. Once the fix arrives it points to the
+// target again.
+const ctxF = await browser.newContext({ baseURL: BASE, viewport: { width: 412, height: 900 } })
+await ctxF.addInitScript(`
+  navigator.geolocation.watchPosition = (success) => {
+    setTimeout(() => success({
+      coords: {
+        latitude: 52.2011, longitude: 4.8796, accuracy: 9, altitude: 2,
+        altitudeAccuracy: 5, heading: null, speed: 1.2,
+      },
+      timestamp: Date.now(),
+    }), 15000)
+    return 1
+  }
+  navigator.geolocation.getCurrentPosition = (success) => {
+    setTimeout(() => success({
+      coords: {
+        latitude: 52.2011, longitude: 4.8796, accuracy: 9, altitude: 2,
+        altitudeAccuracy: 5, heading: null, speed: 1.2,
+      },
+      timestamp: Date.now(),
+    }), 15000)
+  }
+  navigator.geolocation.clearWatch = () => {}
+`)
+const pageF = await ctxF.newPage()
+await pageF.goto(BASE, { waitUntil: 'domcontentloaded' })
+await pageF.waitForSelector('.entry', { timeout: 25000 })
+
+// Straighten the transform via getComputedStyle, which reflects the running
+// animation (Playwright only freezes animations for screenshots).
+const searchAngle = () =>
+  pageF.evaluate(() => {
+    const m = new DOMMatrix(getComputedStyle(document.querySelector('.compass__needle')).transform)
+    return {
+      angle: (Math.atan2(m.b, m.a) * 180) / Math.PI,
+      searching: document
+        .querySelector('.compass__needle')
+        .classList.contains('compass__needle--searching'),
+    }
+  })
+
+check(
+  'Ohne Position ist die Flasche sichtbar',
+  (await pageF.locator('.compass__bottle').count()) === 1,
+)
+check('Ohne Position läuft die Such-Animation', (await searchAngle()).searching)
+const swing = []
+for (let i = 0; i < 8; i++) {
+  swing.push(Number((await searchAngle()).angle.toFixed(1)))
+  await pageF.waitForTimeout(240)
+}
+check(
+  'Die Flasche pendelt hin und her',
+  new Set(swing).size > 3 && swing.every((angle) => Math.abs(angle) <= 33),
+  `${swing.join('° / ')}°`,
+)
+check(
+  'Die Animation ist als Sinus mit Endpunkten definiert',
+  await pageF.evaluate(() => {
+    // The CSS minifier mangles the keyframe names, so the stops themselves are
+    // checked: a sine-like sweep goes back and forth between two ends.
+    for (const sheet of document.styleSheets) {
+      let rules
+      try {
+        rules = [...sheet.cssRules]
+      } catch {
+        continue
+      }
+      for (const rule of rules) {
+        if (rule.type !== CSSRule.KEYFRAMES_RULE) continue
+        const stops = [...rule.cssRules]
+        if (stops.length !== 3) continue
+        const [first, middle, last] = stops.map((stop) => stop.keyText.trim())
+        if (first !== '0%' || middle !== '50%' || last !== '100%') continue
+        const [from, peak, back] = stops.map((stop) => stop.style.transform)
+        return (
+          from === back &&
+          from !== peak &&
+          /rotate\(-?\d/.test(from) &&
+          /rotate\(-?\d/.test(peak) &&
+          parseFloat(from.match(/-?\d+(\.\d+)?/)[0]) * parseFloat(peak.match(/-?\d+(\.\d+)?/)[0]) <
+            0
+        )
+      }
+    }
+    return false
+  }),
+)
+const searchingEnded = await pageF
+  .waitForFunction(
+    () =>
+      !document.querySelector('.compass__needle').classList.contains('compass__needle--searching'),
+    undefined,
+    { timeout: 20000 },
+  )
+  .then(
+    () => true,
+    () => false,
+  )
+check('Der Pendel-Zustand endet mit der Position', searchingEnded)
+await pageF.locator('.entry').first().click()
+await pageF.waitForSelector('.compass-panel__banner', { timeout: 5000 })
+// The needle rotates with a transition of 320 ms.
+await pageF.waitForTimeout(700)
+check(
+  'Nach der Position zeigt die Flasche zum Ziel',
+  Math.abs(
+    await pageF.evaluate(() => {
+      const m = new DOMMatrix(
+        getComputedStyle(document.querySelector('.compass__needle')).transform,
+      )
+      return (Math.atan2(m.b, m.a) * 180) / Math.PI
+    }),
+  ) > 1,
+)
+await pageF.close()
+await ctxF.close()
+
 /* ------------------------------------------------------------------- End --- */
 await browser.close()
 const failed = results.filter((entry) => !entry.ok)

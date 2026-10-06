@@ -27,6 +27,8 @@ const props = defineProps<{
   accuracy: number | null
   /** Compact rendering (50%) when the list is scrolled. */
   compact: boolean
+  /** Still waiting for the position: the bottle sweeps instead of pointing. */
+  searching: boolean
 }>()
 
 const hasHeading = computed(() => props.heading !== null && Number.isFinite(props.heading))
@@ -83,13 +85,14 @@ const label = computed(() =>
       <!-- Needle: beer bottle, tip (neck) points up = north -->
       <g
         class="compass__needle"
-        :style="{ transform: `rotate(${needleRotation}deg)` }"
+        :class="{ 'compass__needle--searching': searching }"
+        :style="searching ? undefined : { transform: `rotate(${needleRotation}deg)` }"
         filter="url(#bc-needle-shadow)"
       >
         <!-- Anchors the rotation exactly in the center (BBox center = 0,0). -->
         <rect x="-110" y="-110" width="220" height="220" fill="transparent" pointer-events="none" />
 
-        <g v-if="bearing !== null" class="compass__bottle">
+        <g v-if="bearing !== null || searching" class="compass__bottle">
           <!-- Hals (Spitze) -->
           <path
             d="M -4.6 -80 L -4.6 -54 L -4 -49 L -17 -36 L -17 52 Q -17 62 -8 66 L 8 66 Q 17 62 17 52
@@ -209,6 +212,41 @@ const label = computed(() =>
   transform-box: fill-box;
   transform-origin: center;
   transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/*
+ * Loading indicator while there is no position yet: the bottle swings back and
+ * forth like a compass that is searching. The `ease-in-out` between the
+ * keyframes approximates a sine - the bottle is slowest at the ends and
+ * fastest in the middle.
+ */
+.compass__needle--searching {
+  animation: compass-search 1.9s ease-in-out infinite;
+  transition: none;
+}
+
+.compass__needle--searching .compass__bottle {
+  opacity: 0.75;
+}
+
+@keyframes compass-search {
+  0% {
+    transform: rotate(-32deg);
+  }
+  50% {
+    transform: rotate(32deg);
+  }
+  100% {
+    transform: rotate(-32deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* No movement - the bottle simply points up instead of tilting to the side. */
+  .compass__needle--searching {
+    animation: none;
+    transform: rotate(0deg);
+  }
 }
 
 .compass__cap {

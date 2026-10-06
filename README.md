@@ -111,6 +111,9 @@ was die App tatsächlich abfragt).
   zeigt auf die berechnete Peilung (`atan2(Δlon, Δlat)`), die N/O/S/W-Rose wird um
   das negative Geräte-Heading gedreht, damit Norden oben bleibt. Ohne
   Lagesensor (`deviceorientation`) wird die Rose ausgeblendet, statt zu raten.
+  Solange die Position aussteht, ist die Flasche als **Ladeanzeige** sichtbar und
+  pendelt sinusförmig hin und her (Keyframes mit `ease-in-out`); mit
+  `prefers-reduced-motion` steht sie still.
 - **GPS** läuft über `navigator.geolocation.watchPosition` mit Permission-Abfrage,
   Fehlerunterscheidung (verweigert / nicht verfügbar / Timeout) und optionaler
   High-Accuracy. Das Tracking pausiert, wenn die App in den Hintergrund geht, und
@@ -226,7 +229,7 @@ Das Backend (`server/index.mjs`) hat **keine Abhängigkeiten** – nur Node-Stan
 | Einstellungen                 | IndexedDB → `settings`                 |
 | Client-ID                     | IndexedDB → `identity`                 |
 | App-Shell (HTML, JS, CSS, Icons) | Service Worker → Workbox-Precache |
-| `./data/*.json`              | CacheFirst im Service Worker           |
+| `./data/*.json`              | **NetworkFirst** im Service Worker (Fallback: Cache) |
 | `./api/*`                    | **NetworkOnly** – niemals zwischenspeichern |
 
 `localStorage` wird bewusst **nicht** verwendet (die App liest dort nichts und schreibt
@@ -239,10 +242,13 @@ dort nichts).
 2. Online-Status aus `navigator.onLine` **plus** einer echten Fetch-Probe, damit
    „online" nicht nur am WLAN-Symbol hängt.
 3. Update-Prüfung per `HEAD` (mit ETag) und über `version.json`. Nur bei echter
-   Änderung wird die große Datei geladen.
+   Änderung wird die große Datei geladen. Antwortet der Server mit `304`, gilt die
+   zuletzt gelesene `version.json` weiter – so wird keine erfundene Version
+   angekündigt.
 4. Neuer Datensatz: Standardmäßig erscheint ein Banner mit **Übernehmen / Später**.
-   Mit „Automatisch übernehmen" in den Einstellungen passiert das ohne Rückfrage,
-   „Automatisch prüfen" startet die Prüfung schon beim Öffnen der App.
+   Mit „Automatisch übernehmen" in den Einstellungen passiert das ohne Rückfrage.
+   „Automatisch prüfen" ist ab Werk **an** – nur so erfährt eine App mit älterem
+   Datenbestand überhaupt von einer neuen Version.
 5. Die Übernahme ist **eine IndexedDB-Transaktion** auf `items` + `meta`. Schlägt der
    Download oder die Validierung fehl, bleiben die bisherigen Daten unangetastet – die
    App meldet nur, dass die Datei fehlerhaft war.
@@ -314,7 +320,8 @@ Geprüft werden unter anderem: Erststart ohne Rückfrage, IndexedDB als Quelle d
 Wahrheit, `localStorage` bleibt leer, virtualisierte Liste, Auswahl-Badge,
 `geo:`-Intent, verweigerte Berechtigung, GPS-Position in den Einstellungen,
 Offline-Neustart inkl. GPS, kein Download im Flugmodus, Update-Ankündigung mit
-Bestätigung, atomarer Austausch, Datenverlustschutz bei kaputtem JSON und bei
+Bestätigung, automatische Ankündigung beim Start mit einem älteren Datenbestand,
+atomarer Austausch, Datenverlustschutz bei kaputtem JSON und bei
 Schema-Verstößen, Settings-Persistenz über den Neustart, PWA-Kriterien (Manifest,
 Precache, Service-Worker-Scope) sowie eine fehlerfreie Browser-Konsole.
 
@@ -324,9 +331,10 @@ Auswahl-Badge direkt unter dem Kompass (Name, Entfernung mit „Details"- und
 Navigations-Knopf direkt daneben, Aufheben-Knopf), Genauigkeitsplakette, Shrink auf
 50 % beim Scrollen – zurück auf 100 % oben bzw.
 bei Auswahl und wieder klein beim weitergescrollten –, das Sortier-Dropdown,
-GPS-Angaben ausschließlich in den Einstellungen, der Zustand ohne Position sowie
-das Scrollen auf kleinen Bildschirmen (Scrollen außerhalb der Liste, feste Hülle
-auf normalen Handys).
+GPS-Angaben ausschließlich in den Einstellungen, der Zustand ohne Position, die
+Ladeanzeige (Flasche pendelt, bis die Position da ist, und zeigt danach zum Ziel)
+sowie das Scrollen auf kleinen Bildschirmen (Scrollen außerhalb der Liste, feste
+Hülle auf normalen Handys).
 
 Der Test schreibt seine Testdaten vorübergehend nach `public/data/` und stellt sie
 danach wieder her (auch bei Abbruch).

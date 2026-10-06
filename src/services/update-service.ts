@@ -128,6 +128,10 @@ export function createUpdateService(store: DataStore): UpdateService {
 
   // ETag of the version.json, so that this file is only transferred when needed.
   let versionEtag: string | null = null
+  // Last successfully read version file. A 304 means "your copy is still
+  // current", so the parsed content of that copy is used - without it the app
+  // would announce a made-up version number (`current + 1`).
+  let lastRemoteVersion: RemoteVersion | null = null
 
   function reset(): void {
     status.value = 'idle'
@@ -144,7 +148,7 @@ export function createUpdateService(store: DataStore): UpdateService {
     try {
       const response = await fetchText(versionUrl, versionEtag, null)
       if (response.etag) versionEtag = response.etag
-      if (response.notModified) return { remote: undefined }
+      if (response.notModified) return { remote: lastRemoteVersion ?? undefined }
       if (response.status === 404) return { missing: true }
       if (response.status >= 400) {
         return { failure: { code: 'http_error', httpStatus: response.status, details: [] } }
@@ -153,6 +157,7 @@ export function createUpdateService(store: DataStore): UpdateService {
       if (!parsed.ok) {
         return { failure: { code: 'invalid_version', details: parsed.issues } }
       }
+      lastRemoteVersion = parsed.version
       return { remote: parsed.version }
     } catch (cause) {
       return {

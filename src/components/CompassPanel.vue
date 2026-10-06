@@ -36,6 +36,13 @@ const emit = defineEmits<{ openSettings: []; openDetails: []; clearSelection: []
 
 const distanceLabel = computed(() => (props.meters === null ? null : formatDistance(props.meters)))
 
+/**
+ * Loading state: tracking is running and no position has arrived yet. The bottle
+ * sweeps back and forth then. `idle` (tracking not started), a denied permission
+ * and errors are not "searching" - there the caption explains what is missing.
+ */
+const searching = computed(() => !props.hasFix && props.status === 'requesting')
+
 /** `geo:` link of the selected entry - opens navigation on the device. */
 const navigationUrl = computed(() => (props.target ? mapUrl(props.target) : null))
 
@@ -97,6 +104,7 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
         :target-name="target?.name ?? null"
         :accuracy="accuracy"
         :compact="compact"
+        :searching="searching"
       />
     </div>
 
