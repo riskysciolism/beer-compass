@@ -2,12 +2,13 @@ name: GitHub Pages
 
 # Test deployment: publishes the static variant (data from `public/data`, no
 # backend) as a project site, e.g. https://<user>.github.io/beer-compass/
+#
+# Note: Pages for private repositories is not available on every GitHub plan. If
+# it is missing, the build job still succeeds and only the deploy job fails.
 on:
   push:
     branches: [main]
   workflow_dispatch:
-  # Pages of private repositories are not available on every plan; the deploy
-  # fails with a clear message, the build is still useful as a check.
 concurrency:
   group: pages
   cancel-in-progress: true
