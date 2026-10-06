@@ -6,7 +6,8 @@
  *
  * ```json
  * [{ "position": { "longitude": 4.88, "latitude": 52.2 },
- *    "address": "…", "image": "<base64>", "name": "…", "description": "…" }]
+ *    "address": "…", "image": "<base64>", "name": "…", "description": "…",
+ *    "features": ["Pale Ale", "Außenbereich"] }]
  * ```
  *
  * The matching schemas live in `src/schemas/dataset.ts` (zod, in the web worker).
@@ -23,6 +24,12 @@ export interface Item {
   image: string
   name: string
   description: string
+  /**
+   * Short feature tags (beer styles, taproom, outdoor area, …) shown as a grid
+   * in the detail sheet. Optional, so datasets from before this field stay
+   * valid and are simply shown without features.
+   */
+  features?: string[]
 }
 
 /** `version.json` - deliberately tolerant so that an old backend blocks nothing. */

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 /**
  * Checks the new UI: compass with beer bottle needle, ring only with
- * orientation sensor, shrink behavior on scroll, selection bar, cog in the header.
+ * orientation sensor, shrink behavior on scroll, selection badge with details
+ * and navigation next to the distance, detail sheet, cog in the header and the
+ * scrolling on small screens.
  *
  * Usage:
  *   npm run build:only
@@ -143,8 +145,27 @@ const badgeActions = await pageA.evaluate(() => {
     detailsInside: inside('.compass-panel__banner-details'),
     clear: document.querySelectorAll('.compass-panel__banner-clear').length,
     clearInside: inside('.compass-panel__banner-clear'),
+    navigate: document.querySelectorAll('.compass-panel__banner-navigate').length,
+    navigateInside: inside('.compass-panel__banner-navigate'),
+    navigateHref:
+      document.querySelector('.compass-panel__banner-navigate')?.getAttribute('href') ?? '',
     detailsLabel:
       document.querySelector('.compass-panel__banner-details')?.textContent?.trim() ?? '',
+    // Details and navigation sit directly right of the distance, on the same line.
+    rightOfDistance: (() => {
+      const distance = document.querySelector('.compass-panel__banner-distance')
+      const details = document.querySelector('.compass-panel__banner-details')
+      const navigate = document.querySelector('.compass-panel__banner-navigate')
+      if (!distance || !details || !navigate) return false
+      const from = distance.getBoundingClientRect()
+      const detailsBox = details.getBoundingClientRect()
+      const navigateBox = navigate.getBoundingClientRect()
+      const rowHeight = Math.max(from.height, navigateBox.height, detailsBox.height)
+      const sameRow =
+        Math.abs(from.top - navigateBox.top) < rowHeight &&
+        Math.abs(from.top - detailsBox.top) < rowHeight
+      return sameRow && detailsBox.left >= from.right - 1 && navigateBox.left >= from.right - 1
+    })(),
   }
 })
 check(
@@ -159,6 +180,14 @@ check(
   badgeActions.clear === 1 && badgeActions.clearInside,
   `${badgeActions.clear} Knopf`,
 )
+check(
+  'Navigations-Knopf (Pfeil) im Badge',
+  badgeActions.navigate === 1 &&
+    badgeActions.navigateInside &&
+    badgeActions.navigateHref.startsWith('geo:'),
+  `href "${badgeActions.navigateHref.slice(0, 28)}…"`,
+)
+check('Details und Navigation direkt rechts neben der Entfernung', badgeActions.rightOfDistance)
 check(
   'Kein Footer mehr am unteren Rand',
   (await pageA.locator('.selection-bar').count()) === 0 &&
@@ -211,6 +240,53 @@ await pageA.waitForTimeout(300)
 await pageA.click('.compass-panel__banner-details')
 await pageA.waitForSelector('.sheet__name', { timeout: 5000 })
 check('Details über den Badge-Knopf', (await pageA.textContent('.sheet__name')) === firstName)
+
+// Detail sheet: compact distance/direction, features as grid, address instead
+// of coordinates, no address button, navigation as icon only.
+const sheetInfo = await pageA.evaluate(() => {
+  const features = [...document.querySelectorAll('.sheet__feature')].map((node) =>
+    node.textContent.trim(),
+  )
+  const grid = document.querySelector('.sheet__features')
+  const navigate = document.querySelector('.sheet__navigate')
+  return {
+    quick: document.querySelectorAll('.sheet__quick').length,
+    quickText: (document.querySelector('.sheet__quick')?.textContent ?? '')
+      .replace(/\s+/g, ' ')
+      .trim(),
+    features,
+    featureColumns: grid ? getComputedStyle(grid).gridTemplateColumns.split(' ').length : 0,
+    address: (document.querySelector('.sheet__address-value')?.textContent ?? '').trim(),
+    coordinates: document.querySelectorAll('.sheet__stats, .sheet__dms').length,
+    copyButtons: document.querySelectorAll('.sheet__actions button').length,
+    navigateText: (navigate?.textContent ?? '').trim(),
+    navigateHref: navigate?.getAttribute('href') ?? '',
+    navigateLabel: navigate?.getAttribute('aria-label') ?? '',
+  }
+})
+check(
+  'Entfernung und Richtung kompakt in einer Zeile',
+  sheetInfo.quick === 1 && /\d/.test(sheetInfo.quickText),
+  sheetInfo.quickText,
+)
+check(
+  'Merkmale als Grid',
+  sheetInfo.features.length >= 4 && sheetInfo.featureColumns >= 2,
+  `${sheetInfo.features.length} Merkmale in ${sheetInfo.featureColumns} Spalten: ${sheetInfo.features.join(', ')}`,
+)
+check(
+  'Adresse statt Koordinaten',
+  sheetInfo.address.length > 0 && sheetInfo.coordinates === 0,
+  sheetInfo.address,
+)
+check('Kein Adress-Knopf mehr', sheetInfo.copyButtons === 0)
+check(
+  'Navigations-Knopf nur mit Icon',
+  sheetInfo.navigateText.length <= 2 &&
+    sheetInfo.navigateHref.startsWith('geo:') &&
+    sheetInfo.navigateLabel.length > 0,
+  `Icon "${sheetInfo.navigateText}", Label "${sheetInfo.navigateLabel}"`,
+)
 await pageA.click('.sheet__close')
 
 /* -------------------------------------------- B: shrink on list scrolling -- */
@@ -507,6 +583,70 @@ check(
   'Klick daneben schließt das Dropdown',
   (await pageA.locator('.list__sort-menu').count()) === 0,
 )
+
+/* ----------------------------------------------- G: small screen scrolling -- */
+
+process.stdout.write('\n7) Kleiner Bildschirm: die Liste bleibt erreichbar\n')
+
+// Normal phone: the shell stays fixed, only the list scrolls inside.
+const shellState = await pageA.evaluate(() => {
+  const app = document.querySelector('#app')
+  return {
+    appScrollable: app.scrollHeight > app.clientHeight + 1,
+    listScrollable:
+      document.querySelector('.virtual').scrollHeight >
+      document.querySelector('.virtual').clientHeight + 1,
+  }
+})
+check(
+  'Normales Handy: kein Scrollen außerhalb der Liste',
+  !shellState.appScrollable && shellState.listScrollable,
+)
+
+const ctxE = await browser.newContext({ baseURL: BASE, viewport: { width: 360, height: 520 } })
+await ctxE.addInitScript(stubGeolocation())
+const pageE = await ctxE.newPage()
+await pageE.goto(BASE, { waitUntil: 'domcontentloaded' })
+await pageE.waitForSelector('.entry', { timeout: 25000 })
+await pageE.locator('.entry').first().click()
+await pageE.waitForSelector('.compass-panel__banner', { timeout: 5000 })
+
+const smallScreen = await pageE.evaluate(() => {
+  const app = document.querySelector('#app')
+  return {
+    appScrollable: app.scrollHeight > app.clientHeight + 1,
+    viewport: window.innerHeight,
+    listHeight: Math.round(document.querySelector('.layout__list').getBoundingClientRect().height),
+    dial: Math.round(document.querySelector('.compass__svg').getBoundingClientRect().width),
+  }
+})
+check(
+  'Außerhalb der Liste ist scrollbar',
+  smallScreen.appScrollable,
+  `Liste ${smallScreen.listHeight}px, Zifferblatt ${smallScreen.dial}px, Viewport ${smallScreen.viewport}px`,
+)
+
+await pageE.evaluate(() => {
+  document.querySelector('#app').scrollTop = 99999
+})
+await pageE.waitForTimeout(400)
+const afterScroll = await pageE.evaluate(() => {
+  const list = document.querySelector('.virtual').getBoundingClientRect()
+  return {
+    top: Math.round(list.top),
+    bottom: Math.round(list.bottom),
+    height: Math.round(list.height),
+    viewport: window.innerHeight,
+  }
+})
+check(
+  'Nach dem Scrollen ist die Liste vollständig sichtbar',
+  afterScroll.top >= 0 && afterScroll.bottom <= afterScroll.viewport + 1,
+  `Liste ${afterScroll.top}–${afterScroll.bottom}px bei ${afterScroll.viewport}px`,
+)
+check('Die Liste behält ihre Höhe', afterScroll.height >= 100, `${afterScroll.height}px`)
+await pageE.close()
+await ctxE.close()
 
 /* ------------------------------------------------------------------- End --- */
 await browser.close()

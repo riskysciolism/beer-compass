@@ -102,7 +102,11 @@ export const de = {
     detail: 'Details',
     close: 'Schließen',
     address: 'Adresse',
+    /** heading of the feature grid */
+    features: 'Merkmale',
     openInMaps: 'In Karten-App öffnen',
+    /** aria label of the navigation button */
+    navigate: 'Navigation starten',
     distance: 'Entfernung',
     direction: 'Richtung',
     unknownDistance: '–',

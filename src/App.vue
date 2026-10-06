@@ -451,9 +451,14 @@ watch(
   gap: var(--space-2);
 }
 
+/*
+ * The list keeps a usable minimum (the sort bar sits inside it). If the screen
+ * is too small for compass *and* list, `#app` scrolls as well - see
+ * `styles/main.css`.
+ */
 .layout__list {
   flex: 1;
-  min-height: 140px;
+  min-height: 200px;
 }
 
 @media (min-width: 720px) {

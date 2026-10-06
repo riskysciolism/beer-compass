@@ -4,7 +4,7 @@
  *
  * What is checked:
  * - First start, data loading, IndexedDB as the source of truth
- * - Single screen UI: list, selection bar, detail sheet, geo: intent
+ * - Single screen UI: list, selection badge with details + navigation, detail sheet, geo: intent
  * - GPS: denied permission and valid position (now inside the settings)
  * - Offline operation including GPS still works
  * - Update detection, confirmation, atomic replacement

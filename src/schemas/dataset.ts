@@ -23,6 +23,11 @@ export const itemSchema = z.object(
     image: z.string({ error: 'muss eine Textzeile sein (Bild-Link oder leerer String)' }),
     name: z.string({ error: 'muss eine Textzeile sein (Name)' }),
     description: z.string({ error: 'muss eine Textzeile sein (Beschreibung)' }),
+    /** Optional: older datasets have no features. */
+    features: z
+      .array(z.string({ error: 'muss eine Textzeile sein (Merkmal)' }).max(40))
+      .max(12)
+      .optional(),
   },
   { error: 'muss ein Objekt mit position, address, image, name und description sein' },
 )

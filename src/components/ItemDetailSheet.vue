@@ -1,14 +1,14 @@
 <script setup lang="ts">
 /** Detail view of an entry as a bottom sheet. */
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted } from 'vue'
 
 import { translate } from '@/i18n'
 import type { StoredItem } from '@/types/data'
 import {
   cardinalDirection,
   distanceBetween,
-  formatCoordinate,
   formatDistance,
+  mapUrl,
   type LatLon,
 } from '@/utils/geo'
 import { normalizeImageSource } from '@/utils/image'
@@ -20,53 +20,34 @@ const props = defineProps<{
 
 const emit = defineEmits<{ close: [] }>()
 
-const copied = ref(false)
-let timer: ReturnType<typeof setTimeout> | undefined
-
 const image = computed(() => normalizeImageSource(props.item.image))
 
+/** Distance and direction in one compact line - the arrow shows the bearing. */
 const distance = computed(() => {
   if (!props.position) return null
   const result = distanceBetween(props.position, props.item.position)
   return {
     label: formatDistance(result.meters),
     direction: cardinalDirection(result.bearing),
-    meters: result.meters,
+    bearing: result.bearing,
   }
 })
 
-const latitude = computed(() => formatCoordinate(props.item.position.latitude, 'N', 'S'))
-const longitude = computed(() => formatCoordinate(props.item.position.longitude, 'E', 'W'))
+/** Feature tags (beer styles, taproom, outdoor area, …) as a grid. */
+const features = computed(() => props.item.features ?? [])
 
 /**
  * The `geo:` intent opens the map app configured on the device.
  * The app itself does not load anything from the network.
  */
-const mapUrl = computed(() => {
-  const { latitude: lat, longitude: lon } = props.item.position
-  return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(props.item.name)})`
-})
-
-async function copyAddress(): Promise<void> {
-  try {
-    await navigator.clipboard.writeText(`${props.item.name}, ${props.item.address}`)
-    copied.value = true
-    if (timer) clearTimeout(timer)
-    timer = setTimeout(() => (copied.value = false), 2000)
-  } catch {
-    copied.value = false
-  }
-}
+const navigationUrl = computed(() => mapUrl(props.item))
 
 function onKey(event: KeyboardEvent): void {
   if (event.key === 'Escape') emit('close')
 }
 
 onMounted(() => document.addEventListener('keydown', onKey))
-onBeforeUnmount(() => {
-  document.removeEventListener('keydown', onKey)
-  if (timer) clearTimeout(timer)
-})
+onBeforeUnmount(() => document.removeEventListener('keydown', onKey))
 </script>
 
 <template>
@@ -80,7 +61,6 @@ onBeforeUnmount(() => {
         <img v-if="image" class="sheet__image" :src="image" alt="" decoding="async" />
         <div class="sheet__titles">
           <h2 class="sheet__name">{{ item.name }}</h2>
-          <p class="sheet__address">{{ item.address }}</p>
         </div>
         <button
           class="sheet__close"
@@ -94,34 +74,40 @@ onBeforeUnmount(() => {
 
       <p class="sheet__description">{{ item.description }}</p>
 
-      <dl v-if="distance" class="sheet__stats">
-        <div>
-          <dt>{{ translate('list.distance') }}</dt>
-          <dd class="mono">{{ distance.label }}</dd>
-        </div>
-        <div>
-          <dt>{{ translate('list.direction') }}</dt>
-          <dd class="mono">{{ distance.direction }}</dd>
-        </div>
-      </dl>
+      <!-- Distance and direction compact in one line, the arrow shows the bearing. -->
+      <div v-if="distance" class="sheet__quick">
+        <span class="sheet__quick-arrow" :style="{ transform: `rotate(${distance.bearing}deg)` }">
+          ➤
+        </span>
+        <span class="visually-hidden">{{ translate('list.distance') }}: </span>
+        <span class="sheet__quick-value mono">{{ distance.label }}</span>
+        <span class="sheet__quick-separator" aria-hidden="true">·</span>
+        <span class="visually-hidden">{{ translate('list.direction') }}: </span>
+        <span class="sheet__quick-value mono">{{ distance.direction }}</span>
+      </div>
 
-      <dl class="sheet__stats">
-        <div>
-          <dt>{{ translate('geo.latitude') }}</dt>
-          <dd class="mono">{{ latitude.decimal }}</dd>
-        </div>
-        <div>
-          <dt>{{ translate('geo.longitude') }}</dt>
-          <dd class="mono">{{ longitude.decimal }}</dd>
-        </div>
-      </dl>
-      <p class="sheet__dms mono">{{ latitude.dms }} · {{ longitude.dms }}</p>
+      <div v-if="features.length > 0" class="sheet__block">
+        <span class="sheet__label">{{ translate('list.features') }}</span>
+        <ul class="sheet__features">
+          <li v-for="feature in features" :key="feature" class="sheet__feature">{{ feature }}</li>
+        </ul>
+      </div>
+
+      <!-- Address instead of coordinates - the position belongs in the settings. -->
+      <div class="sheet__block">
+        <span class="sheet__label">{{ translate('list.address') }}</span>
+        <p class="sheet__address-value">{{ item.address }}</p>
+      </div>
 
       <div class="sheet__actions">
-        <a class="button" :href="mapUrl">📍 {{ translate('list.openInMaps') }}</a>
-        <button class="button button--quiet" type="button" @click="copyAddress">
-          {{ copied ? translate('geo.copied') : translate('list.address') }}
-        </button>
+        <a
+          class="button sheet__navigate"
+          :href="navigationUrl"
+          :aria-label="translate('list.openInMaps')"
+          :title="translate('list.openInMaps')"
+        >
+          ➤
+        </a>
       </div>
     </div>
   </div>
@@ -211,12 +197,6 @@ onBeforeUnmount(() => {
   font-size: 1.1rem;
 }
 
-.sheet__address {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
 .sheet__close {
   flex-shrink: 0;
   width: 36px;
@@ -233,42 +213,89 @@ onBeforeUnmount(() => {
   color: var(--text);
 }
 
-.sheet__stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-  gap: var(--space-3);
-  margin: var(--space-4) 0 0;
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--surface-border);
-}
-
-.sheet__stats dt {
+/* Small heading above a block of details. */
+.sheet__label {
+  display: block;
   font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: var(--text-faint);
 }
 
-.sheet__stats dd {
-  margin: 2px 0 0;
-  font-size: 0.85rem;
+.sheet__block {
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--surface-border);
+}
+
+/* Distance and direction compact in one line. */
+.sheet__quick {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-1) var(--space-2);
+  margin-top: var(--space-3);
+  font-size: 0.9rem;
+}
+
+.sheet__quick-arrow {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.sheet__quick-value {
   font-weight: 600;
 }
 
-.sheet__dms {
+.sheet__quick-separator {
+  color: var(--text-faint);
+}
+
+/* Features as a grid of tags. */
+.sheet__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(104px, 1fr));
+  gap: var(--space-2);
+  margin: var(--space-2) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet__feature {
+  padding: 6px var(--space-3);
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  background: var(--bg-sunken);
+  font-size: 0.78rem;
+  line-height: 1.3;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sheet__address-value {
   margin-top: var(--space-2);
-  font-size: 0.72rem;
-  color: var(--text-muted);
+  font-size: 0.9rem;
+  color: var(--text);
 }
 
 .sheet__actions {
   display: flex;
-  flex-wrap: wrap;
+  justify-content: flex-end;
   gap: var(--space-2);
   margin-top: var(--space-5);
 }
 
-.sheet__actions .button {
-  flex: 1 1 150px;
+/* Navigation is an icon only - the arrow points into the direction of travel. */
+.sheet__navigate {
+  width: 56px;
+  min-height: 56px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 1.4rem;
+  line-height: 1;
 }
 </style>

@@ -10,7 +10,7 @@ import { computed } from 'vue'
 
 import BeerCompass from '@/components/BeerCompass.vue'
 import { translate } from '@/i18n'
-import { formatDistance } from '@/utils/geo'
+import { formatDistance, mapUrl } from '@/utils/geo'
 import type { GeoStatus } from '@/services/geo-service'
 import type { StoredItem } from '@/types/data'
 
@@ -36,6 +36,9 @@ const emit = defineEmits<{ openSettings: []; openDetails: []; clearSelection: []
 
 const distanceLabel = computed(() => (props.meters === null ? null : formatDistance(props.meters)))
 
+/** `geo:` link of the selected entry - opens navigation on the device. */
+const navigationUrl = computed(() => (props.target ? mapUrl(props.target) : null))
+
 /** Small accuracy badge top right next to the compass. */
 const accuracyLabel = computed(() =>
   props.accuracy === null ? null : `± ${Math.round(props.accuracy)} m`,
@@ -43,8 +46,8 @@ const accuracyLabel = computed(() =>
 
 /**
  * Hint line below the compass. With a selection the
- * banner appears instead (large name and distance, without a direction - that lives in the
- * needle); without a selection this text.
+ * badge appears instead (name, distance, details and navigation - the direction
+ * itself lives in the needle); without a selection this text.
  */
 const caption = computed(() => {
   // Without a position: say what is missing.
@@ -111,20 +114,31 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
         </button>
       </div>
 
-      <span class="compass-panel__banner-value">
-        <strong class="compass-panel__banner-name">{{ target.name }}</strong>
+      <!-- Name on its own line, distance with details and navigation next to it. -->
+      <strong class="compass-panel__banner-name">{{ target.name }}</strong>
+
+      <div class="compass-panel__banner-row">
         <span v-if="distanceLabel" class="compass-panel__banner-distance mono">
           {{ distanceLabel }}
         </span>
-      </span>
 
-      <button
-        class="button button--small compass-panel__banner-details"
-        type="button"
-        @click="emit('openDetails')"
-      >
-        {{ translate('selection.details') }}
-      </button>
+        <button
+          class="button button--small compass-panel__banner-details"
+          type="button"
+          @click="emit('openDetails')"
+        >
+          {{ translate('selection.details') }}
+        </button>
+
+        <a
+          class="button button--small compass-panel__banner-navigate"
+          :href="navigationUrl ?? undefined"
+          :aria-label="translate('list.navigate')"
+          :title="translate('list.navigate')"
+        >
+          ➤
+        </a>
+      </div>
     </div>
 
     <p v-else class="compass-panel__caption">{{ caption }}</p>
@@ -195,8 +209,9 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
 }
 
 /*
- * Badge of the selected entry: sits directly below the compass and holds name,
- * distance, the details button and the clear button.
+ * Badge of the selected entry: sits directly below the compass and holds the
+ * name on its own line, below it the distance with the two buttons directly
+ * next to it.
  */
 .compass-panel__banner {
   position: relative;
@@ -211,6 +226,16 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
   background: var(--bg-elevated);
   box-shadow: var(--shadow-md);
   text-align: center;
+}
+
+/* Distance, details and navigation in one row - wraps only on tiny screens. */
+.compass-panel__banner-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1) var(--space-2);
+  min-width: 0;
 }
 
 .compass-panel__banner-head {
@@ -239,8 +264,17 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
 }
 
 .compass-panel__banner-details {
-  width: 100%;
-  margin-top: var(--space-1);
+  flex: 0 0 auto;
+}
+
+/* Navigation is an icon only - the arrow points into the direction of travel. */
+.compass-panel__banner-navigate {
+  flex: 0 0 auto;
+  width: 38px;
+  min-height: 38px;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .compass-panel__banner-label {
@@ -250,16 +284,8 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
   text-transform: uppercase;
 }
 
-.compass-panel__banner-value {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: center;
-  gap: var(--space-2);
-  max-width: 100%;
-}
-
 .compass-panel__banner-name {
+  min-width: 0;
   max-width: 100%;
   font-size: 1.05rem;
   font-weight: 650;
@@ -270,6 +296,7 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
 }
 
 .compass-panel__banner-distance {
+  flex: 0 0 auto;
   color: var(--accent);
   font-size: 1rem;
   font-weight: 600;
@@ -288,10 +315,10 @@ const showStartHint = computed(() => !props.hasFix && props.status === 'idle')
   font-size: 0.84rem;
 }
 
-.compass-panel--compact .compass-panel__banner-details {
-  min-height: 36px;
-  padding: 0 var(--space-3);
-  font-size: 0.78rem;
+.compass-panel--compact .compass-panel__banner-navigate {
+  width: 34px;
+  min-height: 34px;
+  font-size: 0.9rem;
 }
 
 .compass-panel--compact .compass-panel__accuracy {

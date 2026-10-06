@@ -91,6 +91,16 @@ export function cardinalDirection(bearing: number): string {
   return CARDINALS_DE[index] ?? 'N'
 }
 
+/**
+ * `geo:` intent for the map app configured on the device. Opens navigation
+ * directly - without a detour via a web app and without any network request
+ * from this app.
+ */
+export function mapUrl(item: { name: string; position: LatLon }): string {
+  const { latitude: lat, longitude: lon } = item.position
+  return `geo:${lat},${lon}?q=${lat},${lon}(${encodeURIComponent(item.name)})`
+}
+
 /** Cartesian coordinates for a simple offline display compass rose. */
 export function projectToLocal(origin: LatLon, point: LatLon, radiusMeters: number) {
   const { meters, bearing } = distanceBetween(origin, point)

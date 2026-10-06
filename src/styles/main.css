@@ -127,15 +127,22 @@ body {
 }
 
 /*
- * The app is a fixed shell: only the entry list scrolls (see VirtualList).
- * Without this constraint the whole page would scroll and the virtual list
- * would lose its height - with many entries it then renders everything.
+ * The app is a fixed shell: normally only the entry list scrolls (see
+ * VirtualList). Without this constraint the whole page would scroll and the
+ * virtual list would lose its height - with many entries it then renders
+ * everything.
+ *
+ * `overflow-y: auto` is the fallback for small screens: if the content needs
+ * more space than the viewport offers (short displays, landscape phones, the
+ * keyboard open), the shell scrolls as well instead of cutting off the list.
+ * The virtual list keeps its height from the flex chain in both cases.
  */
 #app {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   isolation: isolate;
 }
 
@@ -222,6 +229,14 @@ a {
   background: transparent;
   color: var(--text);
   border-color: var(--surface-border);
+}
+
+/* Compact variant for rows next to each other - still a comfortable tap target. */
+.button--small {
+  min-height: 38px;
+  padding: 0 var(--space-3);
+  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
 }
 
 .button--quiet {

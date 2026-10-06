@@ -147,6 +147,25 @@ const STYLES = [
   'Weißbier mit Hefe und Koriander, 5,0 % vol. Erfrischend im Sommer.',
 ]
 
+/** Beer styles per style index - shown as a grid in the detail sheet. */
+const STYLE_FEATURES = [
+  ['Helles Ale', 'Fassbier', 'Mild'],
+  ['Doppelbock', '7,5 % vol.', 'Unfiltriert'],
+  ['Pale Ale', '6,2 % vol.', 'Zitrusnoten'],
+  ['Saison', 'Gewürzhopfen', 'Trocken'],
+  ['Porter', '5,4 % vol.', 'Geröstet'],
+  ['Weißbier', '5,0 % vol.', 'Hefe'],
+]
+
+/** Features of the premises, rotated per entry. */
+const VENUE_FEATURES = [
+  ['Schanktisch', 'Außenbereich', 'Aufenthalt erlaubt'],
+  ['Schanktisch', 'Aufenthalt erlaubt'],
+  ['Schanktisch', 'Außenbereich', 'Hunde willkommen'],
+  ['Schanktisch', 'Eigene Biersorten', 'Aufenthalt erlaubt'],
+  ['Schanktisch', 'Außenbereich', 'Eigene Biersorten'],
+]
+
 const items = SEEDS.map(([name, address], index) => {
   // Spread deterministically around Breukelen (52.2011, 4.8796).
   const longitude = Number((4.8796 + Math.sin(index * 1.7) * 0.09 + index * 0.004).toFixed(6))
@@ -157,19 +176,23 @@ const items = SEEDS.map(([name, address], index) => {
     image: makeThumb(index),
     name,
     description: `${STYLES[index % STYLES.length]} Schanktisch vorhanden, Aufenthalt gern erlaubt.`,
+    features: [
+      ...STYLE_FEATURES[index % STYLE_FEATURES.length],
+      ...VENUE_FEATURES[index % VENUE_FEATURES.length],
+    ],
   }
 })
 
 const data = {
-  version: 1,
-  updatedAt: '2026-01-15T10:00:00.000Z',
+  version: 2,
+  updatedAt: '2026-10-06T10:00:00.000Z',
   items,
 }
 const version = {
   version: data.version,
   updatedAt: data.updatedAt,
   count: items.length,
-  schema: 1,
+  schema: 2,
 }
 
 mkdirSync(OUT_DIR, { recursive: true })
@@ -179,4 +202,4 @@ writeFileSync(resolve(OUT_DIR, 'version.json'), `${JSON.stringify(version, null,
 process.stdout.write(
   `data.json: ${items.length} Einträge, ${(JSON.stringify(items).length / 1024).toFixed(1)} kB\n`,
 )
-process.stdout.write('version.json: Version 1\n')
+process.stdout.write(`version.json: Version ${data.version}\n`)

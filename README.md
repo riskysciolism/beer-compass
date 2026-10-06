@@ -116,14 +116,24 @@ was die App tatsächlich abfragt).
   High-Accuracy. Das Tracking pausiert, wenn die App in den Hintergrund geht, und
   läuft offline weiter.
 - **Auswahl-Badge**: Direkt unter dem Kompass erscheint ein Badge mit dem gewählten
-  Eintrag – großer Name, Entfernung, „Details"-Knopf zum Öffnen des Detail-Sheets
-  und ein „✕" zum Aufheben der Auswahl. Die Richtungsangabe steht bewusst nicht
-  dort, sie steckt in der Nadel. Oben rechts am Kompass zeigt eine kleine
-  Genauigkeitsplakette die aktuelle GPS-Genauigkeit (z. B. „± 9 m").
+  Eintrag – der Name auf eigener Zeile, darunter die Entfernung mit dem
+  „Details"-Knopf und einem Pfeil für die Navigation (`geo:`-Intent) direkt neben
+  sich. Oben rechts ein „✕" hebt die Auswahl auf. Die Richtungsangabe steht
+  bewusst nicht im Badge, sie steckt in der Nadel. Oben rechts am Kompass zeigt
+  eine kleine Genauigkeitsplakette die aktuelle GPS-Genauigkeit (z. B. „± 9 m").
+- **Scrollen auf kleinen Bildschirmen**: Die App ist normalerweise eine feste
+  Hülle, in der nur die Liste scrollt (die virtuelle Liste braucht ihre Höhe).
+  Reicht der Platz nicht – kurze Displays, Hochformat-Handys, offene Tastatur –,
+  scrollt zusätzlich `#app`, damit die Liste erreichbar bleibt. Das Zifferblatt
+  skaliert zusätzlich mit der Bildschirmhöhe (`38dvh`).
 - **Sortierung** direkt in der Liste: ein Knopf öffnet ein Dropdown mit
   „Nach Entfernung" und „Nach Name" (wird in den Einstellungen gespeichert).
 - **GPS-Details** stehen bewusst nur in den Einstellungen; auf der Hauptseite
   erscheinen nur Distanz, Kompass und die Genauigkeitsplakette.
+- **Detail-Sheet**: Bild, Name, Beschreibung, dann eine kompakte Zeile für
+  Entfernung und Richtung (Pfeil zeigt die Peilung), die Merkmale als Grid, die
+  **Adresse statt Koordinaten** und ein runter Navigations-Knopf mit Pfeil-Icon
+  (`geo:`-Intent).
 
 ## Datenformat
 
@@ -136,7 +146,8 @@ was die App tatsächlich abfragt).
     "address": "Molenweg 2, 2011 AN Haarlem",
     "image": "data:image/png;base64,…",
     "name": "Brouwerij de Regionaal",
-    "description": "Craft-Bier aus eigener Brauerei."
+    "description": "Craft-Bier aus eigener Brauerei.",
+    "features": ["Helles Ale", "Außenbereich", "Schanktisch"]
   }
 ]
 ```
@@ -150,11 +161,15 @@ Regeln:
 | `image`       | ja      | Bild-URL **oder** leerer String                               |
 | `name`        | ja      | Textzeile                                                     |
 | `description` | ja      | Textzeile                                                     |
+| `features`    | nein    | Liste von kurzen Merkmalen (max. 12 × 40 Zeichen)              |
+
+`features` ist optional: Ältere Datensätze ohne das Feld bleiben gültig und werden
+im Detail-Sheet ohne Merkmals-Grid angezeigt.
 
 `public/data/version.json` steuert die Update-Erkennung:
 
 ```json
-{ "version": 1, "updatedAt": "2026-02-01T09:00:00.000Z", "count": 28 }
+{ "version": 2, "updatedAt": "2026-10-06T10:00:00.000Z", "count": 28 }
 ```
 
 Eigene Daten einbringen:
@@ -305,11 +320,13 @@ Precache, Service-Worker-Scope) sowie eine fehlerfreie Browser-Konsole.
 
 Der UI-Test prüft das neue Layout: kein Reiter mehr, Nadel auf dem Zielwinkel,
 Rosendrehung gegen die Geräteausrichtung, Ausblenden der Rose ohne Lagesensor,
-Auswahl-Badge direkt unter dem Kompass (großer Name, Entfernung, ohne
-Richtungsangabe, Details- und Aufheben-Knopf), Genauigkeitsplakette, Shrink auf
+Auswahl-Badge direkt unter dem Kompass (Name, Entfernung mit „Details"- und
+Navigations-Knopf direkt daneben, Aufheben-Knopf), Genauigkeitsplakette, Shrink auf
 50 % beim Scrollen – zurück auf 100 % oben bzw.
-bei Auswahl und wieder klein beim weitergescrollten –, das Sortier-Dropdown sowie
-GPS-Angaben ausschließlich in den Einstellungen und der Zustand ohne Position.
+bei Auswahl und wieder klein beim weitergescrollten –, das Sortier-Dropdown,
+GPS-Angaben ausschließlich in den Einstellungen, der Zustand ohne Position sowie
+das Scrollen auf kleinen Bildschirmen (Scrollen außerhalb der Liste, feste Hülle
+auf normalen Handys).
 
 Der Test schreibt seine Testdaten vorübergehend nach `public/data/` und stellt sie
 danach wieder her (auch bei Abbruch).
@@ -336,9 +353,10 @@ danach wieder her (auch bei Abbruch).
     ├── sw.ts                   Service Worker (Precache, Offline-Fallback)
     ├── components/
     │   ├── BeerCompass.vue     Kompassrose + Bierflaschennadel (SVG)
-    │   ├── CompassPanel.vue    Kompass, Auswahl-Badge (Name, Distanz, Details), Genauigkeit
+    │   ├── CompassPanel.vue    Kompass, Auswahl-Badge (Name, Distanz, Details, Navigation), Genauigkeit
+    │   ├── ItemDetailSheet.vue Details: Adresse, Merkmals-Grid, Distanz/Richtung, Navigation
     │   ├── GeoStatusPanel.vue  GPS-Status, Koordinaten, Genauigkeit
-    │   └── …                   Header, ItemList, Detail-/Settings-Sheet …
+    │   └── …                   Header, ItemList, Settings-Sheet …
     ├── services/               data-store, update-service, geo-service, sw-registration …
     ├── db/                     IndexedDB-Schema und Repository
     ├── workers/parse.worker.ts JSON parsen + validieren (zod)

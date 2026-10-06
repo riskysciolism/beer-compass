@@ -152,18 +152,23 @@ const label = computed(() =>
 
 <style scoped>
 /*
- * The scaling to 50% uses `width`, not `transform`:
+ * The scaling to 50 % uses `width`, not `transform`:
  * only then does the space in the layout shrink too and the list below gets
  * really more room.
+ *
+ * `--dial-size` also takes the viewport height into account: on short displays
+ * (landscape phone, split screen) the dial yields space to the list instead of
+ * pushing it out of the screen. The compact size is always exactly half of it.
  */
 .compass {
+  --dial-size: min(78vw, 300px, 38dvh);
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
 .compass__svg {
-  width: min(78vw, 300px);
+  width: var(--dial-size);
   max-width: 300px;
   height: auto;
   overflow: visible;
@@ -171,7 +176,8 @@ const label = computed(() =>
 }
 
 .compass--compact .compass__svg {
-  width: min(39vw, 150px);
+  width: calc(var(--dial-size) / 2);
+  max-width: 150px;
 }
 
 .compass__face-start {
