@@ -1,0 +1,62 @@
+name: GitHub Pages
+
+# Test deployment: publishes the static variant (data from `public/data`, no
+# backend) as a project site, e.g. https://<user>.github.io/beer-compass/
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  # Pages of private repositories are not available on every plan; the deploy
+  # fails with a clear message, the build is still useful as a check.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run test
+
+      # No `.env` in CI: the app falls back to the static data files below the
+      # deployment base. `BC_BASE_PATH` must match the repository name, because
+      # GitHub Pages serves project sites in a subdirectory.
+      - name: Build (static, subpath)
+        run: npm run build
+        env:
+          BC_BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_API_BASE: ''
+          VITE_DATA_URL: ''
+          VITE_VERSION_URL: ''
+          VITE_ECHO_URL: ''
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4

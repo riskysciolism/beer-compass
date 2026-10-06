@@ -35,7 +35,9 @@ precacheAndRoute(self.__WB_MANIFEST)
 
 registerRoute(
   new NavigationRoute(createHandlerBoundToURL('index.html'), {
-    denylist: [/^\/api\//, /^\/data\//],
+    // Matches `/api/…` as well as `/beer-compass/data/…`, so the static data
+    // files are never answered with the app shell.
+    denylist: [/\/api\//, /\/data\//],
   }),
 )
 
@@ -51,7 +53,8 @@ registerRoute(
  * cached file is used - the app then simply sees the older version.
  */
 registerRoute(
-  ({ url }) => url.pathname.startsWith('/data/') && url.pathname.endsWith('.json'),
+  ({ url }) =>
+    url.pathname.endsWith('/data/version.json') || url.pathname.endsWith('/data/data.json'),
   new NetworkFirst({
     cacheName: 'bc-data-files',
     networkTimeoutSeconds: 3,
@@ -73,11 +76,16 @@ registerRoute(
  * the network unmodified - an answer from the cache would report the state of
  * an old file and no update would ever be noticed.
  */
-registerRoute(({ url }) => url.pathname.startsWith('/data/'), new NetworkOnly(), 'HEAD')
+registerRoute(
+  ({ url }) =>
+    url.pathname.endsWith('/data/version.json') || url.pathname.endsWith('/data/data.json'),
+  new NetworkOnly(),
+  'HEAD',
+)
 
 /* --------------------------------------------------------------- Live-API --- */
 
-registerRoute(({ url }) => url.pathname.startsWith('/api/'), new NetworkOnly())
+registerRoute(({ url }) => url.pathname.includes('/api/'), new NetworkOnly())
 
 clientsClaim()
 

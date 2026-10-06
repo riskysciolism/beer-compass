@@ -9,7 +9,16 @@ const API_TARGET = process.env.BC_API_TARGET ?? 'http://localhost:8787'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
+  /**
+   * Base path of the deployment. `/` locally, on GitHub Pages for the project
+   * site `/beer-compass/`. Everything absolute in the app (service worker,
+   * manifest, start_url, static data files) is derived from this value.
+   */
+  const rawBase = process.env.BC_BASE_PATH ?? env.BC_BASE_PATH ?? '/'
+  const base = rawBase.endsWith('/') ? rawBase : `${rawBase}/`
+
   return {
+    base,
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
@@ -50,15 +59,15 @@ export default defineConfig(({ mode }) => {
           maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         },
         manifest: {
-          id: '/',
+          id: base,
           name: 'Beer Compass – Brauerei-Findbuch',
           short_name: 'Beer Compass',
           description:
             'Offline-first Findbuch für Brauereien, Ausschänke und Craft-Bier-Hotspots mit GPS-Positionsanzeige.',
           lang: 'de',
           dir: 'ltr',
-          start_url: '/',
-          scope: '/',
+          start_url: base,
+          scope: base,
           display: 'standalone',
           display_override: ['standalone', 'minimal-ui'],
           orientation: 'portrait',
@@ -67,25 +76,25 @@ export default defineConfig(({ mode }) => {
           categories: ['navigation', 'food', 'travel'],
           icons: [
             {
-              src: '/icons/icon-192.png',
+              src: `${base}icons/icon-192.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/icons/icon-512.png',
+              src: `${base}icons/icon-512.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any',
             },
             {
-              src: '/icons/icon-192-maskable.png',
+              src: `${base}icons/icon-192-maskable.png`,
               sizes: '192x192',
               type: 'image/png',
               purpose: 'maskable',
             },
             {
-              src: '/icons/icon-512-maskable.png',
+              src: `${base}icons/icon-512-maskable.png`,
               sizes: '512x512',
               type: 'image/png',
               purpose: 'maskable',
@@ -97,8 +106,8 @@ export default defineConfig(({ mode }) => {
             {
               name: 'Brauereien in der Nähe',
               short_name: 'Kompass',
-              url: '/',
-              icons: [{ src: '/icons/icon-192.png', sizes: '192x192', type: 'image/png' }],
+              url: base,
+              icons: [{ src: `${base}icons/icon-192.png`, sizes: '192x192', type: 'image/png' }],
             },
           ],
         },

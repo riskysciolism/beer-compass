@@ -52,8 +52,11 @@ export function useServiceWorker(): SwState {
       // `type: 'classic'` fits because the injected workbox bundle is
       // self contained (no import/export statements) - that also keeps
       // older Android Chrome versions happy.
-      const registration = await navigator.serviceWorker.register('/sw.js', {
-        scope: '/',
+      // Below the deployment base: `/sw.js` at the domain root, on GitHub
+      // Pages `/beer-compass/sw.js` (otherwise the scope would be too wide).
+      const scope = import.meta.env.BASE_URL
+      const registration = await navigator.serviceWorker.register(`${scope}sw.js`, {
+        scope,
         type: 'classic',
         updateViaCache: 'none',
       })

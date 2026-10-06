@@ -23,6 +23,7 @@ IndexedDB, die App-Shell im Service-Worker-Cache, das GPS funktioniert offline w
 - [Datenformat](#datenformat)
 - [Backend-API](#backend-api)
 - [Offline- und Update-Verhalten](#offline--und-update-verhalten)
+- [GitHub Pages (Test-Deployment)](#github-pages-test-deployment)
 - [Installation auf Android](#installation-auf-android)
 - [Qualitätssicherung](#qualitätssicherung)
 - [Projektstruktur](#projektstruktur)
@@ -397,6 +398,23 @@ bewusst so gebaut und getestet.
   `Content-Type` für `.webmanifest`.
 - Cache-Header: für `sw.js` **kein** langlebiges Caching (`updateViaCache: 'none'` ist
   gesetzt), für `/api/*` keine Caches.
+
+**GitHub Pages (Test-Deployment)**
+
+`.github/workflows/pages.yml` veröffentlicht bei jedem Push auf `main` die
+statische Variante als Projektseite (`https://<user>.github.io/beer-compass/`).
+Zwei Dinge sind dafür nötig:
+
+- Unterpfad: `BC_BASE_PATH` muss dem Repository-Namen entsprechen
+  (`/beer-compass/`). Service Worker, Manifest, `start_url`, Icons und die
+  Datendateien leiten sich daraus ab – lokal bleibt der Default `/`.
+- Leere Umgebungsvariablen gelten als „nicht gesetzt" (`VITE_API_BASE=` o. Ä.).
+  Deshalb greift im Workflow automatisch die statische Variante über
+  `public/data`; ein Backend gibt es auf Pages nicht.
+
+Einmalig in den Repository-Einstellungen unter **Settings → Pages** die Quelle
+auf **GitHub Actions** stellen. Für private Repositories ist GitHub Pages nur mit
+entsprechendem GitHub-Plan verfügbar.
 
 ## Datenschutz
 
