@@ -202,6 +202,7 @@ function parseItemPayload(body, existingSlug) {
   const name = sanitizeText(body.name)
   if (!name) return null
   const address = sanitizeText(body.address)
+  const description = sanitizeText(body.description)
   const latitude = Number(body.latitude)
   const longitude = Number(body.longitude)
   if (!isValidCoordinate(latitude, longitude)) return null
@@ -211,7 +212,7 @@ function parseItemPayload(body, existingSlug) {
   const metadata = typeof body.metadata === 'object' && body.metadata !== null ? body.metadata : {}
   const isActive = coerceBoolean(body.is_active)
   const slug = existingSlug || slugify(name)
-  return { slug, name, address, latitude, longitude, features, metadata, isActive }
+  return { slug, name, address, description, latitude, longitude, features, metadata, isActive }
 }
 
 router.post('/items', authMiddleware, async (req, res) => {
@@ -222,12 +223,13 @@ router.post('/items', authMiddleware, async (req, res) => {
   }
   try {
     const { rows } = await pool.query(
-      `INSERT INTO items (slug, name, address, latitude, longitude, features, metadata, is_active)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+      `INSERT INTO items (slug, name, address, description, latitude, longitude, features, metadata, is_active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
       [
         parsed.slug,
         parsed.name,
         parsed.address,
+        parsed.description,
         parsed.latitude,
         parsed.longitude,
         parsed.features,
@@ -248,6 +250,10 @@ router.post('/items', authMiddleware, async (req, res) => {
 
 router.put('/items/:id', authMiddleware, async (req, res) => {
   const id = Number(req.params.id)
+  if (!Number.isInteger(id)) {
+    res.status(400).json({ error: 'Invalid id' })
+    return
+  }
   const { rows: existing } = await pool.query('SELECT slug FROM items WHERE id = $1', [id])
   if (existing.length === 0) {
     res.status(404).json({ error: 'Not found' })
@@ -260,12 +266,13 @@ router.put('/items/:id', authMiddleware, async (req, res) => {
   }
   const { rows } = await pool.query(
     `UPDATE items
-     SET name = $1, address = $2, latitude = $3, longitude = $4, features = $5,
-         metadata = $6, is_active = $7, updated_at = NOW()
-     WHERE id = $8 RETURNING *`,
+     SET name = $1, address = $2, description = $3, latitude = $4, longitude = $5,
+         features = $6, metadata = $7, is_active = $8, updated_at = NOW()
+     WHERE id = $9 RETURNING *`,
     [
       parsed.name,
       parsed.address,
+      parsed.description,
       parsed.latitude,
       parsed.longitude,
       parsed.features,
@@ -506,32 +513,37 @@ router.post('/publish', authMiddleware, async (req, res) => {
     'SELECT * FROM items WHERE is_active = true ORDER BY name',
   )
   const { rows: fields } = await pool.query('SELECT * FROM schema_fields ORDER BY sort_order, id')
-  const { rows: versionRow } = await pool.query('SELECT COUNT(*) FROM items')
-  const version = 1 + Number(versionRow[0].count)
+  const { rows: versionRow } = await pool.query('SELECT MAX(version) FROM version_history')
 
-  const data = {
-    version,
-    generatedAt: new Date().toISOString(),
-    schema: fields,
-    items: items.map((item) => ({
-      id: item.id,
-      slug: item.slug,
-      name: item.name,
-      address: item.address,
-      position: { latitude: Number(item.latitude), longitude: Number(item.longitude) },
-      features: item.features,
-      metadata: item.metadata,
-      image: item.image,
-    })),
-  }
+  const previousVersion = Number(versionRow[0].max ?? 0)
+  const version = previousVersion + 1
+  const updatedAt = new Date().toISOString()
+
+  // Map DB rows to the dataset format the PWA expects (a plain array of items).
+  const dataset = items.map((item) => ({
+    position: { longitude: Number(item.longitude), latitude: Number(item.latitude) },
+    address: item.address ?? '',
+    image: item.image ?? '',
+    name: item.name,
+    description: item.description ?? '',
+    features: Array.isArray(item.features) ? item.features : [],
+  }))
+
+  // Keep schema fields in a separate file so the app can extend its UI later.
+  const schemaPayload = { fields: fields.map((f) => ({ key: f.key, label: f.label, type: f.type })) }
 
   const publicDataDir = resolve(process.cwd(), 'public/data')
   await mkdir(publicDataDir, { recursive: true })
-  writeFileSync(resolve(publicDataDir, 'data.json'), JSON.stringify(data, null, 2))
+  writeFileSync(resolve(publicDataDir, 'data.json'), JSON.stringify(dataset, null, 2))
+  writeFileSync(resolve(publicDataDir, 'schema.json'), JSON.stringify(schemaPayload, null, 2))
   writeFileSync(
     resolve(publicDataDir, 'version.json'),
-    JSON.stringify({ version, generatedAt: data.generatedAt }, null, 2),
+    JSON.stringify({ version, updatedAt, count: items.length, schema: version }, null, 2),
   )
+
+  // Record the published version so subsequent publishes increment correctly.
+  await pool.query('INSERT INTO version_history (version) VALUES ($1)', [version])
+
   await logAudit(req.admin.id, 'data_published', 'dataset', version, { count: items.length })
   res.json({ version, count: items.length })
 })

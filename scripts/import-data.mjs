@@ -20,6 +20,7 @@ async function main() {
 
   const raw = await readFile(DATA_FILE, 'utf-8')
   const data = JSON.parse(raw)
+  const items = Array.isArray(data) ? data : data.items ?? []
 
   const { rows: existing } = await pool.query('SELECT COUNT(*) FROM items')
   if (Number(existing[0].count) > 0) {
@@ -28,10 +29,11 @@ async function main() {
     return
   }
 
-  for (const item of data.items ?? []) {
+  for (const item of items) {
     const name = String(item.name ?? '')
     const slug = slugify(name) || slugify(String(item.id ?? ''))
     const address = String(item.address ?? '')
+    const description = String(item.description ?? '')
     const lat = Number(item.position?.latitude)
     const lon = Number(item.position?.longitude)
     const features = Array.isArray(item.features)
@@ -41,14 +43,14 @@ async function main() {
     const image = item.image ? String(item.image) : null
 
     await pool.query(
-      `INSERT INTO items (slug, name, address, latitude, longitude, features, metadata, image, is_active)
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+      `INSERT INTO items (slug, name, address, description, latitude, longitude, features, metadata, image, is_active)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
        ON CONFLICT (slug) DO NOTHING`,
-      [slug, name, address, lat, lon, features, JSON.stringify(metadata), image, true],
+      [slug, name, address, description, lat, lon, features, JSON.stringify(metadata), image, true],
     )
   }
 
-  console.info(`Imported ${data.items?.length ?? 0} items.`)
+  console.info(`Imported ${items.length} items.`)
   await closePool()
 }
 

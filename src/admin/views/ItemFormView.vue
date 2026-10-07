@@ -5,12 +5,17 @@ import { fetchItem, createItem, updateItem, uploadImage, fetchSchema } from '../
 
 const route = useRoute()
 const router = useRouter()
-const isNew = computed(() => route.params.id === 'new')
-const id = computed(() => (isNew.value ? null : Number(route.params.id)))
+const isNew = computed(() => route.params.id === undefined || route.params.id === 'new')
+const id = computed(() => {
+  if (isNew.value) return null
+  const parsed = Number(route.params.id)
+  return Number.isFinite(parsed) ? parsed : null
+})
 
 const item = ref<any>({
   name: '',
   address: '',
+  description: '',
   latitude: '',
   longitude: '',
   features: [],
@@ -64,6 +69,7 @@ async function save() {
     const payload = {
       name: item.value.name,
       address: item.value.address,
+      description: item.value.description,
       latitude: Number(item.value.latitude),
       longitude: Number(item.value.longitude),
       features: item.value.features,
@@ -97,6 +103,11 @@ async function save() {
       <div class="admin__form-row">
         <label class="admin__label">Adresse</label>
         <input v-model="item.address" class="admin__input" type="text" />
+      </div>
+
+      <div class="admin__form-row">
+        <label class="admin__label">Beschreibung</label>
+        <textarea v-model="item.description" class="admin__textarea" rows="3"></textarea>
       </div>
 
       <div class="admin__form-row grid-2">

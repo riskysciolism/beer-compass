@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS version_history (
+  version INT PRIMARY KEY,
+  published_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
