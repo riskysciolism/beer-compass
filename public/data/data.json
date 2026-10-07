@@ -1,13 +1,500 @@
 [
   {
     "position": {
-      "longitude": 12,
-      "latitude": 12
+      "longitude": 4.8796,
+      "latitude": 52.2561
     },
-    "address": "asd",
-    "image": "",
-    "name": "asd",
-    "description": "asd",
-    "features": []
+    "address": "Planteraan 33, 3611 AA Uithoorn",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAECElEQVR42u3cXYiVZRQF4HWZmpqaP6npNKPj6Ewzjo6OozMlVqKIlViJZVZiJZaViJVYWWJ/YmWJlZiWKFZiJaJEREREJBEREVFERERUFBER3cUKL7oR33POwP55X90Xz+1Za22+y/N9mF13DoMfzKnvw+AHlzf0YfCDueP7MvjBvMa+DH4wv6kfgx8smNiPwQ8WNp/L4AdXtfRn8INFrf0Z/GBx2wAGP7i2fQCDHyyZMpDBD5Z2DGTwgxumn8fgB8s6BzH4wfKuQQx+cPPMwQx+sKJ7MIMfrOwZwlL8+88vNSlpE267dAhzVevBq8l5I1bNPp85kTp6Sm57sXrOUOZA+/CnymU37rxsKL1ZH/9/OWzHmiuG0YvX4U/leQPcPXcYPfT2SLn9vhSsnTec1mo9Sql5vYF184fTUi2HOBOzU7B+wQhaqTb+bOtxEu5bOIIWqo226pFbH2y48gJqqzbWokOuvbDx6pHUVG2kdn7u/fDgopHUVGmcdnYJHbFp8ShqqTRMM7ekrnj4mlHUUGmQVmaJnbH5utHUkBqilVdqb2xZMprSKj1JGnkld8djSy+ktNQAjazS++OJ68dQWmqARlbp/bF12RhKSpWXztFmtQPbbhxLSani0jnarHbg6ZvGUlKquHSONqsd2H5LHSWdrrR0hhWLLXh2RR2lpJ4ayQxLFnuwY+VFlJIqLJlhyWIPdt5aTympwpIZliz24IXb6yklVVgyw5LFHuxa1UApqcKSGZYs9mD36gZKSRWWzLBksQd77hhHKanCkhmWLPbg5TXjKCVVWDLDksUe7LtrPKWkCktmWLLYg/33NFJKqrBkhiWLPTiwtpGSTldYOsOKxRYcXDeBklJPjXSONqsdeG39BEpKFZfO0Wa1A4fubaKkVHHpHG1WO3D4/iZKS5XXyCq9P97cMJHSUgM0skrvjyMbJ1Fapb92aOSV3B1HH5hEDakRWnml9saxh5qpodKTpJVZYmcc39RMLZUGaeaW1BVvP9JCTZWGaWeX0BHvbG6hpmovQGjn594P7265mNqqjbTokGsvvPdoKy1UG2vVI7c+eP/xVlqpNvps63ESPniyjZZqeVn6TMxOwYdb22it1k8HlJrXG/ho22R66O3HNHL7fSn4+KnJ9JLL52o8b4ATz7TTm9fhc9iOT7a3MwfWx89lNz59bgpzon343Pbisx1TmSupo+e8EZ/vnMpS1Hrwkjbhi+c7GPzgyxc7GPzgq13TGPzg693TGPzgm5emM/jBt3s7Gfzgu1c6Gfzg+30zGPzgh/0zGPzgxwNdDH7w08EuBj/4+dWZDH7w6+uzGPzgt0OzGPzg98PdDH7wxxvdDH7w51s9DH7w15EeBj/4++glDH7+A4SWdqbdU3KvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij de Regionaal",
+    "description": "Klassisches helles Ale, mild und hopfig. Schankt frisch vom Fass. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Helles Ale",
+      "Fassbier",
+      "Mild",
+      "Schanktisch",
+      "Außenbereich",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.97285,
+      "latitude": 52.215812
+    },
+    "address": "Bantammerdijk 1, 3621 EA Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/klEQVR42u3cWW+WVRQF4PU7VBzAEZlEEKitpaVQi7W1thZqa6EWaqEMhVIoKA6oqDig4oASEAeGoAQlEIQwBEI0RqMxGn4Dv8A7swwX3hDO935N9tn7HNgXz+231tp5L7/3xU3jK+js4OYJlXR2cMvEKjo7GDO5ms4Obp1SQ2cHt02tpbOD26fV0dnBHdPn0tnB2Bn1dHYwblYDnR3cWTGfzg7uqmyks4O7q5ro7OCe6mY6O7i3poXODu6rbaWzg/F1bXR2cP+8djo7mFC/kM4OJjZ0MBf//nO5LDltwqT5nUxVuQcvkvJGTG7sYkqkjh6S2l5MaepmCmIf/mqp7MYDzYtpTfv4/0thO6a29NCK1eGvZnkDPNjaSwujPVJqvy8F09qWUlu5R8k1bzQwvb2Pmso5xPWYHYKHFvRTS9H4G63HFZjRsZwaikZr9UitD2Z2DjC2orEaHVLthVldKxlT0cjY+an3Q0X3asZUalzs7Bw64uFFg4yl1LCYuTl1RWXPWsZQalCszBw7o6p3iDGEhsTKy7U3HlkyTGmlnqQYeTl3R3XfBkoLDYiRlXt/zO4fobTQgBhZufdHzbJNlBQqL50Tm9YO1A68QEmh4tI5sWntwJwVmykpVFw6JzatHahb9RIlXau0dIYWjS2YO/gKpYSeGskMTRp7MG/NFkoJFZbM0KSxB/VDr1FKqLBkhiaNPXh0eCulhApLZmjS2IOG9W9QSqiwZIYmjT14bOQtSgkVlszQpLEHjRu3UUqosGSGJo09ePz5dyglVFgyQ5PGHjRtfo9SQoUlMzRp7EHzi9spJVRYMkOTxh488fIHlHStwtIZWjS2oGXLDkoKPTXSObFp7cCTr35ESaHi0jmxae1A6+ufUFKouHRObFo70LZ1J6WFysfIyr0/nnrzM0oLDYiRlXt/tG/bRWml/toRIy/n7ljw9m7GEBoRKy/X3lj47h7GUOpJipWZY2d0bN/LWEoNipmbU1c8/f6XjKnUsNjZOXRE54dfM6aiFyBi56feD1079jG2opEaHVLthWc+3k8NRWO1eqTWB92fHqSWotE3Wo8rsGjnIWoq52Xp6zE7BIs//5bayv10QK55o4GeXYdpYbQf00jt96Xg2d1HaCWVz9VY3gC9X3xPa1aHT2E7luw9yhRoHz+V3Vj61TGmJPbhU9uLvm+OM1VSR095I57bd4K5KPfgOW1C/4Ef6exg2cFTdHaw/NBpOjsY+O4MnR2sOHyOzg5WHjlPZwerfrhAZwerj16ks4PBYz/R2cGa4z/T2cHaE7/Q2cHQyV/p7GDdqd/o7GD49O90drD+7B90drDh3J90djBy/i86O9h44W86O9h08RKdnf8AoRji6ui2QEwAAAAASUVORK5CYII=",
+    "name": "Brouwerij ’t IJ",
+    "description": "Dunkles Doppelbock, unfiltriert, 7,5 % vol. Im Fass bestellen. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Doppelbock",
+      "7,5 % vol.",
+      "Unfiltriert",
+      "Schanktisch",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.864601,
+      "latitude": 52.153971
+    },
+    "address": "Molenpad 2, 3621 AA Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEAUlEQVR42u3cyW+VZRgF8PNHOMQ5zihYsBYKMtQKtVRqGSyVuRYpUIECFWoZbEVFJagEVIJKUCGoBJWg0RhjjDFGY4wxxhijMca48i9wZ45h4Ybw3nubPMP7wrP4be8558m3vN+HuovGMPjBhItvYfCD+kvGMvhBw6XjGPxg0mV1DH7QePl4Bj+YcsXtDH4w9cp6Bj+YflUDgx80XT2RwQ+ar2lk8IOZ105m8IOW66Yw+EHr9VMZ/KDthmkMfnDvjTMY/KD9piYGP+i4uZnBD+aNuZvBDxbcOoul+Pefv2tS0iZ0jm1hrmo9eDU5b0TXuFbmROroKbntxaLbZjMH2oc/Wy67saSujd6sj/+/HLZj6fg59OJ1+LN53gDLJ7TTw2iPlNvvS0F3fQet1XqUUvNGAz13zKWlWg5xPman4KGG+bRSbfyF1uMM9E5cQAvVRlv1yK0P1kzqpLZqYy065NoLfY0LqanaSO383Pth3eQuaqo0Tju7hI7YcOciaqk0TDO3pK7on7qYGioN0sossTM2TVtKDakhWnml9sbA9GWUVulJ0sgruTu2zFhBaakBGlml98dgUzelpQZoZJXeH0N39VBSqrx0jjarHdjevJKSUsWlc7RZ7cDOmasoKVVcOkeb1Q4Mz+qlpHOVls6wYrEFIy2rKSX11EhmWLLYg133rKWUVGHJDEsWe/Bkax+lpApLZliy2IPds9dRSqqwZIYliz14pm09paQKS2ZYstiDPXP6KSVVWDLDksUe7G3fSCmpwpIZliz24Pn7NlNKqrBkhiWLPdjXMUApqcKSGZYs9mD/3C2UkiosmWHJYg8OzNtKSecqLJ1hxWILXpo/SEmpp0Y6R5vVDhy8f4iSUsWlc7RZ7cChzm2UlCounaPNagdeXbiD0lLlNbJK74/DXTspLTVAI6v0/jjywDClVfprh0Zeyd3xxqIRakiN0MortTeOLt5FDZWeJK3MEjvj2JInqKXSIM3ckrri+LKnqKnSMO3sEjri7eW7qanaCxDa+bn3w4kVT1NbtZEWHXLthZPdz9JCtbFWPXLrg/ce3EMr1UZfaD3OwKmevbRUy8vS52N2Ck6vfI7Wav10QKl5o4EPV71AD6P9mEZuvy8FH/Xuo5dcPlfjeQN8vHo/vXkdPoft+GTNAebA+vi57Mana19kTrQPn9tefNb3MnMldfScN+Lzhw+yFLUevKRN+GL9IQY/+HLDKwx+8FX/awx+8PXGwwx+8M2mIwx+8O3m1xn84LuBNxn84PtHjjL4wQ9bjzH4wY+Dxxn84KdH32Lwg5+H3mHwg1+2nWDwg1+3n2Twg992vMvgB78/9j6DH/wxfIrBD/4cOc3gB389/gGDn/8AiGafazxHT7oAAAAASUVORK5CYII=",
+    "name": "Brouwerij de Molen",
+    "description": "Kräftiges Pale Ale mit Orangenschalen und Zitrusnoten, 6,2 % vol. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Pale Ale",
+      "6,2 % vol.",
+      "Zitrusnoten",
+      "Schanktisch",
+      "Außenbereich",
+      "Hunde willkommen"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.808277,
+      "latitude": 52.161174
+    },
+    "address": "Kruisstraat 22, 3771 CC Barneveld",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD+UlEQVR42u3c0U+WZRgG8OvPyKWihiamoiASqKBCiKCCigKBCAoKhDmzLHOaM8syS53WWq05Xau1WnO2pnNO12qt1lqtv6K/oLN2NQ86cT7f+7Hdz30/j94Hv9Pvuq577+H3vnhi2Uw6O5hRM4vODp6snU1nBzPrKujsYFZ9BZ0dVDTMobODOY1z6exg7up5dHYwr+kpOjuobK6ks4P56yrp7GBBy3w6O1jYuoDODqranqazg0XtC+nsYHFHFZ0dLOmsorODpZsX0dlBddczdHawvHsxc/HvP3+XJadNqNm2hKkq9+BFUt6I2p6lTInU0UNS24u6ndVMQezDPyiV3VjZW01r2sf/XwrbUd+/jFasDv8gyxugYWA5LUz3SKn9vhQ0DtZQW7lHyTVvOrBqqJaayjnEo5gdgjXDK6ilaPzj1uM+NI2soIai0Vo9UuuD5r11jK1orEaHVHth7dhKxlQ0MnZ+6v2wfn89Yyo1LnZ2Dh3RMv4sYyk1LGZuTl3ROtnAGEoNipWZY2e0TTUwhtCQWHm59saGA42UVupJipGXc3e0H1xFaaEBMbJy74+OQ6spLTQgRlbu/dF5eA0lhcpL58SmtQObXm6ipFBx6ZzYtHZgy5FmSgoVl86JTWsHul5rpqSHlZbO0KKxBd1H11JK6KmRzNCksQdbj62jlFBhyQxNGnuw/fh6SgkVlszQpLEHPSdaKCVUWDJDk8Ye7DjZSimhwpIZmjT2oPdUK6WECktmaNLYg77Tz1FKqLBkhiaNPeh/q41SQoUlMzRp7MHAmQ2UEiosmaFJYw8G322nlFBhyQxNGnuw6+xGSnpYYekMLRpbMHRuIyWFnhrpnNi0dmD4gw5KChWXzolNawdGzndSUqi4dE5sWjuw5+ImSguVj5GVe3+MXtpMaaEBMbJy74+xD7dQWqm/dsTIy7k79n3UxRhCI2Ll5dob4x93MYZST1KszBw7Y+KTbsZSalDM3Jy6YvLTrYyp1LDY2Tl0xNRn2xhT0QsQsfNT74cDV7YztqKRGh1S7YUXr/ZQQ9FYrR6p9cHBaz3UUjT6cetxHw59voOaynlZ+lHMDsFLX+yktnI/HZBr3nTg8Je9tDDdj2mk9vtS8MpXfbSSyudqLG+AI1/305rV4VPYjle/6WcKtI+fym4c/fZ5piT24VPbi9evDzBVUkdPeSOO3RhkLso9eE6bcPy7XXR2cOL7ITo7eOPmbjo7OHlrN50dnLo9TGcHb94ZobOD03f30NnB2/f20tnBmR9G6ezgnR9H6ezg7E9jdHbw3s/76Ozg3C/76ezg/V/H6ezg/G8TdHZw4fcJOju4+McknR1c+vMFOju4/NcUnZ3/ANpmEs+qk+PvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij Ommegang",
+    "description": "Saison mit Pfeffer und Estragon, Referenz auf das alte Brauhaus. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Saison",
+      "Gewürzhopfen",
+      "Trocken",
+      "Schanktisch",
+      "Eigene Biersorten",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.94007,
+      "latitude": 52.226868
+    },
+    "address": "Molenstraat 9, 3621 AV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cR6xVZRQF4DW2xIKxYFTUqEgAIYiIVHkU6fUhVbqPJlWavTesoFix94aCvWPvDXuJMUZDjHHozCzDwAnhv+e+ZJf/hz34pnettXOG9xyc1Ho3Bj/o3mZ3Bj/o2XYPBj/o3X5PBj/o02EvBj9o6Lg3gx/067QPgx8M6Lwvgx8M7NKCwQ8Gd92PwQ+GdtufwQ+G9ziAwQ9G9jqQwQ9Gn3wQgx80NrRk8IOxfQ9m8INx/Q9h8IMJpxzK4AeTBh3G4AenDWnFUvz7z9a6lLQJU4cdzlzVe/AqOW/E9BFHMCdSR0/JbS9mjjqSOdA+/PZy2Y3TxxxFb9bH/18O29HUeDS9eB1+e543wJxTj6GH5h4pt9+XgnnjW9NavUcpNa85cMbEY2mpnkPsjNkpWDi5Da1Ujd/VemyDxVPa0kLVaKseufXB0mntqK1qrEWHXHth2Yz21FQ1Ujs/935YMes4aqo1Tju7hI5Y1dSBWmoN08wtqSvOmt2RGmoN0sossTPOmduJGlJDtPJK7Y3z5h9PabWeJI28krvjggWdKS01QCOr9P64aNEJlJYaoJFVen9csqQLJaXKS+dos9qBy848kZJSxaVztFntwBXLu1JSqrh0jjarHbhqZTdK2lFp6QwrFluwelV3Skk9NZIZliz24Jqze1BKqrBkhiWLPbju3J6UkiosmWHJYg9uOL8XpaQKS2ZYstiDtRf2ppRUYckMSxZ7cNPFfSglVVgyw5LFHtx8aQOlpApLZliy2INbL+9LKanCkhmWLPbg9iv7UUqqsGSGJYs9WL+6P6WkCktmWLLYgzuvHkBJOyosnWHFYgvuvnYgJaWeGukcbVY7cO/1gygpVVw6R5vVDty/ZjAlpYpL52iz2oEHbxxCaanyGlml98fD64ZSWmqARlbp/fHoLcMordZfOzTySu6Ox28bTg2pEVp5pfbGk3eMpIZaT5JWZomdsWH9KGqpNUgzt6SuePqu0dRUa5h2dgkdsemeMdRU9QKEdn7u/fDsfY3UVjXSokOuvfD8A2NpoWqsVY/c+uDFh8bRStXoXa3HNnj5kfG0VM/L0jtjdgpefWwCrdX76YBS85oDrz8xkR6a+zGN3H5fCjZvmEQvuXyuxvMGePOpyfTmdfgctuPtjVOYA+vj57Ib7z4zlTnRPnxue/H+c9OYK6mj57wRH74wnaWo9+AlbcLHL81g8INPX5nJ4AefvzaLwQ++fKOJwQ+2bJ7N4AdfvzWHwQ++fWcugx98/948Bj/48YP5DH7w80cLGPzgl08WMvjBr58tYvCD375YzOAHv29ZwuAHf3y1lMEPtn6zjMEP/vxuOYMf/PXDCgY/+PunlQx+/gO/L6fYBA4XGgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij 't Vaartje",
+    "description": "Geröstetes Porter, 5,4 % vol. Passt zu geräuchertem Käse. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Porter",
+      "5,4 % vol.",
+      "Geröstet",
+      "Schanktisch",
+      "Außenbereich",
+      "Eigene Biersorten"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.971464,
+      "latitude": 52.254812
+    },
+    "address": "Kerkstraat 14, 3621 BA Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cW29VVRQF4PELvAYFQa5yKxZoLdBaoBVqa6mFUlsLtkBtkdoClQJFVBQVRUWBoEBQNERjjMYQjTEaYzTGaAjR+Dv4BbyZYXjwhbDOPk3mmnMtmA/f6xljzOzHszcWTL6Nzg4qptxOZweLpt5BZweV0+6ks4Ml0++is4OqGXfT2UH1zEl0dlAz+x46O1g+5146O6idO5nODurmTaGzg/r599HZwaqFU+nsoKFiGp0dNC66n84O1lROp7ODpsUz6eygeeksOjtoqZpNZwet1XOYi3+vXilLTpvQVvMAU1XuwYukvBHty+YyJVJHD0ltL9avmMcUxD789VLZjY7a+bSmffz/pbAdnXULaMXq8NezvAG66hfSwkSPlNrvS0H3ygpqK/coueZNBHpWP0hN5RziZswOweaGSmopGn+r9bgGvY2LqaFotFaP1Pqgb80SxlY0VqNDqr2wde1SxlQ0MnZ+6v3Q31TFmEqNi52dQ0cMNFczllLDYubm1BWDLQ8xhlKDYmXm2BnPtNYwhtCQWHm59sbQumWUVupJipGXc3cMt62gtNCAGFm598dIey2lhQbEyMq9P3atr6OkUHnpnNi0dmC042FKChWXzolNawf2bKynpFBx6ZzYtHZgrHMlJd2otHSGFo0t2Ne1ilJCT41khiaNPRjvXk0pocKSGZo09uD5ngZKCRWWzNCksQcHNzVSSqiwZIYmjT14cfMjlBIqLJmhSWMPDvWupZRQYckMTRp78EpfE6WECktmaNLYg8NbHqWUUGHJDE0ae/DatmZKCRWWzNCksQdH+lsoJVRYMkOTxh68OfAYJd2osHSGFo0tODrYSkmhp0Y6JzatHXh7+zpKChWXzolNaweO7WijpFBx6ZzYtHbgvaHHKS1UPkZW7v1xfLid0kIDYmTl3h8nRzZQWqm/dsTIy7k7Tu3sYAyhEbHycu2ND3ZvZAylnqRYmTl2xunRTsZSalDM3Jy64uyeJxhTqWGxs3PoiHNjXYyp6AWI2Pmp98NHe7sZW9FIjQ6p9sL5/U9SQ9FYrR6p9cEn4z3UUjT6VutxDS4c2ERN5bwsfTNmh+DTg09RW7mfDsg1byLw2Qu9tDDRj2mk9vtS8PlLfbSSyudqLG+ALw5toTWrw6ewHV++vJUp0D5+Krvx1eFtTEnsw6e2F1+/2s9USR095Y24+PrTzEW5B89pE745MkBnB9++MUhnB98d3U5nB9+/tYPODn54Z4jODn489iydHfz07jCdHfx8fITODn45sZPODn49uYvODn47tZvODn5/f5TODv44/RydHfx5ZozODi6d3UtnB5fP7aOzg78+3E9nB3+fH6ezg38+PkBn5z98QJFgsjYwNgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij Maaienbroek",
+    "description": "Weißbier mit Hefe und Koriander, 5,0 % vol. Erfrischend im Sommer. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Weißbier",
+      "5,0 % vol.",
+      "Hefe",
+      "Schanktisch",
+      "Außenbereich",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.840611,
+      "latitude": 52.204068
+    },
+    "address": "Molendijk 5, 3621 BB Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAECElEQVR42u3cXYiVZRQF4HWZmpqaP6npNKPj6Ewzjo6OozMlVqKIlViJZVZiJZaViJVYWWJ/YmWJlZiWKFZiJaJEREREJBEREVFERERUFBER3cUKL7oR33POwP55X90Xz+1Za22+y/N9mF13DoMfzKnvw+AHlzf0YfCDueP7MvjBvMa+DH4wv6kfgx8smNiPwQ8WNp/L4AdXtfRn8INFrf0Z/GBx2wAGP7i2fQCDHyyZMpDBD5Z2DGTwgxumn8fgB8s6BzH4wfKuQQx+cPPMwQx+sKJ7MIMfrOwZwlL8+88vNSlpE267dAhzVevBq8l5I1bNPp85kTp6Sm57sXrOUOZA+/CnymU37rxsKL1ZH/9/OWzHmiuG0YvX4U/leQPcPXcYPfT2SLn9vhSsnTec1mo9Sql5vYF184fTUi2HOBOzU7B+wQhaqTb+bOtxEu5bOIIWqo226pFbH2y48gJqqzbWokOuvbDx6pHUVG2kdn7u/fDgopHUVGmcdnYJHbFp8ShqqTRMM7ekrnj4mlHUUGmQVmaJnbH5utHUkBqilVdqb2xZMprSKj1JGnkld8djSy+ktNQAjazS++OJ68dQWmqARlbp/bF12RhKSpWXztFmtQPbbhxLSani0jnarHbg6ZvGUlKquHSONqsd2H5LHSWdrrR0hhWLLXh2RR2lpJ4ayQxLFnuwY+VFlJIqLJlhyWIPdt5aTympwpIZliz24IXb6yklVVgyw5LFHuxa1UApqcKSGZYs9mD36gZKSRWWzLBksQd77hhHKanCkhmWLPbg5TXjKCVVWDLDksUe7LtrPKWkCktmWLLYg/33NFJKqrBkhiWLPTiwtpGSTldYOsOKxRYcXDeBklJPjXSONqsdeG39BEpKFZfO0Wa1A4fubaKkVHHpHG1WO3D4/iZKS5XXyCq9P97cMJHSUgM0skrvjyMbJ1Fapb92aOSV3B1HH5hEDakRWnml9saxh5qpodKTpJVZYmcc39RMLZUGaeaW1BVvP9JCTZWGaWeX0BHvbG6hpmovQGjn594P7265mNqqjbTokGsvvPdoKy1UG2vVI7c+eP/xVlqpNvps63ESPniyjZZqeVn6TMxOwYdb22it1k8HlJrXG/ho22R66O3HNHL7fSn4+KnJ9JLL52o8b4ATz7TTm9fhc9iOT7a3MwfWx89lNz59bgpzon343Pbisx1TmSupo+e8EZ/vnMpS1Hrwkjbhi+c7GPzgyxc7GPzgq13TGPzg693TGPzgm5emM/jBt3s7Gfzgu1c6Gfzg+30zGPzgh/0zGPzgxwNdDH7w08EuBj/4+dWZDH7w6+uzGPzgt0OzGPzg98PdDH7wxxvdDH7w51s9DH7w15EeBj/4++glDH7+A4SWdqbdU3KvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij de Bonte Koe",
+    "description": "Klassisches helles Ale, mild und hopfig. Schankt frisch vom Fass. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Helles Ale",
+      "Fassbier",
+      "Mild",
+      "Schanktisch",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.851968,
+      "latitude": 52.148975
+    },
+    "address": "Stationsweg 3, 3621 BC Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/klEQVR42u3cWW+WVRQF4PU7VBzAEZlEEKitpaVQi7W1thZqa6EWaqEMhVIoKA6oqDig4oASEAeGoAQlEIQwBEI0RqMxGn4Dv8A7swwX3hDO935N9tn7HNgXz+231tp5L7/3xU3jK+js4OYJlXR2cMvEKjo7GDO5ms4Obp1SQ2cHt02tpbOD26fV0dnBHdPn0tnB2Bn1dHYwblYDnR3cWTGfzg7uqmyks4O7q5ro7OCe6mY6O7i3poXODu6rbaWzg/F1bXR2cP+8djo7mFC/kM4OJjZ0MBf//nO5LDltwqT5nUxVuQcvkvJGTG7sYkqkjh6S2l5MaepmCmIf/mqp7MYDzYtpTfv4/0thO6a29NCK1eGvZnkDPNjaSwujPVJqvy8F09qWUlu5R8k1bzQwvb2Pmso5xPWYHYKHFvRTS9H4G63HFZjRsZwaikZr9UitD2Z2DjC2orEaHVLthVldKxlT0cjY+an3Q0X3asZUalzs7Bw64uFFg4yl1LCYuTl1RWXPWsZQalCszBw7o6p3iDGEhsTKy7U3HlkyTGmlnqQYeTl3R3XfBkoLDYiRlXt/zO4fobTQgBhZufdHzbJNlBQqL50Tm9YO1A68QEmh4tI5sWntwJwVmykpVFw6JzatHahb9RIlXau0dIYWjS2YO/gKpYSeGskMTRp7MG/NFkoJFZbM0KSxB/VDr1FKqLBkhiaNPXh0eCulhApLZmjS2IOG9W9QSqiwZIYmjT14bOQtSgkVlszQpLEHjRu3UUqosGSGJo09ePz5dyglVFgyQ5PGHjRtfo9SQoUlMzRp7EHzi9spJVRYMkOTxh488fIHlHStwtIZWjS2oGXLDkoKPTXSObFp7cCTr35ESaHi0jmxae1A6+ufUFKouHRObFo70LZ1J6WFysfIyr0/nnrzM0oLDYiRlXt/tG/bRWml/toRIy/n7ljw9m7GEBoRKy/X3lj47h7GUOpJipWZY2d0bN/LWEoNipmbU1c8/f6XjKnUsNjZOXRE54dfM6aiFyBi56feD1079jG2opEaHVLthWc+3k8NRWO1eqTWB92fHqSWotE3Wo8rsGjnIWoq52Xp6zE7BIs//5bayv10QK55o4GeXYdpYbQf00jt96Xg2d1HaCWVz9VY3gC9X3xPa1aHT2E7luw9yhRoHz+V3Vj61TGmJPbhU9uLvm+OM1VSR095I57bd4K5KPfgOW1C/4Ef6exg2cFTdHaw/NBpOjsY+O4MnR2sOHyOzg5WHjlPZwerfrhAZwerj16ks4PBYz/R2cGa4z/T2cHaE7/Q2cHQyV/p7GDdqd/o7GD49O90drD+7B90drDh3J90djBy/i86O9h44W86O9h08RKdnf8AoRji6ui2QEwAAAAASUVORK5CYII=",
+    "name": "Brouwerij Schouten",
+    "description": "Dunkles Doppelbock, unfiltriert, 7,5 % vol. Im Fass bestellen. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Doppelbock",
+      "7,5 % vol.",
+      "Unfiltriert",
+      "Schanktisch",
+      "Außenbereich",
+      "Hunde willkommen"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.988925,
+      "latitude": 52.170246
+    },
+    "address": "Langerakdijk 8, 3621 EK Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEAUlEQVR42u3cyW+VZRgF8PNHOMQ5zihYsBYKMtQKtVRqGSyVuRYpUIECFWoZbEVFJagEVIJKUCGoBJWg0RhjjDFGY4wxxhijMca48i9wZ45h4Ybw3nubPMP7wrP4be8558m3vN+HuovGMPjBhItvYfCD+kvGMvhBw6XjGPxg0mV1DH7QePl4Bj+YcsXtDH4w9cp6Bj+YflUDgx80XT2RwQ+ar2lk8IOZ105m8IOW66Yw+EHr9VMZ/KDthmkMfnDvjTMY/KD9piYGP+i4uZnBD+aNuZvBDxbcOoul+Pefv2tS0iZ0jm1hrmo9eDU5b0TXuFbmROroKbntxaLbZjMH2oc/Wy67saSujd6sj/+/HLZj6fg59OJ1+LN53gDLJ7TTw2iPlNvvS0F3fQet1XqUUvNGAz13zKWlWg5xPman4KGG+bRSbfyF1uMM9E5cQAvVRlv1yK0P1kzqpLZqYy065NoLfY0LqanaSO383Pth3eQuaqo0Tju7hI7YcOciaqk0TDO3pK7on7qYGioN0sossTM2TVtKDakhWnml9sbA9GWUVulJ0sgruTu2zFhBaakBGlml98dgUzelpQZoZJXeH0N39VBSqrx0jjarHdjevJKSUsWlc7RZ7cDOmasoKVVcOkeb1Q4Mz+qlpHOVls6wYrEFIy2rKSX11EhmWLLYg133rKWUVGHJDEsWe/Bkax+lpApLZliy2IPds9dRSqqwZIYliz14pm09paQKS2ZYstiDPXP6KSVVWDLDksUe7G3fSCmpwpIZliz24Pn7NlNKqrBkhiWLPdjXMUApqcKSGZYs9mD/3C2UkiosmWHJYg8OzNtKSecqLJ1hxWILXpo/SEmpp0Y6R5vVDhy8f4iSUsWlc7RZ7cChzm2UlCounaPNagdeXbiD0lLlNbJK74/DXTspLTVAI6v0/jjywDClVfprh0Zeyd3xxqIRakiN0MortTeOLt5FDZWeJK3MEjvj2JInqKXSIM3ckrri+LKnqKnSMO3sEjri7eW7qanaCxDa+bn3w4kVT1NbtZEWHXLthZPdz9JCtbFWPXLrg/ce3EMr1UZfaD3OwKmevbRUy8vS52N2Ck6vfI7Wav10QKl5o4EPV71AD6P9mEZuvy8FH/Xuo5dcPlfjeQN8vHo/vXkdPoft+GTNAebA+vi57Mana19kTrQPn9tefNb3MnMldfScN+Lzhw+yFLUevKRN+GL9IQY/+HLDKwx+8FX/awx+8PXGwwx+8M2mIwx+8O3m1xn84LuBNxn84PtHjjL4wQ9bjzH4wY+Dxxn84KdH32Lwg5+H3mHwg1+2nWDwg1+3n2Twg992vMvgB78/9j6DH/wxfIrBD/4cOc3gB389/gGDn/8AiGafazxHT7oAAAAASUVORK5CYII=",
+    "name": "Brouwerij De Korenaar",
+    "description": "Kräftiges Pale Ale mit Orangenschalen und Zitrusnoten, 6,2 % vol. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Pale Ale",
+      "6,2 % vol.",
+      "Zitrusnoten",
+      "Schanktisch",
+      "Eigene Biersorten",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.951307,
+      "latitude": 52.236718
+    },
+    "address": "Vaartweg 7, 3621 EV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD+UlEQVR42u3c0U+WZRgG8OvPyKWihiamoiASqKBCiKCCigKBCAoKhDmzLHOaM8syS53WWq05Xau1WnO2pnNO12qt1lqtv6K/oLN2NQ86cT7f+7Hdz30/j94Hv9Pvuq577+H3vnhi2Uw6O5hRM4vODp6snU1nBzPrKujsYFZ9BZ0dVDTMobODOY1z6exg7up5dHYwr+kpOjuobK6ks4P56yrp7GBBy3w6O1jYuoDODqranqazg0XtC+nsYHFHFZ0dLOmsorODpZsX0dlBddczdHawvHsxc/HvP3+XJadNqNm2hKkq9+BFUt6I2p6lTInU0UNS24u6ndVMQezDPyiV3VjZW01r2sf/XwrbUd+/jFasDv8gyxugYWA5LUz3SKn9vhQ0DtZQW7lHyTVvOrBqqJaayjnEo5gdgjXDK6ilaPzj1uM+NI2soIai0Vo9UuuD5r11jK1orEaHVHth7dhKxlQ0MnZ+6v2wfn89Yyo1LnZ2Dh3RMv4sYyk1LGZuTl3ROtnAGEoNipWZY2e0TTUwhtCQWHm59saGA42UVupJipGXc3e0H1xFaaEBMbJy74+OQ6spLTQgRlbu/dF5eA0lhcpL58SmtQObXm6ipFBx6ZzYtHZgy5FmSgoVl86JTWsHul5rpqSHlZbO0KKxBd1H11JK6KmRzNCksQdbj62jlFBhyQxNGnuw/fh6SgkVlszQpLEHPSdaKCVUWDJDk8Ye7DjZSimhwpIZmjT2oPdUK6WECktmaNLYg77Tz1FKqLBkhiaNPeh/q41SQoUlMzRp7MHAmQ2UEiosmaFJYw8G322nlFBhyQxNGnuw6+xGSnpYYekMLRpbMHRuIyWFnhrpnNi0dmD4gw5KChWXzolNawdGzndSUqi4dE5sWjuw5+ImSguVj5GVe3+MXtpMaaEBMbJy74+xD7dQWqm/dsTIy7k79n3UxRhCI2Ll5dob4x93MYZST1KszBw7Y+KTbsZSalDM3Jy6YvLTrYyp1LDY2Tl0xNRn2xhT0QsQsfNT74cDV7YztqKRGh1S7YUXr/ZQQ9FYrR6p9cHBaz3UUjT6cetxHw59voOaynlZ+lHMDsFLX+yktnI/HZBr3nTg8Je9tDDdj2mk9vtS8MpXfbSSyudqLG+AI1/305rV4VPYjle/6WcKtI+fym4c/fZ5piT24VPbi9evDzBVUkdPeSOO3RhkLso9eE6bcPy7XXR2cOL7ITo7eOPmbjo7OHlrN50dnLo9TGcHb94ZobOD03f30NnB2/f20tnBmR9G6ezgnR9H6ezg7E9jdHbw3s/76Ozg3C/76ezg/V/H6ezg/G8TdHZw4fcJOju4+McknR1c+vMFOju4/NcUnZ3/ANpmEs+qk+PvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij ’t Vaartje",
+    "description": "Saison mit Pfeffer und Estragon, Referenz auf das alte Brauhaus. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Saison",
+      "Gewürzhopfen",
+      "Trocken",
+      "Schanktisch",
+      "Außenbereich",
+      "Eigene Biersorten"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.833074,
+      "latitude": 52.25101
+    },
+    "address": "Korte Dijk 11, 3621 EA Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cR6xVZRQF4DW2xIKxYFTUqEgAIYiIVHkU6fUhVbqPJlWavTesoFix94aCvWPvDXuJMUZDjHHozCzDwAnhv+e+ZJf/hz34pnettXOG9xyc1Ho3Bj/o3mZ3Bj/o2XYPBj/o3X5PBj/o02EvBj9o6Lg3gx/067QPgx8M6Lwvgx8M7NKCwQ8Gd92PwQ+GdtufwQ+G9ziAwQ9G9jqQwQ9Gn3wQgx80NrRk8IOxfQ9m8INx/Q9h8IMJpxzK4AeTBh3G4AenDWnFUvz7z9a6lLQJU4cdzlzVe/AqOW/E9BFHMCdSR0/JbS9mjjqSOdA+/PZy2Y3TxxxFb9bH/18O29HUeDS9eB1+e543wJxTj6GH5h4pt9+XgnnjW9NavUcpNa85cMbEY2mpnkPsjNkpWDi5Da1Ujd/VemyDxVPa0kLVaKseufXB0mntqK1qrEWHXHth2Yz21FQ1Ujs/935YMes4aqo1Tju7hI5Y1dSBWmoN08wtqSvOmt2RGmoN0sossTPOmduJGlJDtPJK7Y3z5h9PabWeJI28krvjggWdKS01QCOr9P64aNEJlJYaoJFVen9csqQLJaXKS+dos9qBy848kZJSxaVztFntwBXLu1JSqrh0jjarHbhqZTdK2lFp6QwrFluwelV3Skk9NZIZliz24Jqze1BKqrBkhiWLPbju3J6UkiosmWHJYg9uOL8XpaQKS2ZYstiDtRf2ppRUYckMSxZ7cNPFfSglVVgyw5LFHtx8aQOlpApLZliy2INbL+9LKanCkhmWLPbg9iv7UUqqsGSGJYs9WL+6P6WkCktmWLLYgzuvHkBJOyosnWHFYgvuvnYgJaWeGukcbVY7cO/1gygpVVw6R5vVDty/ZjAlpYpL52iz2oEHbxxCaanyGlml98fD64ZSWmqARlbp/fHoLcMordZfOzTySu6Ox28bTg2pEVp5pfbGk3eMpIZaT5JWZomdsWH9KGqpNUgzt6SuePqu0dRUa5h2dgkdsemeMdRU9QKEdn7u/fDsfY3UVjXSokOuvfD8A2NpoWqsVY/c+uDFh8bRStXoXa3HNnj5kfG0VM/L0jtjdgpefWwCrdX76YBS85oDrz8xkR6a+zGN3H5fCjZvmEQvuXyuxvMGePOpyfTmdfgctuPtjVOYA+vj57Ib7z4zlTnRPnxue/H+c9OYK6mj57wRH74wnaWo9+AlbcLHL81g8INPX5nJ4AefvzaLwQ++fKOJwQ+2bJ7N4AdfvzWHwQ++fWcugx98/948Bj/48YP5DH7w80cLGPzgl08WMvjBr58tYvCD375YzOAHv29ZwuAHf3y1lMEPtn6zjMEP/vxuOYMf/PXDCgY/+PunlQx+/gO/L6fYBA4XGgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij de Gooyer",
+    "description": "Geröstetes Porter, 5,4 % vol. Passt zu geräuchertem Käse. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Porter",
+      "5,4 % vol.",
+      "Geröstet",
+      "Schanktisch",
+      "Außenbereich",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.91019,
+      "latitude": 52.192184
+    },
+    "address": "Waldijk 1, 3621 KW Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cW29VVRQF4PELvAYFQa5yKxZoLdBaoBVqa6mFUlsLtkBtkdoClQJFVBQVRUWBoEBQNERjjMYQjTEaYzTGaAjR+Dv4BbyZYXjwhbDOPk3mmnMtmA/f6xljzOzHszcWTL6Nzg4qptxOZweLpt5BZweV0+6ks4Ml0++is4OqGXfT2UH1zEl0dlAz+x46O1g+5146O6idO5nODurmTaGzg/r599HZwaqFU+nsoKFiGp0dNC66n84O1lROp7ODpsUz6eygeeksOjtoqZpNZwet1XOYi3+vXilLTpvQVvMAU1XuwYukvBHty+YyJVJHD0ltL9avmMcUxD789VLZjY7a+bSmffz/pbAdnXULaMXq8NezvAG66hfSwkSPlNrvS0H3ygpqK/coueZNBHpWP0hN5RziZswOweaGSmopGn+r9bgGvY2LqaFotFaP1Pqgb80SxlY0VqNDqr2wde1SxlQ0MnZ+6v3Q31TFmEqNi52dQ0cMNFczllLDYubm1BWDLQ8xhlKDYmXm2BnPtNYwhtCQWHm59sbQumWUVupJipGXc3cMt62gtNCAGFm598dIey2lhQbEyMq9P3atr6OkUHnpnNi0dmC042FKChWXzolNawf2bKynpFBx6ZzYtHZgrHMlJd2otHSGFo0t2Ne1ilJCT41khiaNPRjvXk0pocKSGZo09uD5ngZKCRWWzNCksQcHNzVSSqiwZIYmjT14cfMjlBIqLJmhSWMPDvWupZRQYckMTRp78EpfE6WECktmaNLYg8NbHqWUUGHJDE0ae/DatmZKCRWWzNCksQdH+lsoJVRYMkOTxh68OfAYJd2osHSGFo0tODrYSkmhp0Y6JzatHXh7+zpKChWXzolNaweO7WijpFBx6ZzYtHbgvaHHKS1UPkZW7v1xfLid0kIDYmTl3h8nRzZQWqm/dsTIy7k7Tu3sYAyhEbHycu2ND3ZvZAylnqRYmTl2xunRTsZSalDM3Jy64uyeJxhTqWGxs3PoiHNjXYyp6AWI2Pmp98NHe7sZW9FIjQ6p9sL5/U9SQ9FYrR6p9cEn4z3UUjT6VutxDS4c2ERN5bwsfTNmh+DTg09RW7mfDsg1byLw2Qu9tDDRj2mk9vtS8PlLfbSSyudqLG+ALw5toTWrw6ewHV++vJUp0D5+Krvx1eFtTEnsw6e2F1+/2s9USR095Y24+PrTzEW5B89pE745MkBnB9++MUhnB98d3U5nB9+/tYPODn54Z4jODn489iydHfz07jCdHfx8fITODn45sZPODn49uYvODn47tZvODn5/f5TODv44/RydHfx5ZozODi6d3UtnB5fP7aOzg78+3E9nB3+fH6ezg38+PkBn5z98QJFgsjYwNgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij Rieker",
+    "description": "Weißbier mit Hefe und Koriander, 5,0 % vol. Erfrischend im Sommer. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Weißbier",
+      "5,0 % vol.",
+      "Hefe",
+      "Schanktisch",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.017581,
+      "latitude": 52.14642
+    },
+    "address": "Lindelaan 21, 3621 EV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAECElEQVR42u3cXYiVZRQF4HWZmpqaP6npNKPj6Ewzjo6OozMlVqKIlViJZVZiJZaViJVYWWJ/YmWJlZiWKFZiJaJEREREJBEREVFERERUFBER3cUKL7oR33POwP55X90Xz+1Za22+y/N9mF13DoMfzKnvw+AHlzf0YfCDueP7MvjBvMa+DH4wv6kfgx8smNiPwQ8WNp/L4AdXtfRn8INFrf0Z/GBx2wAGP7i2fQCDHyyZMpDBD5Z2DGTwgxumn8fgB8s6BzH4wfKuQQx+cPPMwQx+sKJ7MIMfrOwZwlL8+88vNSlpE267dAhzVevBq8l5I1bNPp85kTp6Sm57sXrOUOZA+/CnymU37rxsKL1ZH/9/OWzHmiuG0YvX4U/leQPcPXcYPfT2SLn9vhSsnTec1mo9Sql5vYF184fTUi2HOBOzU7B+wQhaqTb+bOtxEu5bOIIWqo226pFbH2y48gJqqzbWokOuvbDx6pHUVG2kdn7u/fDgopHUVGmcdnYJHbFp8ShqqTRMM7ekrnj4mlHUUGmQVmaJnbH5utHUkBqilVdqb2xZMprSKj1JGnkld8djSy+ktNQAjazS++OJ68dQWmqARlbp/bF12RhKSpWXztFmtQPbbhxLSani0jnarHbg6ZvGUlKquHSONqsd2H5LHSWdrrR0hhWLLXh2RR2lpJ4ayQxLFnuwY+VFlJIqLJlhyWIPdt5aTympwpIZliz24IXb6yklVVgyw5LFHuxa1UApqcKSGZYs9mD36gZKSRWWzLBksQd77hhHKanCkhmWLPbg5TXjKCVVWDLDksUe7LtrPKWkCktmWLLYg/33NFJKqrBkhiWLPTiwtpGSTldYOsOKxRYcXDeBklJPjXSONqsdeG39BEpKFZfO0Wa1A4fubaKkVHHpHG1WO3D4/iZKS5XXyCq9P97cMJHSUgM0skrvjyMbJ1Fapb92aOSV3B1HH5hEDakRWnml9saxh5qpodKTpJVZYmcc39RMLZUGaeaW1BVvP9JCTZWGaWeX0BHvbG6hpmovQGjn594P7265mNqqjbTokGsvvPdoKy1UG2vVI7c+eP/xVlqpNvps63ESPniyjZZqeVn6TMxOwYdb22it1k8HlJrXG/ho22R66O3HNHL7fSn4+KnJ9JLL52o8b4ATz7TTm9fhc9iOT7a3MwfWx89lNz59bgpzon343Pbisx1TmSupo+e8EZ/vnMpS1Hrwkjbhi+c7GPzgyxc7GPzgq13TGPzg693TGPzgm5emM/jBt3s7Gfzgu1c6Gfzg+30zGPzgh/0zGPzgxwNdDH7w08EuBj/4+dWZDH7w6+uzGPzgt0OzGPzg98PdDH7wxxvdDH7w51s9DH7w15EeBj/4++glDH7+A4SWdqbdU3KvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij Puijekker",
+    "description": "Klassisches helles Ale, mild und hopfig. Schankt frisch vom Fass. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Helles Ale",
+      "Fassbier",
+      "Mild",
+      "Schanktisch",
+      "Außenbereich",
+      "Hunde willkommen"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.921823,
+      "latitude": 52.180763
+    },
+    "address": "Rijnlaan 4, 3621 EV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/klEQVR42u3cWW+WVRQF4PU7VBzAEZlEEKitpaVQi7W1thZqa6EWaqEMhVIoKA6oqDig4oASEAeGoAQlEIQwBEI0RqMxGn4Dv8A7swwX3hDO935N9tn7HNgXz+231tp5L7/3xU3jK+js4OYJlXR2cMvEKjo7GDO5ms4Obp1SQ2cHt02tpbOD26fV0dnBHdPn0tnB2Bn1dHYwblYDnR3cWTGfzg7uqmyks4O7q5ro7OCe6mY6O7i3poXODu6rbaWzg/F1bXR2cP+8djo7mFC/kM4OJjZ0MBf//nO5LDltwqT5nUxVuQcvkvJGTG7sYkqkjh6S2l5MaepmCmIf/mqp7MYDzYtpTfv4/0thO6a29NCK1eGvZnkDPNjaSwujPVJqvy8F09qWUlu5R8k1bzQwvb2Pmso5xPWYHYKHFvRTS9H4G63HFZjRsZwaikZr9UitD2Z2DjC2orEaHVLthVldKxlT0cjY+an3Q0X3asZUalzs7Bw64uFFg4yl1LCYuTl1RWXPWsZQalCszBw7o6p3iDGEhsTKy7U3HlkyTGmlnqQYeTl3R3XfBkoLDYiRlXt/zO4fobTQgBhZufdHzbJNlBQqL50Tm9YO1A68QEmh4tI5sWntwJwVmykpVFw6JzatHahb9RIlXau0dIYWjS2YO/gKpYSeGskMTRp7MG/NFkoJFZbM0KSxB/VDr1FKqLBkhiaNPXh0eCulhApLZmjS2IOG9W9QSqiwZIYmjT14bOQtSgkVlszQpLEHjRu3UUqosGSGJo09ePz5dyglVFgyQ5PGHjRtfo9SQoUlMzRp7EHzi9spJVRYMkOTxh488fIHlHStwtIZWjS2oGXLDkoKPTXSObFp7cCTr35ESaHi0jmxae1A6+ufUFKouHRObFo70LZ1J6WFysfIyr0/nnrzM0oLDYiRlXt/tG/bRWml/toRIy/n7ljw9m7GEBoRKy/X3lj47h7GUOpJipWZY2d0bN/LWEoNipmbU1c8/f6XjKnUsNjZOXRE54dfM6aiFyBi56feD1079jG2opEaHVLthWc+3k8NRWO1eqTWB92fHqSWotE3Wo8rsGjnIWoq52Xp6zE7BIs//5bayv10QK55o4GeXYdpYbQf00jt96Xg2d1HaCWVz9VY3gC9X3xPa1aHT2E7luw9yhRoHz+V3Vj61TGmJPbhU9uLvm+OM1VSR095I57bd4K5KPfgOW1C/4Ef6exg2cFTdHaw/NBpOjsY+O4MnR2sOHyOzg5WHjlPZwerfrhAZwerj16ks4PBYz/R2cGa4z/T2cHaE7/Q2cHQyV/p7GDdqd/o7GD49O90drD+7B90drDh3J90djBy/i86O9h44W86O9h08RKdnf8AoRji6ui2QEwAAAAASUVORK5CYII=",
+    "name": "Brouwerij De Tuin",
+    "description": "Dunkles Doppelbock, unfiltriert, 7,5 % vol. Im Fass bestellen. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Doppelbock",
+      "7,5 % vol.",
+      "Unfiltriert",
+      "Schanktisch",
+      "Eigene Biersorten",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.848138,
+      "latitude": 52.244899
+    },
+    "address": "Weerkade 6, 3621 EZ Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEAUlEQVR42u3cyW+VZRgF8PNHOMQ5zihYsBYKMtQKtVRqGSyVuRYpUIECFWoZbEVFJagEVIJKUCGoBJWg0RhjjDFGY4wxxhijMca48i9wZ45h4Ybw3nubPMP7wrP4be8558m3vN+HuovGMPjBhItvYfCD+kvGMvhBw6XjGPxg0mV1DH7QePl4Bj+YcsXtDH4w9cp6Bj+YflUDgx80XT2RwQ+ar2lk8IOZ105m8IOW66Yw+EHr9VMZ/KDthmkMfnDvjTMY/KD9piYGP+i4uZnBD+aNuZvBDxbcOoul+Pefv2tS0iZ0jm1hrmo9eDU5b0TXuFbmROroKbntxaLbZjMH2oc/Wy67saSujd6sj/+/HLZj6fg59OJ1+LN53gDLJ7TTw2iPlNvvS0F3fQet1XqUUvNGAz13zKWlWg5xPman4KGG+bRSbfyF1uMM9E5cQAvVRlv1yK0P1kzqpLZqYy065NoLfY0LqanaSO383Pth3eQuaqo0Tju7hI7YcOciaqk0TDO3pK7on7qYGioN0sossTM2TVtKDakhWnml9sbA9GWUVulJ0sgruTu2zFhBaakBGlml98dgUzelpQZoZJXeH0N39VBSqrx0jjarHdjevJKSUsWlc7RZ7cDOmasoKVVcOkeb1Q4Mz+qlpHOVls6wYrEFIy2rKSX11EhmWLLYg133rKWUVGHJDEsWe/Bkax+lpApLZliy2IPds9dRSqqwZIYliz14pm09paQKS2ZYstiDPXP6KSVVWDLDksUe7G3fSCmpwpIZliz24Pn7NlNKqrBkhiWLPdjXMUApqcKSGZYs9mD/3C2UkiosmWHJYg8OzNtKSecqLJ1hxWILXpo/SEmpp0Y6R5vVDhy8f4iSUsWlc7RZ7cChzm2UlCounaPNagdeXbiD0lLlNbJK74/DXTspLTVAI6v0/jjywDClVfprh0Zeyd3xxqIRakiN0MortTeOLt5FDZWeJK3MEjvj2JInqKXSIM3ckrri+LKnqKnSMO3sEjri7eW7qanaCxDa+bn3w4kVT1NbtZEWHXLthZPdz9JCtbFWPXLrg/ce3EMr1UZfaD3OwKmevbRUy8vS52N2Ck6vfI7Wav10QKl5o4EPV71AD6P9mEZuvy8FH/Xuo5dcPlfjeQN8vHo/vXkdPoft+GTNAebA+vi57Mana19kTrQPn9tefNb3MnMldfScN+Lzhw+yFLUevKRN+GL9IQY/+HLDKwx+8FX/awx+8PXGwwx+8M2mIwx+8O3m1xn84LuBNxn84PtHjjL4wQ9bjzH4wY+Dxxn84KdH32Lwg5+H3mHwg1+2nWDwg1+3n2Twg992vMvgB78/9j6DH/wxfIrBD/4cOc3gB389/gGDn/8AiGafazxHT7oAAAAASUVORK5CYII=",
+    "name": "Brouwerij Hopman",
+    "description": "Kräftiges Pale Ale mit Orangenschalen und Zitrusnoten, 6,2 % vol. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Pale Ale",
+      "6,2 % vol.",
+      "Zitrusnoten",
+      "Schanktisch",
+      "Außenbereich",
+      "Eigene Biersorten"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.971915,
+      "latitude": 52.24487
+    },
+    "address": "Zuiderweg 12, 3621 ET Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD+UlEQVR42u3c0U+WZRgG8OvPyKWihiamoiASqKBCiKCCigKBCAoKhDmzLHOaM8syS53WWq05Xau1WnO2pnNO12qt1lqtv6K/oLN2NQ86cT7f+7Hdz30/j94Hv9Pvuq577+H3vnhi2Uw6O5hRM4vODp6snU1nBzPrKujsYFZ9BZ0dVDTMobODOY1z6exg7up5dHYwr+kpOjuobK6ks4P56yrp7GBBy3w6O1jYuoDODqranqazg0XtC+nsYHFHFZ0dLOmsorODpZsX0dlBddczdHawvHsxc/HvP3+XJadNqNm2hKkq9+BFUt6I2p6lTInU0UNS24u6ndVMQezDPyiV3VjZW01r2sf/XwrbUd+/jFasDv8gyxugYWA5LUz3SKn9vhQ0DtZQW7lHyTVvOrBqqJaayjnEo5gdgjXDK6ilaPzj1uM+NI2soIai0Vo9UuuD5r11jK1orEaHVHth7dhKxlQ0MnZ+6v2wfn89Yyo1LnZ2Dh3RMv4sYyk1LGZuTl3ROtnAGEoNipWZY2e0TTUwhtCQWHm59saGA42UVupJipGXc3e0H1xFaaEBMbJy74+OQ6spLTQgRlbu/dF5eA0lhcpL58SmtQObXm6ipFBx6ZzYtHZgy5FmSgoVl86JTWsHul5rpqSHlZbO0KKxBd1H11JK6KmRzNCksQdbj62jlFBhyQxNGnuw/fh6SgkVlszQpLEHPSdaKCVUWDJDk8Ye7DjZSimhwpIZmjT2oPdUK6WECktmaNLYg77Tz1FKqLBkhiaNPeh/q41SQoUlMzRp7MHAmQ2UEiosmaFJYw8G322nlFBhyQxNGnuw6+xGSnpYYekMLRpbMHRuIyWFnhrpnNi0dmD4gw5KChWXzolNawdGzndSUqi4dE5sWjuw5+ImSguVj5GVe3+MXtpMaaEBMbJy74+xD7dQWqm/dsTIy7k79n3UxRhCI2Ll5dob4x93MYZST1KszBw7Y+KTbsZSalDM3Jy6YvLTrYyp1LDY2Tl0xNRn2xhT0QsQsfNT74cDV7YztqKRGh1S7YUXr/ZQQ9FYrR6p9cHBaz3UUjT6cetxHw59voOaynlZ+lHMDsFLX+yktnI/HZBr3nTg8Je9tDDdj2mk9vtS8MpXfbSSyudqLG+AI1/305rV4VPYjle/6WcKtI+fym4c/fZ5piT24VPbi9evDzBVUkdPeSOO3RhkLso9eE6bcPy7XXR2cOL7ITo7eOPmbjo7OHlrN50dnLo9TGcHb94ZobOD03f30NnB2/f20tnBmR9G6ezgnR9H6ezg7E9jdHbw3s/76Ozg3C/76ezg/V/H6ezg/G8TdHZw4fcJOju4+McknR1c+vMFOju4/NcUnZ3/ANpmEs+qk+PvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij Korte Boot",
+    "description": "Saison mit Pfeffer und Estragon, Referenz auf das alte Brauhaus. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Saison",
+      "Gewürzhopfen",
+      "Trocken",
+      "Schanktisch",
+      "Außenbereich",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.022735,
+      "latitude": 52.180717
+    },
+    "address": "Dorpsstraat 30, 3621 EH Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cR6xVZRQF4DW2xIKxYFTUqEgAIYiIVHkU6fUhVbqPJlWavTesoFix94aCvWPvDXuJMUZDjHHozCzDwAnhv+e+ZJf/hz34pnettXOG9xyc1Ho3Bj/o3mZ3Bj/o2XYPBj/o3X5PBj/o02EvBj9o6Lg3gx/067QPgx8M6Lwvgx8M7NKCwQ8Gd92PwQ+GdtufwQ+G9ziAwQ9G9jqQwQ9Gn3wQgx80NrRk8IOxfQ9m8INx/Q9h8IMJpxzK4AeTBh3G4AenDWnFUvz7z9a6lLQJU4cdzlzVe/AqOW/E9BFHMCdSR0/JbS9mjjqSOdA+/PZy2Y3TxxxFb9bH/18O29HUeDS9eB1+e543wJxTj6GH5h4pt9+XgnnjW9NavUcpNa85cMbEY2mpnkPsjNkpWDi5Da1Ujd/VemyDxVPa0kLVaKseufXB0mntqK1qrEWHXHth2Yz21FQ1Ujs/935YMes4aqo1Tju7hI5Y1dSBWmoN08wtqSvOmt2RGmoN0sossTPOmduJGlJDtPJK7Y3z5h9PabWeJI28krvjggWdKS01QCOr9P64aNEJlJYaoJFVen9csqQLJaXKS+dos9qBy848kZJSxaVztFntwBXLu1JSqrh0jjarHbhqZTdK2lFp6QwrFluwelV3Skk9NZIZliz24Jqze1BKqrBkhiWLPbju3J6UkiosmWHJYg9uOL8XpaQKS2ZYstiDtRf2ppRUYckMSxZ7cNPFfSglVVgyw5LFHtx8aQOlpApLZliy2INbL+9LKanCkhmWLPbg9iv7UUqqsGSGJYs9WL+6P6WkCktmWLLYgzuvHkBJOyosnWHFYgvuvnYgJaWeGukcbVY7cO/1gygpVVw6R5vVDty/ZjAlpYpL52iz2oEHbxxCaanyGlml98fD64ZSWmqARlbp/fHoLcMordZfOzTySu6Ox28bTg2pEVp5pfbGk3eMpIZaT5JWZomdsWH9KGqpNUgzt6SuePqu0dRUa5h2dgkdsemeMdRU9QKEdn7u/fDsfY3UVjXSokOuvfD8A2NpoWqsVY/c+uDFh8bRStXoXa3HNnj5kfG0VM/L0jtjdgpefWwCrdX76YBS85oDrz8xkR6a+zGN3H5fCjZvmEQvuXyuxvMGePOpyfTmdfgctuPtjVOYA+vj57Ib7z4zlTnRPnxue/H+c9OYK6mj57wRH74wnaWo9+AlbcLHL81g8INPX5nJ4AefvzaLwQ++fKOJwQ+2bJ7N4AdfvzWHwQ++fWcugx98/948Bj/48YP5DH7w80cLGPzgl08WMvjBr58tYvCD375YzOAHv29ZwuAHf3y1lMEPtn6zjMEP/vxuOYMf/PXDCgY/+PunlQx+/gO/L6fYBA4XGgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij de Witte",
+    "description": "Geröstetes Porter, 5,4 % vol. Passt zu geräuchertem Käse. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Porter",
+      "5,4 % vol.",
+      "Geröstet",
+      "Schanktisch",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.894893,
+      "latitude": 52.146426
+    },
+    "address": "Havenkade 2, 3621 EC Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cW29VVRQF4PELvAYFQa5yKxZoLdBaoBVqa6mFUlsLtkBtkdoClQJFVBQVRUWBoEBQNERjjMYQjTEaYzTGaAjR+Dv4BbyZYXjwhbDOPk3mmnMtmA/f6xljzOzHszcWTL6Nzg4qptxOZweLpt5BZweV0+6ks4Ml0++is4OqGXfT2UH1zEl0dlAz+x46O1g+5146O6idO5nODurmTaGzg/r599HZwaqFU+nsoKFiGp0dNC66n84O1lROp7ODpsUz6eygeeksOjtoqZpNZwet1XOYi3+vXilLTpvQVvMAU1XuwYukvBHty+YyJVJHD0ltL9avmMcUxD789VLZjY7a+bSmffz/pbAdnXULaMXq8NezvAG66hfSwkSPlNrvS0H3ygpqK/coueZNBHpWP0hN5RziZswOweaGSmopGn+r9bgGvY2LqaFotFaP1Pqgb80SxlY0VqNDqr2wde1SxlQ0MnZ+6v3Q31TFmEqNi52dQ0cMNFczllLDYubm1BWDLQ8xhlKDYmXm2BnPtNYwhtCQWHm59sbQumWUVupJipGXc3cMt62gtNCAGFm598dIey2lhQbEyMq9P3atr6OkUHnpnNi0dmC042FKChWXzolNawf2bKynpFBx6ZzYtHZgrHMlJd2otHSGFo0t2Ne1ilJCT41khiaNPRjvXk0pocKSGZo09uD5ngZKCRWWzNCksQcHNzVSSqiwZIYmjT14cfMjlBIqLJmhSWMPDvWupZRQYckMTRp78EpfE6WECktmaNLYg8NbHqWUUGHJDE0ae/DatmZKCRWWzNCksQdH+lsoJVRYMkOTxh68OfAYJd2osHSGFo0tODrYSkmhp0Y6JzatHXh7+zpKChWXzolNaweO7WijpFBx6ZzYtHbgvaHHKS1UPkZW7v1xfLid0kIDYmTl3h8nRzZQWqm/dsTIy7k7Tu3sYAyhEbHycu2ND3ZvZAylnqRYmTl2xunRTsZSalDM3Jy64uyeJxhTqWGxs3PoiHNjXYyp6AWI2Pmp98NHe7sZW9FIjQ6p9sL5/U9SQ9FYrR6p9cEn4z3UUjT6VutxDS4c2ERN5bwsfTNmh+DTg09RW7mfDsg1byLw2Qu9tDDRj2mk9vtS8PlLfbSSyudqLG+ALw5toTWrw6ewHV++vJUp0D5+Krvx1eFtTEnsw6e2F1+/2s9USR095Y24+PrTzEW5B89pE745MkBnB9++MUhnB98d3U5nB9+/tYPODn54Z4jODn489iydHfz07jCdHfx8fITODn45sZPODn49uYvODn47tZvODn5/f5TODv44/RydHfx5ZozODi6d3UtnB5fP7aOzg78+3E9nB3+fH6ezg38+PkBn5z98QJFgsjYwNgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij Zilver",
+    "description": "Weißbier mit Hefe und Koriander, 5,0 % vol. Erfrischend im Sommer. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Weißbier",
+      "5,0 % vol.",
+      "Hefe",
+      "Schanktisch",
+      "Außenbereich",
+      "Hunde willkommen"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.886048,
+      "latitude": 52.192232
+    },
+    "address": "Kerkplein 2, 3621 EV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAECElEQVR42u3cXYiVZRQF4HWZmpqaP6npNKPj6Ewzjo6OozMlVqKIlViJZVZiJZaViJVYWWJ/YmWJlZiWKFZiJaJEREREJBEREVFERERUFBER3cUKL7oR33POwP55X90Xz+1Za22+y/N9mF13DoMfzKnvw+AHlzf0YfCDueP7MvjBvMa+DH4wv6kfgx8smNiPwQ8WNp/L4AdXtfRn8INFrf0Z/GBx2wAGP7i2fQCDHyyZMpDBD5Z2DGTwgxumn8fgB8s6BzH4wfKuQQx+cPPMwQx+sKJ7MIMfrOwZwlL8+88vNSlpE267dAhzVevBq8l5I1bNPp85kTp6Sm57sXrOUOZA+/CnymU37rxsKL1ZH/9/OWzHmiuG0YvX4U/leQPcPXcYPfT2SLn9vhSsnTec1mo9Sql5vYF184fTUi2HOBOzU7B+wQhaqTb+bOtxEu5bOIIWqo226pFbH2y48gJqqzbWokOuvbDx6pHUVG2kdn7u/fDgopHUVGmcdnYJHbFp8ShqqTRMM7ekrnj4mlHUUGmQVmaJnbH5utHUkBqilVdqb2xZMprSKj1JGnkld8djSy+ktNQAjazS++OJ68dQWmqARlbp/bF12RhKSpWXztFmtQPbbhxLSani0jnarHbg6ZvGUlKquHSONqsd2H5LHSWdrrR0hhWLLXh2RR2lpJ4ayQxLFnuwY+VFlJIqLJlhyWIPdt5aTympwpIZliz24IXb6yklVVgyw5LFHuxa1UApqcKSGZYs9mD36gZKSRWWzLBksQd77hhHKanCkhmWLPbg5TXjKCVVWDLDksUe7LtrPKWkCktmWLLYg/33NFJKqrBkhiWLPTiwtpGSTldYOsOKxRYcXDeBklJPjXSONqsdeG39BEpKFZfO0Wa1A4fubaKkVHHpHG1WO3D4/iZKS5XXyCq9P97cMJHSUgM0skrvjyMbJ1Fapb92aOSV3B1HH5hEDakRWnml9saxh5qpodKTpJVZYmcc39RMLZUGaeaW1BVvP9JCTZWGaWeX0BHvbG6hpmovQGjn594P7265mNqqjbTokGsvvPdoKy1UG2vVI7c+eP/xVlqpNvps63ESPniyjZZqeVn6TMxOwYdb22it1k8HlJrXG/ho22R66O3HNHL7fSn4+KnJ9JLL52o8b4ATz7TTm9fhc9iOT7a3MwfWx89lNz59bgpzon343Pbisx1TmSupo+e8EZ/vnMpS1Hrwkjbhi+c7GPzgyxc7GPzgq13TGPzg693TGPzgm5emM/jBt3s7Gfzgu1c6Gfzg+30zGPzgh/0zGPzgxwNdDH7w08EuBj/4+dWZDH7w6+uzGPzgt0OzGPzg98PdDH7wxxvdDH7w51s9DH7w15EeBj/4++glDH7+A4SWdqbdU3KvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij de Onderneming",
+    "description": "Klassisches helles Ale, mild und hopfig. Schankt frisch vom Fass. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Helles Ale",
+      "Fassbier",
+      "Mild",
+      "Schanktisch",
+      "Eigene Biersorten",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.0252,
+      "latitude": 52.25103
+    },
+    "address": "Kanaalweg 18, 3621 EK Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/klEQVR42u3cWW+WVRQF4PU7VBzAEZlEEKitpaVQi7W1thZqa6EWaqEMhVIoKA6oqDig4oASEAeGoAQlEIQwBEI0RqMxGn4Dv8A7swwX3hDO935N9tn7HNgXz+231tp5L7/3xU3jK+js4OYJlXR2cMvEKjo7GDO5ms4Obp1SQ2cHt02tpbOD26fV0dnBHdPn0tnB2Bn1dHYwblYDnR3cWTGfzg7uqmyks4O7q5ro7OCe6mY6O7i3poXODu6rbaWzg/F1bXR2cP+8djo7mFC/kM4OJjZ0MBf//nO5LDltwqT5nUxVuQcvkvJGTG7sYkqkjh6S2l5MaepmCmIf/mqp7MYDzYtpTfv4/0thO6a29NCK1eGvZnkDPNjaSwujPVJqvy8F09qWUlu5R8k1bzQwvb2Pmso5xPWYHYKHFvRTS9H4G63HFZjRsZwaikZr9UitD2Z2DjC2orEaHVLthVldKxlT0cjY+an3Q0X3asZUalzs7Bw64uFFg4yl1LCYuTl1RWXPWsZQalCszBw7o6p3iDGEhsTKy7U3HlkyTGmlnqQYeTl3R3XfBkoLDYiRlXt/zO4fobTQgBhZufdHzbJNlBQqL50Tm9YO1A68QEmh4tI5sWntwJwVmykpVFw6JzatHahb9RIlXau0dIYWjS2YO/gKpYSeGskMTRp7MG/NFkoJFZbM0KSxB/VDr1FKqLBkhiaNPXh0eCulhApLZmjS2IOG9W9QSqiwZIYmjT14bOQtSgkVlszQpLEHjRu3UUqosGSGJo09ePz5dyglVFgyQ5PGHjRtfo9SQoUlMzRp7EHzi9spJVRYMkOTxh488fIHlHStwtIZWjS2oGXLDkoKPTXSObFp7cCTr35ESaHi0jmxae1A6+ufUFKouHRObFo70LZ1J6WFysfIyr0/nnrzM0oLDYiRlXt/tG/bRWml/toRIy/n7ljw9m7GEBoRKy/X3lj47h7GUOpJipWZY2d0bN/LWEoNipmbU1c8/f6XjKnUsNjZOXRE54dfM6aiFyBi56feD1079jG2opEaHVLthWc+3k8NRWO1eqTWB92fHqSWotE3Wo8rsGjnIWoq52Xp6zE7BIs//5bayv10QK55o4GeXYdpYbQf00jt96Xg2d1HaCWVz9VY3gC9X3xPa1aHT2E7luw9yhRoHz+V3Vj61TGmJPbhU9uLvm+OM1VSR095I57bd4K5KPfgOW1C/4Ef6exg2cFTdHaw/NBpOjsY+O4MnR2sOHyOzg5WHjlPZwerfrhAZwerj16ks4PBYz/R2cGa4z/T2cHaE7/Q2cHQyV/p7GDdqd/o7GD49O90drD+7B90drDh3J90djBy/i86O9h44W86O9h08RKdnf8AoRji6ui2QEwAAAAASUVORK5CYII=",
+    "name": "Brouwerij Amberlied",
+    "description": "Dunkles Doppelbock, unfiltriert, 7,5 % vol. Im Fass bestellen. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Doppelbock",
+      "7,5 % vol.",
+      "Unfiltriert",
+      "Schanktisch",
+      "Außenbereich",
+      "Eigene Biersorten"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.007217,
+      "latitude": 52.236681
+    },
+    "address": "Binnenweg 9, 3621 EB Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEAUlEQVR42u3cyW+VZRgF8PNHOMQ5zihYsBYKMtQKtVRqGSyVuRYpUIECFWoZbEVFJagEVIJKUCGoBJWg0RhjjDFGY4wxxhijMca48i9wZ45h4Ybw3nubPMP7wrP4be8558m3vN+HuovGMPjBhItvYfCD+kvGMvhBw6XjGPxg0mV1DH7QePl4Bj+YcsXtDH4w9cp6Bj+YflUDgx80XT2RwQ+ar2lk8IOZ105m8IOW66Yw+EHr9VMZ/KDthmkMfnDvjTMY/KD9piYGP+i4uZnBD+aNuZvBDxbcOoul+Pefv2tS0iZ0jm1hrmo9eDU5b0TXuFbmROroKbntxaLbZjMH2oc/Wy67saSujd6sj/+/HLZj6fg59OJ1+LN53gDLJ7TTw2iPlNvvS0F3fQet1XqUUvNGAz13zKWlWg5xPman4KGG+bRSbfyF1uMM9E5cQAvVRlv1yK0P1kzqpLZqYy065NoLfY0LqanaSO383Pth3eQuaqo0Tju7hI7YcOciaqk0TDO3pK7on7qYGioN0sossTM2TVtKDakhWnml9sbA9GWUVulJ0sgruTu2zFhBaakBGlml98dgUzelpQZoZJXeH0N39VBSqrx0jjarHdjevJKSUsWlc7RZ7cDOmasoKVVcOkeb1Q4Mz+qlpHOVls6wYrEFIy2rKSX11EhmWLLYg133rKWUVGHJDEsWe/Bkax+lpApLZliy2IPds9dRSqqwZIYliz14pm09paQKS2ZYstiDPXP6KSVVWDLDksUe7G3fSCmpwpIZliz24Pn7NlNKqrBkhiWLPdjXMUApqcKSGZYs9mD/3C2UkiosmWHJYg8OzNtKSecqLJ1hxWILXpo/SEmpp0Y6R5vVDhy8f4iSUsWlc7RZ7cChzm2UlCounaPNagdeXbiD0lLlNbJK74/DXTspLTVAI6v0/jjywDClVfprh0Zeyd3xxqIRakiN0MortTeOLt5FDZWeJK3MEjvj2JInqKXSIM3ckrri+LKnqKnSMO3sEjri7eW7qanaCxDa+bn3w4kVT1NbtZEWHXLthZPdz9JCtbFWPXLrg/ce3EMr1UZfaD3OwKmevbRUy8vS52N2Ck6vfI7Wav10QKl5o4EPV71AD6P9mEZuvy8FH/Xuo5dcPlfjeQN8vHo/vXkdPoft+GTNAebA+vi57Mana19kTrQPn9tefNb3MnMldfScN+Lzhw+yFLUevKRN+GL9IQY/+HLDKwx+8FX/awx+8PXGwwx+8M2mIwx+8O3m1xn84LuBNxn84PtHjjL4wQ9bjzH4wY+Dxxn84KdH32Lwg5+H3mHwg1+2nWDwg1+3n2Twg992vMvgB78/9j6DH/wxfIrBD/4cOc3gB389/gGDn/8AiGafazxHT7oAAAAASUVORK5CYII=",
+    "name": "Brouwerij Nachtwacht",
+    "description": "Kräftiges Pale Ale mit Orangenschalen und Zitrusnoten, 6,2 % vol. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Pale Ale",
+      "6,2 % vol.",
+      "Zitrusnoten",
+      "Schanktisch",
+      "Außenbereich",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.88173,
+      "latitude": 52.170205
+    },
+    "address": "Vaartzicht 15, 3621 EV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD+UlEQVR42u3c0U+WZRgG8OvPyKWihiamoiASqKBCiKCCigKBCAoKhDmzLHOaM8syS53WWq05Xau1WnO2pnNO12qt1lqtv6K/oLN2NQ86cT7f+7Hdz30/j94Hv9Pvuq577+H3vnhi2Uw6O5hRM4vODp6snU1nBzPrKujsYFZ9BZ0dVDTMobODOY1z6exg7up5dHYwr+kpOjuobK6ks4P56yrp7GBBy3w6O1jYuoDODqranqazg0XtC+nsYHFHFZ0dLOmsorODpZsX0dlBddczdHawvHsxc/HvP3+XJadNqNm2hKkq9+BFUt6I2p6lTInU0UNS24u6ndVMQezDPyiV3VjZW01r2sf/XwrbUd+/jFasDv8gyxugYWA5LUz3SKn9vhQ0DtZQW7lHyTVvOrBqqJaayjnEo5gdgjXDK6ilaPzj1uM+NI2soIai0Vo9UuuD5r11jK1orEaHVHth7dhKxlQ0MnZ+6v2wfn89Yyo1LnZ2Dh3RMv4sYyk1LGZuTl3ROtnAGEoNipWZY2e0TTUwhtCQWHm59saGA42UVupJipGXc3e0H1xFaaEBMbJy74+OQ6spLTQgRlbu/dF5eA0lhcpL58SmtQObXm6ipFBx6ZzYtHZgy5FmSgoVl86JTWsHul5rpqSHlZbO0KKxBd1H11JK6KmRzNCksQdbj62jlFBhyQxNGnuw/fh6SgkVlszQpLEHPSdaKCVUWDJDk8Ye7DjZSimhwpIZmjT2oPdUK6WECktmaNLYg77Tz1FKqLBkhiaNPeh/q41SQoUlMzRp7MHAmQ2UEiosmaFJYw8G322nlFBhyQxNGnuw6+xGSnpYYekMLRpbMHRuIyWFnhrpnNi0dmD4gw5KChWXzolNawdGzndSUqi4dE5sWjuw5+ImSguVj5GVe3+MXtpMaaEBMbJy74+xD7dQWqm/dsTIy7k79n3UxRhCI2Ll5dob4x93MYZST1KszBw7Y+KTbsZSalDM3Jy6YvLTrYyp1LDY2Tl0xNRn2xhT0QsQsfNT74cDV7YztqKRGh1S7YUXr/ZQQ9FYrR6p9cHBaz3UUjT6cetxHw59voOaynlZ+lHMDsFLX+yktnI/HZBr3nTg8Je9tDDdj2mk9vtS8MpXfbSSyudqLG+AI1/305rV4VPYjle/6WcKtI+fym4c/fZ5piT24VPbi9evDzBVUkdPeSOO3RhkLso9eE6bcPy7XXR2cOL7ITo7eOPmbjo7OHlrN50dnLo9TGcHb94ZobOD03f30NnB2/f20tnBmR9G6ezgnR9H6ezg7E9jdHbw3s/76Ozg3C/76ezg/V/H6ezg/G8TdHZw4fcJOju4+McknR1c+vMFOju4/NcUnZ3/ANpmEs+qk+PvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij Vaartzicht",
+    "description": "Saison mit Pfeffer und Estragon, Referenz auf das alte Brauhaus. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Saison",
+      "Gewürzhopfen",
+      "Trocken",
+      "Schanktisch",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.94108,
+      "latitude": 52.148991
+    },
+    "address": "Oudegracht 44, 3611 CS Utrecht",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cR6xVZRQF4DW2xIKxYFTUqEgAIYiIVHkU6fUhVbqPJlWavTesoFix94aCvWPvDXuJMUZDjHHozCzDwAnhv+e+ZJf/hz34pnettXOG9xyc1Ho3Bj/o3mZ3Bj/o2XYPBj/o3X5PBj/o02EvBj9o6Lg3gx/067QPgx8M6Lwvgx8M7NKCwQ8Gd92PwQ+GdtufwQ+G9ziAwQ9G9jqQwQ9Gn3wQgx80NrRk8IOxfQ9m8INx/Q9h8IMJpxzK4AeTBh3G4AenDWnFUvz7z9a6lLQJU4cdzlzVe/AqOW/E9BFHMCdSR0/JbS9mjjqSOdA+/PZy2Y3TxxxFb9bH/18O29HUeDS9eB1+e543wJxTj6GH5h4pt9+XgnnjW9NavUcpNa85cMbEY2mpnkPsjNkpWDi5Da1Ujd/VemyDxVPa0kLVaKseufXB0mntqK1qrEWHXHth2Yz21FQ1Ujs/935YMes4aqo1Tju7hI5Y1dSBWmoN08wtqSvOmt2RGmoN0sossTPOmduJGlJDtPJK7Y3z5h9PabWeJI28krvjggWdKS01QCOr9P64aNEJlJYaoJFVen9csqQLJaXKS+dos9qBy848kZJSxaVztFntwBXLu1JSqrh0jjarHbhqZTdK2lFp6QwrFluwelV3Skk9NZIZliz24Jqze1BKqrBkhiWLPbju3J6UkiosmWHJYg9uOL8XpaQKS2ZYstiDtRf2ppRUYckMSxZ7cNPFfSglVVgyw5LFHtx8aQOlpApLZliy2INbL+9LKanCkhmWLPbg9iv7UUqqsGSGJYs9WL+6P6WkCktmWLLYgzuvHkBJOyosnWHFYgvuvnYgJaWeGukcbVY7cO/1gygpVVw6R5vVDty/ZjAlpYpL52iz2oEHbxxCaanyGlml98fD64ZSWmqARlbp/fHoLcMordZfOzTySu6Ox28bTg2pEVp5pfbGk3eMpIZaT5JWZomdsWH9KGqpNUgzt6SuePqu0dRUa5h2dgkdsemeMdRU9QKEdn7u/fDsfY3UVjXSokOuvfD8A2NpoWqsVY/c+uDFh8bRStXoXa3HNnj5kfG0VM/L0jtjdgpefWwCrdX76YBS85oDrz8xkR6a+zGN3H5fCjZvmEQvuXyuxvMGePOpyfTmdfgctuPtjVOYA+vj57Ib7z4zlTnRPnxue/H+c9OYK6mj57wRH74wnaWo9+AlbcLHL81g8INPX5nJ4AefvzaLwQ++fKOJwQ+2bJ7N4AdfvzWHwQ++fWcugx98/948Bj/48YP5DH7w80cLGPzgl08WMvjBr58tYvCD375YzOAHv29ZwuAHf3y1lMEPtn6zjMEP/vxuOYMf/PXDCgY/+PunlQx+/gO/L6fYBA4XGgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij de Bruine",
+    "description": "Geröstetes Porter, 5,4 % vol. Passt zu geräuchertem Käse. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Porter",
+      "5,4 % vol.",
+      "Geröstet",
+      "Schanktisch",
+      "Außenbereich",
+      "Hunde willkommen"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.060304,
+      "latitude": 52.204116
+    },
+    "address": "Rivierweg 2, 3621 EV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/UlEQVR42u3cW29VVRQF4PELvAYFQa5yKxZoLdBaoBVqa6mFUlsLtkBtkdoClQJFVBQVRUWBoEBQNERjjMYQjTEaYzTGaAjR+Dv4BbyZYXjwhbDOPk3mmnMtmA/f6xljzOzHszcWTL6Nzg4qptxOZweLpt5BZweV0+6ks4Ml0++is4OqGXfT2UH1zEl0dlAz+x46O1g+5146O6idO5nODurmTaGzg/r599HZwaqFU+nsoKFiGp0dNC66n84O1lROp7ODpsUz6eygeeksOjtoqZpNZwet1XOYi3+vXilLTpvQVvMAU1XuwYukvBHty+YyJVJHD0ltL9avmMcUxD789VLZjY7a+bSmffz/pbAdnXULaMXq8NezvAG66hfSwkSPlNrvS0H3ygpqK/coueZNBHpWP0hN5RziZswOweaGSmopGn+r9bgGvY2LqaFotFaP1Pqgb80SxlY0VqNDqr2wde1SxlQ0MnZ+6v3Q31TFmEqNi52dQ0cMNFczllLDYubm1BWDLQ8xhlKDYmXm2BnPtNYwhtCQWHm59sbQumWUVupJipGXc3cMt62gtNCAGFm598dIey2lhQbEyMq9P3atr6OkUHnpnNi0dmC042FKChWXzolNawf2bKynpFBx6ZzYtHZgrHMlJd2otHSGFo0t2Ne1ilJCT41khiaNPRjvXk0pocKSGZo09uD5ngZKCRWWzNCksQcHNzVSSqiwZIYmjT14cfMjlBIqLJmhSWMPDvWupZRQYckMTRp78EpfE6WECktmaNLYg8NbHqWUUGHJDE0ae/DatmZKCRWWzNCksQdH+lsoJVRYMkOTxh68OfAYJd2osHSGFo0tODrYSkmhp0Y6JzatHXh7+zpKChWXzolNaweO7WijpFBx6ZzYtHbgvaHHKS1UPkZW7v1xfLid0kIDYmTl3h8nRzZQWqm/dsTIy7k7Tu3sYAyhEbHycu2ND3ZvZAylnqRYmTl2xunRTsZSalDM3Jy64uyeJxhTqWGxs3PoiHNjXYyp6AWI2Pmp98NHe7sZW9FIjQ6p9sL5/U9SQ9FYrR6p9cEn4z3UUjT6VutxDS4c2ERN5bwsfTNmh+DTg09RW7mfDsg1byLw2Qu9tDDRj2mk9vtS8PlLfbSSyudqLG+ALw5toTWrw6ewHV++vJUp0D5+Krvx1eFtTEnsw6e2F1+/2s9USR095Y24+PrTzEW5B89pE745MkBnB9++MUhnB98d3U5nB9+/tYPODn54Z4jODn489iydHfz07jCdHfx8fITODn45sZPODn49uYvODn47tZvODn5/f5TODv44/RydHfx5ZozODi6d3UtnB5fP7aOzg78+3E9nB3+fH6ezg38+PkBn5z98QJFgsjYwNgAAAABJRU5ErkJggg==",
+    "name": "Brouwerij Rivierenland",
+    "description": "Weißbier mit Hefe und Koriander, 5,0 % vol. Erfrischend im Sommer. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Weißbier",
+      "5,0 % vol.",
+      "Hefe",
+      "Schanktisch",
+      "Eigene Biersorten",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.979262,
+      "latitude": 52.254823
+    },
+    "address": "Oostzijde 88, 3611 LS Utrecht",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAECElEQVR42u3cXYiVZRQF4HWZmpqaP6npNKPj6Ewzjo6OozMlVqKIlViJZVZiJZaViJVYWWJ/YmWJlZiWKFZiJaJEREREJBEREVFERERUFBER3cUKL7oR33POwP55X90Xz+1Za22+y/N9mF13DoMfzKnvw+AHlzf0YfCDueP7MvjBvMa+DH4wv6kfgx8smNiPwQ8WNp/L4AdXtfRn8INFrf0Z/GBx2wAGP7i2fQCDHyyZMpDBD5Z2DGTwgxumn8fgB8s6BzH4wfKuQQx+cPPMwQx+sKJ7MIMfrOwZwlL8+88vNSlpE267dAhzVevBq8l5I1bNPp85kTp6Sm57sXrOUOZA+/CnymU37rxsKL1ZH/9/OWzHmiuG0YvX4U/leQPcPXcYPfT2SLn9vhSsnTec1mo9Sql5vYF184fTUi2HOBOzU7B+wQhaqTb+bOtxEu5bOIIWqo226pFbH2y48gJqqzbWokOuvbDx6pHUVG2kdn7u/fDgopHUVGmcdnYJHbFp8ShqqTRMM7ekrnj4mlHUUGmQVmaJnbH5utHUkBqilVdqb2xZMprSKj1JGnkld8djSy+ktNQAjazS++OJ68dQWmqARlbp/bF12RhKSpWXztFmtQPbbhxLSani0jnarHbg6ZvGUlKquHSONqsd2H5LHSWdrrR0hhWLLXh2RR2lpJ4ayQxLFnuwY+VFlJIqLJlhyWIPdt5aTympwpIZliz24IXb6yklVVgyw5LFHuxa1UApqcKSGZYs9mD36gZKSRWWzLBksQd77hhHKanCkhmWLPbg5TXjKCVVWDLDksUe7LtrPKWkCktmWLLYg/33NFJKqrBkhiWLPTiwtpGSTldYOsOKxRYcXDeBklJPjXSONqsdeG39BEpKFZfO0Wa1A4fubaKkVHHpHG1WO3D4/iZKS5XXyCq9P97cMJHSUgM0skrvjyMbJ1Fapb92aOSV3B1HH5hEDakRWnml9saxh5qpodKTpJVZYmcc39RMLZUGaeaW1BVvP9JCTZWGaWeX0BHvbG6hpmovQGjn594P7265mNqqjbTokGsvvPdoKy1UG2vVI7c+eP/xVlqpNvps63ESPniyjZZqeVn6TMxOwYdb22it1k8HlJrXG/ho22R66O3HNHL7fSn4+KnJ9JLL52o8b4ATz7TTm9fhc9iOT7a3MwfWx89lNz59bgpzon343Pbisx1TmSupo+e8EZ/vnMpS1Hrwkjbhi+c7GPzgyxc7GPzgq13TGPzg693TGPzgm5emM/jBt3s7Gfzgu1c6Gfzg+30zGPzgh/0zGPzgxwNdDH7w08EuBj/4+dWZDH7w6+uzGPzgt0OzGPzg98PdDH7wxxvdDH7w51s9DH7w15EeBj/4++glDH7+A4SWdqbdU3KvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij de Blauwe Huis",
+    "description": "Klassisches helles Ale, mild und hopfig. Schankt frisch vom Fass. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Helles Ale",
+      "Fassbier",
+      "Mild",
+      "Schanktisch",
+      "Außenbereich",
+      "Eigene Biersorten"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 4.889952,
+      "latitude": 52.226825
+    },
+    "address": "Rijksweg 210, 3621 CD Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD/klEQVR42u3cWW+WVRQF4PU7VBzAEZlEEKitpaVQi7W1thZqa6EWaqEMhVIoKA6oqDig4oASEAeGoAQlEIQwBEI0RqMxGn4Dv8A7swwX3hDO935N9tn7HNgXz+231tp5L7/3xU3jK+js4OYJlXR2cMvEKjo7GDO5ms4Obp1SQ2cHt02tpbOD26fV0dnBHdPn0tnB2Bn1dHYwblYDnR3cWTGfzg7uqmyks4O7q5ro7OCe6mY6O7i3poXODu6rbaWzg/F1bXR2cP+8djo7mFC/kM4OJjZ0MBf//nO5LDltwqT5nUxVuQcvkvJGTG7sYkqkjh6S2l5MaepmCmIf/mqp7MYDzYtpTfv4/0thO6a29NCK1eGvZnkDPNjaSwujPVJqvy8F09qWUlu5R8k1bzQwvb2Pmso5xPWYHYKHFvRTS9H4G63HFZjRsZwaikZr9UitD2Z2DjC2orEaHVLthVldKxlT0cjY+an3Q0X3asZUalzs7Bw64uFFg4yl1LCYuTl1RWXPWsZQalCszBw7o6p3iDGEhsTKy7U3HlkyTGmlnqQYeTl3R3XfBkoLDYiRlXt/zO4fobTQgBhZufdHzbJNlBQqL50Tm9YO1A68QEmh4tI5sWntwJwVmykpVFw6JzatHahb9RIlXau0dIYWjS2YO/gKpYSeGskMTRp7MG/NFkoJFZbM0KSxB/VDr1FKqLBkhiaNPXh0eCulhApLZmjS2IOG9W9QSqiwZIYmjT14bOQtSgkVlszQpLEHjRu3UUqosGSGJo09ePz5dyglVFgyQ5PGHjRtfo9SQoUlMzRp7EHzi9spJVRYMkOTxh488fIHlHStwtIZWjS2oGXLDkoKPTXSObFp7cCTr35ESaHi0jmxae1A6+ufUFKouHRObFo70LZ1J6WFysfIyr0/nnrzM0oLDYiRlXt/tG/bRWml/toRIy/n7ljw9m7GEBoRKy/X3lj47h7GUOpJipWZY2d0bN/LWEoNipmbU1c8/f6XjKnUsNjZOXRE54dfM6aiFyBi56feD1079jG2opEaHVLthWc+3k8NRWO1eqTWB92fHqSWotE3Wo8rsGjnIWoq52Xp6zE7BIs//5bayv10QK55o4GeXYdpYbQf00jt96Xg2d1HaCWVz9VY3gC9X3xPa1aHT2E7luw9yhRoHz+V3Vj61TGmJPbhU9uLvm+OM1VSR095I57bd4K5KPfgOW1C/4Ef6exg2cFTdHaw/NBpOjsY+O4MnR2sOHyOzg5WHjlPZwerfrhAZwerj16ks4PBYz/R2cGa4z/T2cHaE7/Q2cHQyV/p7GDdqd/o7GD49O90drD+7B90drDh3J90djBy/i86O9h44W86O9h08RKdnf8AoRji6ui2QEwAAAAASUVORK5CYII=",
+    "name": "Brouwerij Zeil",
+    "description": "Dunkles Doppelbock, unfiltriert, 7,5 % vol. Im Fass bestellen. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Doppelbock",
+      "7,5 % vol.",
+      "Unfiltriert",
+      "Schanktisch",
+      "Außenbereich",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.003039,
+      "latitude": 52.16114
+    },
+    "address": "Kalenderstraat 5, 3621 CV Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAEAUlEQVR42u3cyW+VZRgF8PNHOMQ5zihYsBYKMtQKtVRqGSyVuRYpUIECFWoZbEVFJagEVIJKUCGoBJWg0RhjjDFGY4wxxhijMca48i9wZ45h4Ybw3nubPMP7wrP4be8558m3vN+HuovGMPjBhItvYfCD+kvGMvhBw6XjGPxg0mV1DH7QePl4Bj+YcsXtDH4w9cp6Bj+YflUDgx80XT2RwQ+ar2lk8IOZ105m8IOW66Yw+EHr9VMZ/KDthmkMfnDvjTMY/KD9piYGP+i4uZnBD+aNuZvBDxbcOoul+Pefv2tS0iZ0jm1hrmo9eDU5b0TXuFbmROroKbntxaLbZjMH2oc/Wy67saSujd6sj/+/HLZj6fg59OJ1+LN53gDLJ7TTw2iPlNvvS0F3fQet1XqUUvNGAz13zKWlWg5xPman4KGG+bRSbfyF1uMM9E5cQAvVRlv1yK0P1kzqpLZqYy065NoLfY0LqanaSO383Pth3eQuaqo0Tju7hI7YcOciaqk0TDO3pK7on7qYGioN0sossTM2TVtKDakhWnml9sbA9GWUVulJ0sgruTu2zFhBaakBGlml98dgUzelpQZoZJXeH0N39VBSqrx0jjarHdjevJKSUsWlc7RZ7cDOmasoKVVcOkeb1Q4Mz+qlpHOVls6wYrEFIy2rKSX11EhmWLLYg133rKWUVGHJDEsWe/Bkax+lpApLZliy2IPds9dRSqqwZIYliz14pm09paQKS2ZYstiDPXP6KSVVWDLDksUe7G3fSCmpwpIZliz24Pn7NlNKqrBkhiWLPdjXMUApqcKSGZYs9mD/3C2UkiosmWHJYg8OzNtKSecqLJ1hxWILXpo/SEmpp0Y6R5vVDhy8f4iSUsWlc7RZ7cChzm2UlCounaPNagdeXbiD0lLlNbJK74/DXTspLTVAI6v0/jjywDClVfprh0Zeyd3xxqIRakiN0MortTeOLt5FDZWeJK3MEjvj2JInqKXSIM3ckrri+LKnqKnSMO3sEjri7eW7qanaCxDa+bn3w4kVT1NbtZEWHXLthZPdz9JCtbFWPXLrg/ce3EMr1UZfaD3OwKmevbRUy8vS52N2Ck6vfI7Wav10QKl5o4EPV71AD6P9mEZuvy8FH/Xuo5dcPlfjeQN8vHo/vXkdPoft+GTNAebA+vi57Mana19kTrQPn9tefNb3MnMldfScN+Lzhw+yFLUevKRN+GL9IQY/+HLDKwx+8FX/awx+8PXGwwx+8M2mIwx+8O3m1xn84LuBNxn84PtHjjL4wQ9bjzH4wY+Dxxn84KdH32Lwg5+H3mHwg1+2nWDwg1+3n2Twg992vMvgB78/9j6DH/wxfIrBD/4cOc3gB389/gGDn/8AiGafazxHT7oAAAAASUVORK5CYII=",
+    "name": "Brouwerij Kalender",
+    "description": "Kräftiges Pale Ale mit Orangenschalen und Zitrusnoten, 6,2 % vol. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Pale Ale",
+      "6,2 % vol.",
+      "Zitrusnoten",
+      "Schanktisch",
+      "Aufenthalt erlaubt"
+    ]
+  },
+  {
+    "position": {
+      "longitude": 5.072239,
+      "latitude": 52.153996
+    },
+    "address": "Zomerhofweg 3, 3621 GP Vreeland",
+    "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAD+UlEQVR42u3c0U+WZRgG8OvPyKWihiamoiASqKBCiKCCigKBCAoKhDmzLHOaM8syS53WWq05Xau1WnO2pnNO12qt1lqtv6K/oLN2NQ86cT7f+7Hdz30/j94Hv9Pvuq577+H3vnhi2Uw6O5hRM4vODp6snU1nBzPrKujsYFZ9BZ0dVDTMobODOY1z6exg7up5dHYwr+kpOjuobK6ks4P56yrp7GBBy3w6O1jYuoDODqranqazg0XtC+nsYHFHFZ0dLOmsorODpZsX0dlBddczdHawvHsxc/HvP3+XJadNqNm2hKkq9+BFUt6I2p6lTInU0UNS24u6ndVMQezDPyiV3VjZW01r2sf/XwrbUd+/jFasDv8gyxugYWA5LUz3SKn9vhQ0DtZQW7lHyTVvOrBqqJaayjnEo5gdgjXDK6ilaPzj1uM+NI2soIai0Vo9UuuD5r11jK1orEaHVHth7dhKxlQ0MnZ+6v2wfn89Yyo1LnZ2Dh3RMv4sYyk1LGZuTl3ROtnAGEoNipWZY2e0TTUwhtCQWHm59saGA42UVupJipGXc3e0H1xFaaEBMbJy74+OQ6spLTQgRlbu/dF5eA0lhcpL58SmtQObXm6ipFBx6ZzYtHZgy5FmSgoVl86JTWsHul5rpqSHlZbO0KKxBd1H11JK6KmRzNCksQdbj62jlFBhyQxNGnuw/fh6SgkVlszQpLEHPSdaKCVUWDJDk8Ye7DjZSimhwpIZmjT2oPdUK6WECktmaNLYg77Tz1FKqLBkhiaNPeh/q41SQoUlMzRp7MHAmQ2UEiosmaFJYw8G322nlFBhyQxNGnuw6+xGSnpYYekMLRpbMHRuIyWFnhrpnNi0dmD4gw5KChWXzolNawdGzndSUqi4dE5sWjuw5+ImSguVj5GVe3+MXtpMaaEBMbJy74+xD7dQWqm/dsTIy7k79n3UxRhCI2Ll5dob4x93MYZST1KszBw7Y+KTbsZSalDM3Jy6YvLTrYyp1LDY2Tl0xNRn2xhT0QsQsfNT74cDV7YztqKRGh1S7YUXr/ZQQ9FYrR6p9cHBaz3UUjT6cetxHw59voOaynlZ+lHMDsFLX+yktnI/HZBr3nTg8Je9tDDdj2mk9vtS8MpXfbSSyudqLG+AI1/305rV4VPYjle/6WcKtI+fym4c/fZ5piT24VPbi9evDzBVUkdPeSOO3RhkLso9eE6bcPy7XXR2cOL7ITo7eOPmbjo7OHlrN50dnLo9TGcHb94ZobOD03f30NnB2/f20tnBmR9G6ezgnR9H6ezg7E9jdHbw3s/76Ozg3C/76ezg/V/H6ezg/G8TdHZw4fcJOju4+McknR1c+vMFOju4/NcUnZ3/ANpmEs+qk+PvAAAAAElFTkSuQmCC",
+    "name": "Brouwerij Zomerhof",
+    "description": "Saison mit Pfeffer und Estragon, Referenz auf das alte Brauhaus. Schanktisch vorhanden, Aufenthalt gern erlaubt.",
+    "features": [
+      "Saison",
+      "Gewürzhopfen",
+      "Trocken",
+      "Schanktisch",
+      "Außenbereich",
+      "Hunde willkommen"
+    ]
   }
 ]
