@@ -5,8 +5,9 @@ import { Router } from 'express'
 import multer from 'multer'
 import { randomUUID } from 'node:crypto'
 import { mkdir } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { resolve, dirname, join } from 'node:path'
 import { writeFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import { pool } from '../lib/db.mjs'
 import { hashPassword, verifyPassword, signToken } from '../lib/auth.mjs'
 import { authMiddleware } from '../lib/middleware.mjs'
@@ -532,7 +533,7 @@ router.post('/publish', authMiddleware, async (req, res) => {
   // Keep schema fields in a separate file so the app can extend its UI later.
   const schemaPayload = { fields: fields.map((f) => ({ key: f.key, label: f.label, type: f.type })) }
 
-  const publicDataDir = resolve(process.cwd(), 'public/data')
+  const publicDataDir = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'public', 'data')
   await mkdir(publicDataDir, { recursive: true })
   writeFileSync(resolve(publicDataDir, 'data.json'), JSON.stringify(dataset, null, 2))
   writeFileSync(resolve(publicDataDir, 'schema.json'), JSON.stringify(schemaPayload, null, 2))

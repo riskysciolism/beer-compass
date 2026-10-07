@@ -1,0 +1,9 @@
+{
+  "fields": [
+    {
+      "key": "toilet",
+      "label": "Toilette vorhanden",
+      "type": "boolean"
+    }
+  ]
+}
