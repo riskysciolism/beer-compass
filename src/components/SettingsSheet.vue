@@ -5,6 +5,7 @@ import { computed } from 'vue'
 import GeoStatusPanel from '@/components/GeoStatusPanel.vue'
 import { translate } from '@/i18n'
 import type { GeoController } from '@/services/geo-service'
+import type { OrientationController } from '@/services/orientation-service'
 import type { OnlineState } from '@/services/online-status'
 import type { DataMeta } from '@/types/data'
 import type { Settings } from '@/types/settings'
@@ -14,6 +15,7 @@ const props = defineProps<{
   settings: Settings
   online: OnlineState
   geo: GeoController
+  orientation: OrientationController
   meta: DataMeta | undefined
   count: number
   usage: { usage: number; quota: number } | undefined
@@ -58,6 +60,38 @@ const swLabel = computed(() => {
     ? translate('status.serviceWorkerReady')
     : translate('status.serviceWorkerOff')
 })
+
+const orientationStatusLabel = computed(() => {
+  switch (props.orientation.status.value) {
+    case 'active':
+      return translate('orientation.active')
+    case 'requesting':
+      return translate('orientation.requesting')
+    case 'denied':
+      return translate('orientation.denied')
+    case 'unsupported':
+      return translate('orientation.unsupported')
+    case 'unavailable':
+      return translate('orientation.unavailable')
+    default:
+      return translate('orientation.idle')
+  }
+})
+
+const orientationError = computed(() =>
+  ['denied', 'unsupported', 'unavailable'].includes(props.orientation.status.value),
+)
+
+const orientationPermissionNeeded = computed(
+  () =>
+    props.orientation.permission.value === 'prompt' ||
+    props.orientation.permission.value === 'denied',
+)
+
+async function requestOrientationPermission(): Promise<void> {
+  const result = await props.orientation.requestPermission()
+  if (result === 'granted') void props.orientation.start()
+}
 </script>
 
 <template>
@@ -134,6 +168,27 @@ const swLabel = computed(() => {
             <small>{{ translate('settings.autoStartHint') }}</small>
           </span>
         </label>
+      </section>
+
+      <!-- Orientation sensor used for the compass rose -->
+      <section class="group">
+        <h3 class="group__title">{{ translate('orientation.title') }}</h3>
+        <div class="geo-panel__status">
+          <span
+            class="geo-panel__dot"
+            :class="{ 'geo-panel__dot--error': orientationError }"
+          />
+          <span class="geo-panel__status-text">{{ orientationStatusLabel }}</span>
+        </div>
+        <button
+          v-if="orientationPermissionNeeded"
+          class="button button--small settings__action"
+          type="button"
+          @click="requestOrientationPermission"
+        >
+          {{ translate('orientation.request') }}
+        </button>
+        <p class="group__note">{{ translate('orientation.hint') }}</p>
       </section>
 
       <!-- Connection -->

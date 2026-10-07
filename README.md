@@ -110,11 +110,16 @@ was die App tatsächlich abfragt).
   Bundle klein und reicht für eine PWA völlig.
 - **Kompass** (`BeerCompass.vue`): reine SVG-Grafik ohne Bibliothek. Die Nadel
   zeigt auf die berechnete Peilung (`atan2(Δlon, Δlat)`), die N/O/S/W-Rose wird um
-  das negative Geräte-Heading gedreht, damit Norden oben bleibt. Ohne
-  Lagesensor (`deviceorientation`) wird die Rose ausgeblendet, statt zu raten.
-  Solange die Position aussteht, ist die Flasche als **Ladeanzeige** sichtbar und
-  pendelt sinusförmig hin und her (Keyframes mit `ease-in-out`); mit
-  `prefers-reduced-motion` steht sie still.
+  das negative Geräte-Heading gedreht, damit Norden oben bleibt. Als Heading-Quelle
+  dient bevorzugt der Orientierungssensor (`deviceorientation` bzw.
+  `deviceorientationabsolute`, auf iOS `webkitCompassHeading`); die Rohdaten werden
+  mit einem exponentiellen Glättungsfilter entwickelt und über
+  `requestAnimationFrame` an die UI weitergegeben. Ist kein Sensor verfügbar oder
+  verweigert, fällt die Rose auf den GPS-Kurs (`coords.heading`) zurück. Ohne
+  beides wird die Rose ausgeblendet, statt zu raten. Solange die Position
+  aussteht, ist die Flasche als **Ladeanzeige** sichtbar und pendelt sinusförmig
+  hin und her (Keyframes mit `ease-in-out`); mit `prefers-reduced-motion` steht
+  sie still.
 - **GPS** läuft über `navigator.geolocation.watchPosition` mit Permission-Abfrage,
   Fehlerunterscheidung (verweigert / nicht verfügbar / Timeout) und optionaler
   High-Accuracy. Das Tracking pausiert, wenn die App in den Hintergrund geht, und

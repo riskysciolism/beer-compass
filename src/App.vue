@@ -27,6 +27,7 @@ import {
   watchOnlineStatus,
   type OnlineState,
 } from '@/services/online-status'
+import { useOrientation } from '@/services/orientation-service'
 import { useServiceWorker } from '@/services/sw-registration'
 import { useSettings } from '@/services/settings-store'
 import { createUpdateService } from '@/services/update-service'
@@ -39,6 +40,7 @@ import { distanceBetween } from '@/utils/geo'
 const store = useDataStore()
 const settingsStore = useSettings()
 const geo = useGeo()
+const orientation = useOrientation()
 const serviceWorker = useServiceWorker()
 
 const update = createUpdateService(store)
@@ -82,11 +84,21 @@ const target = computed(() => {
   return { bearing: result.bearing, meters: result.meters }
 })
 
+/**
+ * Device heading for the compass rose.
+ * Prefer the orientation sensor (magnetometer / gyro), fall back to GPS course
+ * over ground when the sensor is unavailable or denied.
+ */
+const heading = computed(() => orientation.heading.value ?? geo.fix.value?.heading ?? null)
+
 /* ------------------------------------------------------------ Start-up ----- */
 
 function onVisibilityChange(): void {
   // Save energy: tracking pauses when the app goes into the background.
-  if (document.visibilityState !== 'visible' && geo.isTracking.value) geo.stop()
+  if (document.visibilityState !== 'visible') {
+    if (geo.isTracking.value) geo.stop()
+    orientation.stop()
+  }
 }
 
 let teardown: (() => void) | undefined
@@ -109,6 +121,7 @@ onMounted(async () => {
     document.removeEventListener('visibilitychange', onVisibilityChange)
     stopWatching()
     geo.stop()
+    orientation.stop()
     teardown = undefined
   }
   teardown = stopAll
@@ -137,6 +150,10 @@ onMounted(async () => {
   if (settings.value.autoStartTracking)
     await geo.start({ highAccuracy: settings.value.highAccuracy })
   else await geo.refreshPermission()
+
+  // Start the orientation sensor as well; it is independent of GPS and is the
+  // primary source for the compass rose heading.
+  void orientation.start()
 
   void serviceWorker.register()
 })
@@ -387,7 +404,7 @@ watch(
       :target="selected"
       :bearing="target?.bearing ?? null"
       :meters="target?.meters ?? null"
-      :heading="geo.fix.value?.heading ?? null"
+      :heading="heading"
       :accuracy="geo.fix.value?.accuracy ?? null"
       :status="geo.status.value"
       :has-fix="geo.fix.value !== null"
@@ -421,6 +438,7 @@ watch(
     :settings="settings"
     :online="online"
     :geo="geo"
+    :orientation="orientation"
     :meta="store.meta.value"
     :count="store.count.value"
     :usage="store.usage.value"

@@ -211,7 +211,17 @@ const label = computed(() =>
 .compass__cardinal {
   transform-box: fill-box;
   transform-origin: center;
+}
+
+.compass__needle {
   transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.compass__cardinal {
+  /* The rose is driven by the orientation sensor at up to 60 Hz. A short,
+     linear transition keeps it smooth without lagging behind. */
+  transition: transform 90ms linear;
+  will-change: transform;
 }
 
 /*

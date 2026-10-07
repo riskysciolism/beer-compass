@@ -167,6 +167,18 @@ export const de = {
     installed: 'App ist installiert.',
   },
 
+  orientation: {
+    title: 'Kompass-Sensor',
+    active: 'Orientierung aktiv',
+    requesting: 'Berechtigung wird angefordert …',
+    denied: 'Berechtigung verweigert',
+    unsupported: 'Nicht unterstützt',
+    unavailable: 'Kein Sensor erkannt',
+    idle: 'Bereit',
+    request: 'Kompass-Zugriff erlauben',
+    hint: 'Nutzt Magnetometer und Gyroskop für eine flüssigere Kompass-Rose. Ohne Sensor fällt die Rose auf den GPS-Kurs zurück.',
+  },
+
   settings: {
     title: 'Einstellungen',
     appearance: 'Darstellung',
