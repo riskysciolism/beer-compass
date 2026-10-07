@@ -15,8 +15,16 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     throw new Error('Session expired')
   }
   if (!res.ok) {
-    const body = await res.json().catch(() => ({ error: res.statusText }))
-    throw new Error(body.error || `HTTP ${res.status}`)
+    const contentType = res.headers.get('content-type') ?? ''
+    let message = `HTTP ${res.status}`
+    if (contentType.includes('application/json')) {
+      const body = await res.json().catch(() => ({ error: res.statusText }))
+      message = body.error || message
+    } else {
+      const text = await res.text().catch(() => res.statusText)
+      message = text ? `${res.status}: ${text.slice(0, 200)}` : message
+    }
+    throw new Error(message)
   }
   if (res.status === 204) return undefined as T
   return res.json() as Promise<T>
@@ -68,8 +76,16 @@ export async function uploadImage(id: number, file: File): Promise<{ image: stri
     body: formData,
   })
   if (!res.ok) {
-    const body = await res.json().catch(() => ({ error: res.statusText }))
-    throw new Error(body.error || `HTTP ${res.status}`)
+    const contentType = res.headers.get('content-type') ?? ''
+    let message = `HTTP ${res.status}`
+    if (contentType.includes('application/json')) {
+      const body = await res.json().catch(() => ({ error: res.statusText }))
+      message = body.error || message
+    } else {
+      const text = await res.text().catch(() => res.statusText)
+      message = text ? `${res.status}: ${text.slice(0, 200)}` : message
+    }
+    throw new Error(message)
   }
   return res.json()
 }
