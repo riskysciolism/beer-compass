@@ -461,17 +461,17 @@ check(
   Math.abs(Math.abs(cardinalC) - 150) < 1,
   `${cardinalC.toFixed(1)}° (= −210°)`,
 )
+const needleC = await pageC.evaluate(() => {
+  const m = new DOMMatrix(getComputedStyle(document.querySelector('.compass__needle')).transform)
+  return (Math.atan2(m.b, m.a) * 180) / Math.PI
+})
+// Heading changed by +120° (90 -> 210). The needle points at the target relative
+// to the device, so it must rotate by -120° in the opposite direction.
+const needleDelta = ((needleC - angles.needle + 540) % 360) - 180
 check(
-  'Nadel bleibt unabhängig von der Ausrichtung gleich',
-  Math.abs(
-    angles.needle -
-      (await pageC.evaluate(() => {
-        const m = new DOMMatrix(
-          getComputedStyle(document.querySelector('.compass__needle')).transform,
-        )
-        return (Math.atan2(m.b, m.a) * 180) / Math.PI
-      })),
-  ) < 1,
+  'Nadel folgt der Geräteausrichtung relativ zum Ziel (−120°)',
+  Math.abs(needleDelta - -120) < 2,
+  `${needleDelta.toFixed(1)}°`,
 )
 
 /* ----------------------------------------------- E: no position anywhere ------ */

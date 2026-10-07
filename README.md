@@ -108,12 +108,16 @@ was die App tatsächlich abfragt).
 - **Kein Vue-Router und keine Reiter**: eine Seite mit Kompass, Liste, Auswahl-Badge
   direkt unter dem Kompass und zwei Sheets (Details, Einstellungen). Das hält das
   Bundle klein und reicht für eine PWA völlig.
-- **Kompass** (`BeerCompass.vue`): reine SVG-Grafik ohne Bibliothek. Die Nadel
-  zeigt auf die berechnete Peilung (`atan2(Δlon, Δlat)`), die N/O/S/W-Rose wird um
-  das negative Geräte-Heading gedreht, damit Norden oben bleibt. Als Heading-Quelle
-  dient bevorzugt der Orientierungssensor (`deviceorientation` bzw.
-  `deviceorientationabsolute`, auf iOS `webkitCompassHeading`); die Rohdaten werden
-  mit einem exponentiellen Glättungsfilter entwickelt und über
+- **Kompass** (`BeerCompass.vue`): reine SVG-Grafik ohne Bibliothek. Die
+  N/O/S/W-Rose dreht sich wie ein klassischer Kompass gegen das Geräte-Heading,
+  damit Norden oben bleibt. Die Bierflaschen-Nadel zeigt immer auf den
+  ausgewählten Eintrag **relativ zur aktuellen Geräteausrichtung**
+  (`bearing - heading`). Wenn man sich also dreht, dreht sich die Nadel mit, sodass
+  sie stur auf das Ziel zeigt. Ohne Heading-Quelle fällt die Nadel auf die
+  absolute geografische Peilung zurück und die Rose wird ausgeblendet. Als
+  Heading-Quelle dient bevorzugt der Orientierungssensor (`deviceorientation`
+  bzw. `deviceorientationabsolute`, auf iOS `webkitCompassHeading`); die Rohdaten
+  werden mit einem exponentiellen Glättungsfilter geglättet und über
   `requestAnimationFrame` an die UI weitergegeben. Ist kein Sensor verfügbar oder
   verweigert, fällt die Rose auf den GPS-Kurs (`coords.heading`) zurück. Ohne
   beides wird die Rose ausgeblendet, statt zu raten. Solange die Position

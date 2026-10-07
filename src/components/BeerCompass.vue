@@ -2,13 +2,14 @@
 /**
  * Stylized compass with a **beer bottle as needle**.
  *
- * - The **bottle needle** (tip = bottle neck) points at the bearing of the selected
- * target. It is always relative to geographic north.
  * - The **ring with N/E/S/W** is a compass rose that rotates so that "N" points to
- * geographic north, i.e. against the device heading. Without an orientation sensor
- * (`heading === null`) the ring is hidden completely, because it would be misleading
- * then. That difference between the needle and ring angle is exactly how much
- * one still has to turn.
+ *   geographic north, i.e. against the device heading.
+ * - The **bottle needle** (tip = bottle neck) always points at the selected target
+ *   relative to the device. When you turn the phone, the needle stays locked on the
+ *   target: `needleRotation = bearing - heading`. Without a heading it falls back to
+ *   the absolute geographic bearing.
+ * - Without an orientation sensor (`heading === null`) the rose is hidden, because
+ *   it would be misleading then.
  *
  * Plain SVG, no map library, no network request - works offline.
  */
@@ -35,7 +36,16 @@ const hasHeading = computed(() => props.heading !== null && Number.isFinite(prop
 
 /** The ring has to rotate against the device heading. */
 const ringRotation = computed(() => (props.heading === null ? null : -props.heading))
-const needleRotation = computed(() => props.bearing ?? 0)
+
+/**
+ * Needle points at the target relative to the device.
+ * When no heading is available, fall back to the absolute geographic bearing.
+ */
+const needleRotation = computed(() => {
+  if (props.bearing === null) return 0
+  const deviceHeading = props.heading ?? 0
+  return props.bearing - deviceHeading
+})
 
 /** The uncertainty circle: radius 6...46 units for 200 m ... 4 km. */
 const accuracyRadius = computed(() => {
@@ -213,13 +223,10 @@ const label = computed(() =>
   transform-origin: center;
 }
 
-.compass__needle {
-  transition: transform 320ms cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
+.compass__needle,
 .compass__cardinal {
-  /* The rose is driven by the orientation sensor at up to 60 Hz. A short,
-     linear transition keeps it smooth without lagging behind. */
+  /* The rose and the needle are driven by the orientation sensor at up to
+     60 Hz. A short, linear transition keeps both smooth without lagging behind. */
   transition: transform 90ms linear;
   will-change: transform;
 }
