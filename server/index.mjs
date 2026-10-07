@@ -304,26 +304,6 @@ app.use('/data', (req, res) => {
   serveFile(req, res, file)
 })
 
-// Static files / SPA
-if (SERVE_DIST) {
-  app.use(express.static(DIST_DIR))
-  app.use((req, res) => {
-    if (req.path.startsWith('/admin') && !req.path.startsWith('/admin/api')) {
-      const adminFallback = resolve(DIST_DIR, 'admin.html')
-      if (existsSync(adminFallback)) {
-        serveFile(req, res, adminFallback)
-        return
-      }
-    }
-    const fallback = resolve(DIST_DIR, 'index.html')
-    if (existsSync(fallback)) {
-      serveFile(req, res, fallback)
-      return
-    }
-    sendJson(res, 404, { ok: false, error: 'not_found' })
-  })
-}
-
 app.use((_req, res) => {
   sendJson(res, 404, { ok: false, error: 'not_found' })
 })
@@ -349,6 +329,26 @@ async function initAdminRoutes() {
   }
 }
 
+function initStaticFallback() {
+  if (!SERVE_DIST) return
+  app.use(express.static(DIST_DIR))
+  app.use((req, res) => {
+    if (req.path.startsWith('/admin') && !req.path.startsWith('/admin/api')) {
+      const adminFallback = resolve(DIST_DIR, 'admin.html')
+      if (existsSync(adminFallback)) {
+        serveFile(req, res, adminFallback)
+        return
+      }
+    }
+    const fallback = resolve(DIST_DIR, 'index.html')
+    if (existsSync(fallback)) {
+      serveFile(req, res, fallback)
+      return
+    }
+    sendJson(res, 404, { ok: false, error: 'not_found' })
+  })
+}
+
 async function start() {
   try {
     await runMigrations()
@@ -357,6 +357,7 @@ async function start() {
     console.warn('Database not available, admin API and analytics disabled:', err.message)
   }
   await initAdminRoutes()
+  initStaticFallback()
 
   app.listen(PORT, HOST, () => {
     const curlHint =
