@@ -5,6 +5,7 @@
  * Run after migrations:
  *   node scripts/import-data.mjs
  */
+import 'dotenv/config'
 import { readFile } from 'node:fs/promises'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'

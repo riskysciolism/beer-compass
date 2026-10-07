@@ -18,6 +18,7 @@
  *
  * Start: node server/index.mjs [--port 8787] [--serve-dist]
  */
+import 'dotenv/config'
 import { createHash, timingSafeEqual } from 'node:crypto'
 import { createReadStream, existsSync, statSync, readFileSync } from 'node:fs'
 import { dirname, extname, join, normalize, resolve, sep } from 'node:path'
