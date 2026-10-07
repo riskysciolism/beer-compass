@@ -304,16 +304,6 @@ app.use('/data', (req, res) => {
   serveFile(req, res, file)
 })
 
-app.use((_req, res) => {
-  sendJson(res, 404, { ok: false, error: 'not_found' })
-})
-
-app.use((err, _req, res, _next) => {
-  console.error(err)
-  const status = err.status || 500
-  sendJson(res, status, { ok: false, error: err.message || 'internal' })
-})
-
 let dbReady = false
 
 async function initAdminRoutes() {
@@ -333,6 +323,11 @@ function initStaticFallback() {
   if (!SERVE_DIST) return
   app.use(express.static(DIST_DIR))
   app.use((req, res) => {
+    const acceptsHtml = req.headers.accept?.includes('text/html')
+    if (!acceptsHtml) {
+      sendJson(res, 404, { ok: false, error: 'not_found' })
+      return
+    }
     if (req.path.startsWith('/admin') && !req.path.startsWith('/admin/api')) {
       const adminFallback = resolve(DIST_DIR, 'admin.html')
       if (existsSync(adminFallback)) {
@@ -349,6 +344,18 @@ function initStaticFallback() {
   })
 }
 
+function initFinalHandlers() {
+  app.use((_req, res) => {
+    sendJson(res, 404, { ok: false, error: 'not_found' })
+  })
+
+  app.use((err, _req, res, _next) => {
+    console.error(err)
+    const status = err.status || 500
+    sendJson(res, status, { ok: false, error: err.message || 'internal' })
+  })
+}
+
 async function start() {
   try {
     await runMigrations()
@@ -358,6 +365,7 @@ async function start() {
   }
   await initAdminRoutes()
   initStaticFallback()
+  initFinalHandlers()
 
   app.listen(PORT, HOST, () => {
     const curlHint =
