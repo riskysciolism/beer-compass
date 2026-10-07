@@ -128,6 +128,13 @@ was die App tatsächlich abfragt).
   Fehlerunterscheidung (verweigert / nicht verfügbar / Timeout) und optionaler
   High-Accuracy. Das Tracking pausiert, wenn die App in den Hintergrund geht, und
   läuft offline weiter.
+- **Admin-Oberfläche** unter `/admin`: JWT-gesichertes Backend (Express +
+  PostgreSQL) mit Dashboard, Statistiken, Heatmap, CRUD für Biergärten,
+  Schema-Verwaltung (z. B. „Toilette vorhanden"), Review von Nutzer-Vorschlägen,
+  Device-Blocking und Audit-Log. Daten werden aus der Datenbank nach
+  `public/data/data.json` veröffentlicht.
+- **Analytics**: Die App sendet anonymisierte Events (`open`, `select`, `search`,
+  `locate`) an `/api/events`; blockierte Geräte werden serverseitig abgelehnt.
 - **Auswahl-Badge**: Direkt unter dem Kompass erscheint ein Badge mit dem gewählten
   Eintrag – der Name auf eigener Zeile, darunter die Entfernung mit dem
   „Details"-Knopf und einem Pfeil für die Navigation (`geo:`-Intent) direkt neben

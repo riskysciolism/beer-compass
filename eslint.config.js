@@ -72,6 +72,21 @@ export default tseslint.config(
     },
   },
   {
+    // Admin UI: rapid prototyping with loosely typed API responses.
+    files: ['src/admin/**/*.ts', 'src/admin/**/*.vue'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-unsafe-argument': 'off',
+      '@typescript-eslint/no-unsafe-assignment': 'off',
+      '@typescript-eslint/no-unsafe-call': 'off',
+      '@typescript-eslint/no-unsafe-member-access': 'off',
+      '@typescript-eslint/no-unsafe-return': 'off',
+      '@typescript-eslint/prefer-nullish-coalescing': 'off',
+      '@typescript-eslint/prefer-optional-chain': 'off',
+      '@typescript-eslint/no-floating-promises': 'off',
+    },
+  },
+  {
     files: ['scripts/**/*.mjs', 'server/**/*.mjs', 'eslint.config.js'],
     extends: [tseslint.configs.disableTypeChecked],
     languageOptions: {

@@ -72,6 +72,14 @@ function toFix(position: GeolocationPosition): GeoFix {
   }
 }
 
+function distanceChanged(a: GeoFix, b: GeoFix): boolean {
+  const threshold = 0.0001 // ~11 m
+  return (
+    Math.abs(a.latitude - b.latitude) > threshold ||
+    Math.abs(a.longitude - b.longitude) > threshold
+  )
+}
+
 function statusFromError(error: GeolocationPositionError): GeoStatus {
   switch (error.code) {
     case error.PERMISSION_DENIED:
@@ -165,10 +173,20 @@ export function createGeoService(): GeoController {
 
       watchId = navigator.geolocation.watchPosition(
         (position) => {
+          const previous = fix.value
           fix.value = toFix(position)
           status.value = 'active'
           lastErrorAt.value = null
           settle()
+          if (!previous || distanceChanged(previous, fix.value)) {
+            void import('@/services/analytics').then(({ track }) =>
+              track({
+                event_type: 'locate',
+                latitude: fix.value?.latitude,
+                longitude: fix.value?.longitude,
+              }),
+            )
+          }
         },
         (error) => {
           status.value = statusFromError(error)

@@ -34,6 +34,7 @@ import { createUpdateService } from '@/services/update-service'
 import type { StoredItem } from '@/types/data'
 import type { Settings, SortBy } from '@/types/settings'
 import { requestPersistence } from '@/db/repository'
+import { track } from '@/services/analytics'
 import { distanceBetween } from '@/utils/geo'
 
 /* ------------------------------------------------------------- State ---- */
@@ -103,7 +104,9 @@ function onVisibilityChange(): void {
 
 let teardown: (() => void) | undefined
 
-onMounted(async () => {
+  onMounted(async () => {
+  void track({ event_type: 'open' })
+
   const markOnline = () => (online.value = 'unknown')
   const markOffline = () => (online.value = 'offline')
   window.addEventListener('online', markOnline)
@@ -283,6 +286,7 @@ const swNotice = computed(() => {
 
 function onSelect(item: StoredItem): void {
   selected.value = item
+  void track({ event_type: 'select', item_id: item.id })
   // A selection brings the compass back to 100%; the scroll flag stays.
   suppressShrink.value = listScrolled.value
   selectedAt = performance.now()

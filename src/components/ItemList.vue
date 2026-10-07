@@ -4,6 +4,7 @@ import { computed, onBeforeUnmount, ref, watch } from 'vue'
 
 import VirtualList from '@/components/VirtualList.vue'
 import { translate } from '@/i18n'
+import { track } from '@/services/analytics'
 import type { StoredItem } from '@/types/data'
 import type { Settings, SortBy } from '@/types/settings'
 import { cardinalDirection, distanceBetween, formatDistance, type LatLon } from '@/utils/geo'
@@ -30,6 +31,14 @@ function onScroll(scrollTop: number): void {
 }
 
 const search = ref('')
+
+let searchTimeout: ReturnType<typeof setTimeout> | undefined
+watch(search, (term) => {
+  if (searchTimeout) clearTimeout(searchTimeout)
+  searchTimeout = setTimeout(() => {
+    if (term.trim()) void track({ event_type: 'search', metadata: { term: term.trim() } })
+  }, 1000)
+})
 
 /* --------------------------------------------------------------- Sorting -- */
 

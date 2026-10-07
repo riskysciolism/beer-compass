@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url'
+import { resolve } from 'node:path'
 
 import vue from '@vitejs/plugin-vue'
 import { defineConfig, loadEnv } from 'vite'
@@ -32,6 +33,14 @@ export default defineConfig(({ mode }) => {
           target: API_TARGET,
           changeOrigin: true,
         },
+        '/admin/api': {
+          target: API_TARGET,
+          changeOrigin: true,
+        },
+        '/uploads': {
+          target: API_TARGET,
+          changeOrigin: true,
+        },
       },
     },
     preview: {
@@ -41,6 +50,26 @@ export default defineConfig(({ mode }) => {
         '/api': {
           target: API_TARGET,
           changeOrigin: true,
+        },
+        '/admin/api': {
+          target: API_TARGET,
+          changeOrigin: true,
+        },
+        '/uploads': {
+          target: API_TARGET,
+          changeOrigin: true,
+        },
+      },
+    },
+    build: {
+      target: 'es2022',
+      cssCodeSplit: false,
+      sourcemap: mode !== 'production',
+      reportCompressedSize: false,
+      rollupOptions: {
+        input: {
+          main: resolve(__dirname, 'index.html'),
+          admin: resolve(__dirname, 'admin.html'),
         },
       },
     },
@@ -119,12 +148,6 @@ export default defineConfig(({ mode }) => {
     ],
     define: {
       __APP_BUILD_TIME__: JSON.stringify(new Date().toISOString()),
-    },
-    build: {
-      target: 'es2022',
-      cssCodeSplit: false,
-      sourcemap: mode !== 'production',
-      reportCompressedSize: false,
     },
     worker: {
       format: 'es',
