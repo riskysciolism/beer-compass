@@ -50,6 +50,14 @@ export async function fetchItems(): Promise<any[]> {
   return request('/items')
 }
 
+export async function fetchPublishStatus(): Promise<{
+  dirtyItems: number
+  deletedCount: number
+  lastPublishedVersion: number
+}> {
+  return request('/publish-status')
+}
+
 export async function fetchItem(id: number): Promise<any> {
   return request(`/items/${id}`)
 }

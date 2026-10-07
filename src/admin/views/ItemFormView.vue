@@ -28,6 +28,7 @@ const featureInput = ref('')
 const imageFile = ref<File | null>(null)
 const loading = ref(false)
 const error = ref('')
+const dirty = ref(false)
 
 const booleanFields = computed(() => schema.value.filter((f) => f.type === 'boolean'))
 const featureFields = computed(() => schema.value.filter((f) => f.type === 'feature'))
@@ -37,6 +38,7 @@ onMounted(async () => {
     schema.value = await fetchSchema()
     if (!isNew.value && id.value) {
       const data = await fetchItem(id.value)
+      dirty.value = Boolean(data.dirty)
       item.value = { ...data, metadata: data.metadata || {} }
     }
   } catch (e: any) {
@@ -93,7 +95,11 @@ async function save() {
 
 <template>
   <div>
-    <div class="admin__title">{{ isNew ? 'Neuer Biergarten' : 'Biergarten bearbeiten' }}</div>
+    <div class="admin__title">
+      {{ isNew ? 'Neuer Biergarten' : 'Biergarten bearbeiten' }}
+      <span v-if="!isNew && dirty" class="admin__badge admin__badge--pending">Unveröffentlicht</span>
+      <span v-else-if="!isNew" class="admin__badge admin__badge--approved">Veröffentlicht</span>
+    </div>
     <div class="admin__card">
       <div class="admin__form-row">
         <label class="admin__label">Name</label>

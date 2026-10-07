@@ -184,14 +184,37 @@ router.delete('/schema/:id', authMiddleware, async (req, res) => {
 
 /* --------------------------------------------------------- Items --------- */
 
+router.get('/publish-status', authMiddleware, async (_req, res) => {
+  const { rows } = await pool.query(
+    `SELECT COUNT(*) FILTER (WHERE updated_at > COALESCE((SELECT MAX(published_at) FROM version_history), 'epoch')) AS dirty
+     FROM items`,
+  )
+  const { rows: versionRow } = await pool.query('SELECT MAX(version) AS v FROM version_history')
+  const { rows: deletedRow } = await pool.query('SELECT COUNT(*) AS c FROM deleted_items')
+  res.json({
+    dirtyItems: Number(rows[0].dirty),
+    deletedCount: Number(deletedRow[0].c),
+    lastPublishedVersion: Number(versionRow[0].v ?? 0),
+  })
+})
+
 router.get('/items', authMiddleware, async (_req, res) => {
-  const { rows } = await pool.query('SELECT * FROM items ORDER BY name')
+  const { rows } = await pool.query(
+    `SELECT i.*, (i.updated_at > COALESCE((SELECT MAX(published_at) FROM version_history), 'epoch')) AS dirty
+     FROM items i
+     ORDER BY name`,
+  )
   res.json(rows)
 })
 
 router.get('/items/:id', authMiddleware, async (req, res) => {
   const id = Number(req.params.id)
-  const { rows } = await pool.query('SELECT * FROM items WHERE id = $1', [id])
+  const { rows } = await pool.query(
+    `SELECT i.*, (i.updated_at > COALESCE((SELECT MAX(published_at) FROM version_history), 'epoch')) AS dirty
+     FROM items i
+     WHERE i.id = $1`,
+    [id],
+  )
   if (rows.length === 0) {
     res.status(404).json({ error: 'Not found' })
     return
@@ -293,6 +316,7 @@ router.delete('/items/:id', authMiddleware, async (req, res) => {
     res.status(404).json({ error: 'Not found' })
     return
   }
+  await pool.query('INSERT INTO deleted_items (item_name) VALUES ($1)', [rows[0].name])
   await logAudit(req.admin.id, 'item_deleted', 'item', id, { name: rows[0].name })
   res.status(204).send()
 })
@@ -544,6 +568,7 @@ router.post('/publish', authMiddleware, async (req, res) => {
 
   // Record the published version so subsequent publishes increment correctly.
   await pool.query('INSERT INTO version_history (version) VALUES ($1)', [version])
+  await pool.query('TRUNCATE deleted_items')
 
   await logAudit(req.admin.id, 'data_published', 'dataset', version, { count: items.length })
   res.json({ version, count: items.length })

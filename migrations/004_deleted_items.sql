@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS deleted_items (
+  id SERIAL PRIMARY KEY,
+  item_name TEXT NOT NULL,
+  deleted_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
