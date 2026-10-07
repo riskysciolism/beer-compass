@@ -76,9 +76,9 @@ async function save() {
       metadata: item.value.metadata,
       is_active: item.value.is_active,
     }
-    const saved = isNew.value
-      ? await createItem(payload)
-      : await updateItem(id.value!, payload)
+    const saved = !isNew.value && id.value
+      ? await updateItem(id.value, payload)
+      : await createItem(payload)
     if (imageFile.value) {
       await uploadImage(saved.id, imageFile.value)
     }
